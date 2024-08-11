@@ -1,0 +1,89 @@
+.age_input_dropdown {
+  width: 100%;
+  background: white;
+  box-shadow: #726e6e;
+  border-radius: 0.7rem;
+  z-index: 10;
+  position: absolute;
+  border: 1px solid gray;
+  margin-top: -15px;
+  padding: 0.5rem;
+}
+
+.age_inputs_container {
+  display: flex;
+  gap: 5px;
+}
+
+.age_input_dropdown_start_end {
+  padding: 0.4rem;
+  border: 1px solid gray;
+  border-radius: 0.3rem;
+  outline: none;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.age_input_dropdown_start_end:focus {
+  border: 1px solid #fb5806;
+}
+
+.add_endpoint_button {
+  border: 1px solid #fb5806;
+  color: #fb5806;
+  font-size: 0.7rem;
+  padding-left: 0.7rem;
+  padding-right: 0.7rem;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.trash_icon_endpoint_button {
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.trash_icon_endpoint {
+  width: 17px;
+  height: 17px;
+}
+
+.age_ul {
+  margin-top: 1rem;
+}
+
+.age_li {
+  font-size: .8rem;
+  cursor: pointer;
+  width: 100%;
+  border-bottom: 1px solid #f2eaea;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.age_li:hover {
+  background: #e6e3e3;
+}
+
+.done_cancel_button_control {
+  display: flex;
+  justify-content: center;
+}
+
+.done_cancel_main_control {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+}
+
+.age_cancel_button {
+  font-weight: bold;
+  color: gray;
+}
+
+.age_done_button {
+  color: #fb5806;
+  font-weight: bold;
+}

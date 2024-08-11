@@ -24,13 +24,9 @@ export function useLogin(): LoginFuncProps {
           toast.success("Login successful");
           setUser({
             token: res.data.access_token,
-            legal_name: res.data.account.institution.legal_name,
-            uid: res.data.account.institution.uid,
-            phone: res.data.account.phone,
-            email: res.data.account.email,
           });
 
-          void router.push("/verification");
+          void router.push("/project");
         }
       } catch (error) {
         console.error(error);

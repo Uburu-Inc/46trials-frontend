@@ -1,0 +1,17 @@
+.excluded_entry {
+  border: 1px solid #fb5806;
+  align-self: start;
+  margin-top: 3rem;
+  color: #fb5806;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+  border-radius: 0.7rem;
+  font-weight: 600;
+}
+
+.trash_icon {
+  height: 24px;
+  width: 24px;
+}
