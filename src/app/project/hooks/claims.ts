@@ -1,13 +1,12 @@
 import { useState, useCallback } from "react";
 import { Queries } from "./type";
 import { Databases } from "../components/create-project/utils/type";
-import { AxiosResponse } from "axios";
 
 import { useSendQuery } from "./query";
 
 export function useClaimsNetworkRequest() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [dataset, setDataset] = useState<AxiosResponse | undefined | string>(
+  const [dataset, setDataset] = useState(
     ""
   );
   
@@ -29,19 +28,19 @@ export function useClaimsNetworkRequest() {
         sql_query: payload.claimsQuery?.countQuery ?? "",
         action: "count",
         db_name: Databases.CLAIMS,
-      });
+      }) as any
 
       const countRes = await runQuery({
         sql_query: payload.claimsQuery?.countQuery ?? "",
         action: "count",
         db_name: Databases.CLAIMS,
-      });
+      }) as any
 
       setSuccess(true);
       setLoading(false);
 
-      if (countRes?.count) setCount(countRes.count);
-      setDataset(datasetRes?.dataset);
+      if (countRes?.data.count) setCount(countRes.data.count);
+      setDataset(datasetRes?.data.dataset);
 
       setIsDone(true);
     } catch (e) {

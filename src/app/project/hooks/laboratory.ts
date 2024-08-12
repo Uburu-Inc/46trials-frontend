@@ -22,19 +22,19 @@ export function useLaboratoryNetworkRequest() {
         sql_query: payload.claimsQuery?.countQuery ?? "",
         action: "count",
         db_name: Databases.CLAIMS,
-      });
+      }) as any
 
       const countRes = await runQuery({
         sql_query: payload.claimsQuery?.countQuery ?? "",
         action: "count",
         db_name: Databases.CLAIMS,
-      });
+      }) as any
 
       setSuccess(true);
       setLoading(false);
 
-      if (countRes?.count) setCount(countRes.count);
-      setDataset(datasetRes?.dataset);
+      if (countRes?.data.count) setCount(countRes.data.count);
+      setDataset(datasetRes?.data.dataset);
 
       setIsDone(true);
     } catch (e) {

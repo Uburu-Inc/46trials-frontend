@@ -1,7 +1,5 @@
-import { useState, FC } from "react";
+import { useState } from "react";
 import { TextInput } from "@/components/input/text-input";
-import styles from "../../index.module.css";
-import dropdown_style from "./index.module.css";
 import { sqlQueryOperators } from "./constant";
 import toast from "react-hot-toast";
 
@@ -10,7 +8,7 @@ interface Props {
   onChange: (payload: string) => void;
 }
 
-export const AgeInput: FC<Props> = ({ value, onChange }) => {
+export function AgeInput({ value, onChange }: Props) {
   const [openDropdown, setOpenDropDown] = useState(false);
 
   const [startPoint, setStartPoint] = useState(0);
@@ -21,7 +19,7 @@ export const AgeInput: FC<Props> = ({ value, onChange }) => {
 
   const [end, setEnd] = useState(false);
 
-  const handleSendAgeQuery = () => {
+  function handleSendAgeQuery () {
     if (!operator && !startPoint) {
       toast.error("Provide a start point and operator", { position: "top-right" });
       return;
@@ -71,17 +69,17 @@ export const AgeInput: FC<Props> = ({ value, onChange }) => {
         <TextInput
           label={"Required column"}
           readOnly
-          className={styles.element_entry_input}
+          className={'w-full rounded-[0.7rem]'}
           onFocus={() => setOpenDropDown(!openDropdown)}
           value={value}
         />
 
         {openDropdown && (
-          <div className={dropdown_style.age_input_dropdown}>
-            <div className={dropdown_style.age_inputs_container}>
+          <div className={'w-full bg-white shadow-xl rounded-[0.7rem] z-10 absolute border border-[gray] -mt-[15px] p-[0.5rem]'}>
+            <div className={'flex gap-[5px]'}>
               <input
                 type={"number"}
-                className={dropdown_style.age_input_dropdown_start_end}
+                className={'p-[0.4rem] border border-[gray] rounded-[0.3rem] outline-none text-[0.7rem] font-bold'}
                 placeholder={"Start point"}
                 onChange={(e) => setStartPoint(Number(e.target.value))}
                 style={{ width: end ? "48%" : "100%" }}
@@ -89,7 +87,7 @@ export const AgeInput: FC<Props> = ({ value, onChange }) => {
 
               {end && (
                 <input
-                  className={dropdown_style.age_input_dropdown_start_end}
+                  className={'p-[0.4rem] border border-[gray] rounded-[0.3rem] outline-none text-[0.7rem] font-bold'}
                   type={"number"}
                   placeholder={"End point"}
                   onChange={(e) => setEndPoint(Number(e.target.value))}
@@ -98,11 +96,11 @@ export const AgeInput: FC<Props> = ({ value, onChange }) => {
               )}
             </div>
 
-            <ul className={dropdown_style.age_ul}>
+            <ul className={'mt-[1rem]'}>
               {sqlQueryOperators.map(({ text, operator }, index) => (
                 <li
                   key={`${operator}-${index}`}
-                  className={dropdown_style.age_li}
+                  className={'text-[0.8rem] cursor-pointer w-full border border-[f2eaea] py-[10px] px-[8px] hover:bg-[#e6e3e3]'}
                   onClick={() => initOperator(index, operator)}
                   style={{ background: index === activeIndex ? "#e6e3e3" : "" }}>
                   <p>
@@ -113,15 +111,15 @@ export const AgeInput: FC<Props> = ({ value, onChange }) => {
               ))}
             </ul>
 
-            <div className={dropdown_style.done_cancel_button_control}>
-              <div className={dropdown_style.done_cancel_main_control}>
+            <div className={'flex justify-center'}>
+              <div className={'flex gap-[10px] p-[10px]'}>
                 <button
-                  className={dropdown_style.age_cancel_button}
+                  className={'font-bold text-[gray]'}
                   onClick={() => setOpenDropDown(!openDropdown)}>
                   Cancel
                 </button>
                 <button
-                  className={dropdown_style.age_done_button}
+                  className={'text-[#fb5806] font-bold'}
                   onClick={handleSendAgeQuery}>
                   Done
                 </button>

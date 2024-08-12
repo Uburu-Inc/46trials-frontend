@@ -1,10 +1,11 @@
 import { ChangeEvent } from "react";
 import { TrashIcon } from "./components/trash-icon";
 import { TextInput } from "@/components/input/text-input";
-import { useState, FC } from "react";
+import { useState } from "react";
 import { RequiredColumnProps } from "../../utils/type";
 import { dictionaryConverter } from "../../utils/constant";
 import { AgeInput } from "./components/age-input";
+import { ButtonComponent } from "@/components/button";
 
 interface Props {
   requiredColumn?: string;
@@ -24,7 +25,7 @@ export function RequiredColumnEntry({
   const [withExcluded, setWithExcluded] = useState(false);
   return (
     <>
-      <div className={"flex gap-[1rem] w-full -mt-[2rem]"}>
+      <div className={"flex gap-[1rem] w-full"}>
         <div className={"w-[24%]"}>
           <TextInput
             className={"w-full rounded-xl"}
@@ -60,17 +61,14 @@ export function RequiredColumnEntry({
             />
           )}
         </div>
-        <div className={''}>
+        <div className={"flex"}>
           {!withExcluded ? (
-            <button
-              type={"button"}
-              className={
-                "border border-[#fb5806] text-[#fb5806] align-self mt-[3rem] px-[3rem] py-[0.7rem] font-[600]"
-              }
+            <ButtonComponent
+              className="mt-9"
               onClick={() => setWithExcluded(true)}
             >
               Excluded Entries
-            </button>
+            </ButtonComponent>
           ) : (
             <>
               {requiredColumn === "age" ? (
@@ -85,26 +83,28 @@ export function RequiredColumnEntry({
                   }
                 />
               ) : (
-                <TextInput
-                  className={"w-full rounded-xl"}
-                  label={"Excluded Entry"}
-                  value={excludedEntry ?? ""}
-                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                    onChange({
-                      id,
-                      exclude: event.target.value ?? "",
-                      dictionaryKeys: dictionaryConverter,
-                    })
-                  }
-                />
+                <div className="mr-4">
+                  <TextInput
+                    className={"w-1/2 rounded-xl"}
+                    label={"Excluded Entry"}
+                    value={excludedEntry ?? ""}
+                    onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                      onChange({
+                        id,
+                        exclude: event.target.value ?? "",
+                        dictionaryKeys: dictionaryConverter,
+                      })
+                    }
+                  />
+                </div>
               )}
 
               <button
-                className={"mt-[1.5rem]"}
+                className={"mt-[2rem]"}
                 onClick={() => setWithExcluded(false)}
                 type={"button"}
               >
-                <TrashIcon className={'h-[24px] w-[24px]'} />
+                <TrashIcon className={"h-[24px] w-[24px]"} />
               </button>
             </>
           )}

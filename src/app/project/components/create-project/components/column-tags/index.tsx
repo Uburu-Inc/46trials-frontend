@@ -1,4 +1,3 @@
-import styles from "./index.module.css";
 import { RequiredColumnMainProps, RequiredColumnProps } from "../../utils/type";
 import { Tag } from "../../../tag";
 import { cn } from "@/lib/tailwind/cn";

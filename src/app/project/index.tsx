@@ -8,7 +8,7 @@ export function CreateProjectViewPage() {
   return (
     <>
       <main>
-        <div className={"px-[50px] pt-[2rem] mx-auto w-[996px] px-[20px]"}>
+        <div className={"px-[50px] pt-[2rem] mx-auto w-[1000px] px-[20px]"}>
           {phase === 0 && <CreateProject />}
           {phase === 1 && <SearchFilter />}
         </div>
