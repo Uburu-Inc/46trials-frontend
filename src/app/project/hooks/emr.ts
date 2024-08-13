@@ -13,27 +13,27 @@ export function useEmrNetworkRequest() {
 
   const { runQuery } = useSendQuery();
 
-  const fetchResponse = useCallback(async ({ payload }: { payload: Queries }) => {
+  const fetchResponse = useCallback(async function ({ payload }: { payload: Queries }) {
     setLoading(true);
 
     try {
       const datasetRes = await runQuery({
-        sql_query: payload.claimsQuery?.countQuery ?? "",
-        action: "count",
-        db_name: Databases.CLAIMS,
+        sql_query: payload.emrQuery?.datasetQuery ?? "",
+        action: "dataset",
+        db_name: Databases.EMR,
       }) as any
 
       const countRes = await runQuery({
-        sql_query: payload.claimsQuery?.countQuery ?? "",
+        sql_query: payload.emrQuery?.countQuery ?? "",
         action: "count",
-        db_name: Databases.CLAIMS,
+        db_name: Databases.EMR,
       }) as any
 
       setSuccess(true);
       setLoading(false);
 
-      if (countRes?.data.count) setCount(countRes.data.count);
-      setDataset(datasetRes?.data.dataset);
+      if (countRes?.count.count) setCount(countRes.count.count);
+      setDataset(datasetRes?.dataset);
 
       setIsDone(true);
     } catch (e) {

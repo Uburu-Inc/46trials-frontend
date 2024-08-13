@@ -23,8 +23,6 @@ export function SearchFilterMainSection() {
     downloadLink.click();
   }
 
-  console.log(count, 'count result')
-
   return (
     <>
       <div className={"w-full flex justify-between h-[80vh] mt-[1.3rem]"}>

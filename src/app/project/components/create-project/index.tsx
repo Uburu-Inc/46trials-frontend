@@ -50,7 +50,7 @@ export function CreateProject() {
     loading: claimsLoading,
   } = useClaimsNetworkRequest();
 
-  const updateDataSets = (payload: RequiredColumnProps) => {
+  function updateDataSets(payload: RequiredColumnProps) {
     const isPresent =
       selectedColumns.filter(({ id }) => payload.id === id).length > 0;
 
@@ -71,7 +71,7 @@ export function CreateProject() {
     }
 
     setSelectedColumns(selectedColumns.concat(payload));
-  };
+  }
 
   const formik = useFormik<CreateProjectValidationInitialProps>({
     initialValues: createProjectValidationInitial,
@@ -87,15 +87,13 @@ export function CreateProject() {
         selection: selectedColumns,
       });
 
-      console.log(sqlQueries);
-
       void fetchResponse({ payload: sqlQueries });
       void fetchEmrRes({ payload: sqlQueries });
       void fetchClaimsRes({ payload: sqlQueries });
     },
   });
 
-  const updateEntries = ({ id, entries, exclude }: RequiredColumnProps) => {
+  function updateEntries({ id, entries, exclude }: RequiredColumnProps) {
     const updatedEntries = selectedColumns.map((column) => {
       if (column.id === id) {
         return {
@@ -107,7 +105,7 @@ export function CreateProject() {
     });
 
     setSelectedColumns(updatedEntries as Array<RequiredColumnProps>);
-  };
+  }
 
   useEffect(() => {
     if (
@@ -123,6 +121,9 @@ export function CreateProject() {
       handleSetCSV("claims", claimsDataset as any);
 
       setCount(emrCount + labCount + claimsCount);
+
+      console.log(emrCount, labCount, claimsCount, 'cumulation')
+
       setPhase(1);
     }
   }, [
@@ -166,6 +167,7 @@ export function CreateProject() {
             label={"Project name"}
             className={"rounded-xl"}
             name={"projectName"}
+            error={formik.errors.projectName}
           />
         </div>
 
@@ -200,6 +202,7 @@ export function CreateProject() {
                   name={"startDate"}
                   label={"Start Date"}
                   type={"date"}
+                  error={formik.errors.startDate}
                 />
               </div>
               <div className={"w-[48%]"}>
@@ -209,6 +212,7 @@ export function CreateProject() {
                   name={"endDate"}
                   label={"End Date"}
                   type={"date"}
+                  error={formik.errors.endDate}
                 />
               </div>
             </div>
@@ -220,6 +224,7 @@ export function CreateProject() {
                   name={"sampleSize"}
                   label={"Sample Size"}
                   type={"number"}
+                  error={formik.errors.sampleSize}
                 />
               </div>
             </div>

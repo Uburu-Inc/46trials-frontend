@@ -25,8 +25,8 @@ export function useClaimsNetworkRequest() {
 
     try {
       const datasetRes = await runQuery({
-        sql_query: payload.claimsQuery?.countQuery ?? "",
-        action: "count",
+        sql_query: payload.claimsQuery?.datasetQuery ?? "",
+        action: "dataset",
         db_name: Databases.CLAIMS,
       }) as any
 
@@ -39,8 +39,8 @@ export function useClaimsNetworkRequest() {
       setSuccess(true);
       setLoading(false);
 
-      if (countRes?.data.count) setCount(countRes.data.count);
-      setDataset(datasetRes?.data.dataset);
+      if (countRes?.count.count) setCount(countRes.count.count);
+      setDataset(datasetRes?.dataset);
 
       setIsDone(true);
     } catch (e) {
