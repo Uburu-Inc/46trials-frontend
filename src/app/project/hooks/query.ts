@@ -8,7 +8,7 @@ export function useSendQuery() {
   const runQuery = useCallback(
     async function (payload: QueryPayload) {
       try {
-        const response = await axios.post("/projects/get-database/", payload);
+        const response = await axios.post("", payload);
         if (payload.action === "count") return { count: response.data };
         if (payload.action === "dataset") return { dataset: response };
       } catch (error) {
