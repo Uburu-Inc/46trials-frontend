@@ -25,7 +25,7 @@ const workSans = Work_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Uburu One Record",
+  title: "46 Trials",
   description: "Instant Data Retrieval Across Health Systems using OneRecord",
   icons: {
     icon: "/favicon.png",
