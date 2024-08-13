@@ -13,7 +13,6 @@ import { cn } from "@/lib/tailwind/cn";
 import { SelectProps } from "./types";
 import { Label } from "./components/label";
 import { Error } from "./components/error";
-import { SearchDropdownList } from "../../app/types";
 
 export function SelectInput({
   placeholder,
@@ -36,7 +35,7 @@ export function SelectInput({
   );
 
   const handleSelect = useCallback(
-    function (item: SearchDropdownList) {
+    function (item: any) {
       onChange(JSON.stringify(item));
       setSearchTerm(item.text);
       handleToggleCardVisibility(false);

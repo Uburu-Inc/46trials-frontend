@@ -1,5 +1,5 @@
 export const routes = {
-  LOGIN: "/auth/one-record-token/",
+  LOGIN: "/auth/token/",
   VERIFY: "/one-record/",
   FETCH_INSTITUTIONS: "/institutions/",
   SET_INSTITUTION: (id: string) => `/one-record/${id}/`,
