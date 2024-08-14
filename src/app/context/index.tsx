@@ -3,6 +3,7 @@
 import { createContext, useEffect, useState, useCallback } from "react";
 import { AppContainerProps, ContextPayload, AppInfoParams } from "./type";
 import { appParamsState } from "./constants";
+import { SideBar } from "../components/sidebar";
 
 export const AppContext = createContext({} as ContextPayload);
 
@@ -29,7 +30,12 @@ export function AppContextContainer({ children }: AppContainerProps) {
         setUser,
       }}
     >
-      {children}
+      <div className="flex min-h-screen">
+        <div className="w-[20%] bg-[#EDF0F4]">
+          <SideBar />
+        </div>
+        <div className="w-[80%]">{children}</div>
+      </div>
     </AppContext.Provider>
   );
 }

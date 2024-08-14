@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/shadcn-components/button";
 import { Spinner } from "@/components/spinner";
 import { ButtonProps } from "./type";
 

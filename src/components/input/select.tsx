@@ -6,9 +6,9 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+} from "@/components/shadcn-components/select";
+import { Card } from "@/components/shadcn-components/card";
+import { Input } from "@/components/shadcn-components/input";
 import { cn } from "@/lib/tailwind/cn";
 import { SelectProps } from "./types";
 import { Label } from "./components/label";
@@ -27,12 +27,12 @@ export function SelectInput({
   const [searchTerm, setSearchTerm] = useState("");
   const [open, setOpen] = useState(false);
 
-  const handleToggleCardVisibility = useCallback(
-    function (togglePayload: boolean) {
-      setOpen(togglePayload);
-    },
-    []
-  );
+  const handleToggleCardVisibility = useCallback(function (
+    togglePayload: boolean
+  ) {
+    setOpen(togglePayload);
+  },
+  []);
 
   const handleSelect = useCallback(
     function (item: any) {
