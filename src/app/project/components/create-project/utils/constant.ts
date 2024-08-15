@@ -128,22 +128,6 @@ export const Columns: RequiredColumnMainProps = [
     dictionaryKeys: dictionaryConverter,
   },
   {
-    id: "22",
-    isSelected: false,
-    entries: "",
-    exclude: "",
-    column: "firstname",
-    dictionaryKeys: dictionaryConverter,
-  },
-  {
-    id: "23",
-    isSelected: false,
-    entries: "",
-    exclude: "",
-    column: "lastname",
-    dictionaryKeys: dictionaryConverter,
-  },
-  {
     id: "28",
     isSelected: false,
     entries: "",
