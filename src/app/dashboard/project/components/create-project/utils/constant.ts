@@ -118,15 +118,6 @@ export const Columns: RequiredColumnMainProps = [
     column: "region",
     dictionaryKeys: dictionaryConverter,
   },
-
-  {
-    id: "19",
-    isSelected: false,
-    entries: "",
-    exclude: "",
-    column: "facility_location",
-    dictionaryKeys: dictionaryConverter,
-  },
   {
     id: "28",
     isSelected: false,
