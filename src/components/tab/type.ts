@@ -12,6 +12,7 @@ export interface InterfaceTypeProps {
 
 export interface TabTypes {
   current: string;
+  className?: string;
   title: Array<TitleTypes>;
   interfaceItems: Array<InterfaceTypeProps>;
 }

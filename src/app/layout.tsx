@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Poppins, Inter, Manrope, Work_Sans } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import { cn } from "@/lib/tailwind/cn";
-import { AppContextContainer } from "@/app/context";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -48,10 +47,8 @@ export default function RootLayout({
           workSans.className
         )}
       >
-        <AppContextContainer>
-          {children}
-          <Toaster position="top-center" />
-        </AppContextContainer>
+        {children}
+        <Toaster position="top-center" />
       </body>
     </html>
   );

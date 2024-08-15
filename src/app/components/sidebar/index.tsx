@@ -16,7 +16,7 @@ export function SideBar() {
         <AppIcon />
       </div>
 
-      <Link href={"/project"}>
+      <Link href={"/dashboard/project"}>
         <ButtonComponent className="flex gap-2 w-full bg-black font-[400] text-[0.8rem] mt-10">
           <Plus />
           <span>Create Project</span>

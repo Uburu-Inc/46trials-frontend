@@ -18,15 +18,15 @@ export function useLogin(): LoginFuncProps {
       try {
         const res = await axios.post(routes.LOGIN, payload);
 
-        console.log(res);
-
         if (res.data) {
           toast.success("Login successful");
+          
           setUser({
             token: res.data.access_token,
+            uid: res.data.account.uid
           });
 
-          void router.push("/project");
+          void router.push("/dashboard/project");
         }
       } catch (error) {
         console.error(error);

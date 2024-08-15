@@ -4,7 +4,7 @@ import { GlobeIcon } from "./globe-icon";
 import { ButtonComponent } from "@/components/button";
 import { Tag } from "../../../tag";
 import { sqlQueryContext } from "../../../../context";
-import { Card } from "@/components/ui/card"
+import { Card } from "@/components/shadcn-components/card"
 
 export function SearchFilterMainSection() {
   const { count, setPhase, selectedColumns, lab, emr, claims } =

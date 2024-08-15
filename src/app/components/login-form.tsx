@@ -7,7 +7,7 @@ import { useFormik } from "formik";
 import { useLogin } from "@/app/hooks/login";
 import { loginSchema } from "@/app/hooks/login/schema";
 import { ButtonComponent } from "@/components/button";
-import { Card } from "@/components/ui/card";
+import { Card } from "@/components/shadcn-components/card";
 
 export function LoginForm() {
   const { loading, handleLogin } = useLogin();

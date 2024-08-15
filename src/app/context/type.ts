@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 
 export type AppInfoParams = {
   token: string;
+  uid: string
 };
 
 export type UserPaymentInfoPayload = {

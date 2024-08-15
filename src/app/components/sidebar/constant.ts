@@ -12,11 +12,11 @@ export const MenuItems: Array<MenuItemsTypes> = [
   {
     text: "Data Exchange",
     Icon: DataExchange,
-    path: "/data-exchange",
+    path: "/dashboard/data-exchange",
   },
   {
     text: "Account",
     Icon: Account,
-    path: "/account",
+    path: "/dashboard/account?current=details",
   },
 ];
