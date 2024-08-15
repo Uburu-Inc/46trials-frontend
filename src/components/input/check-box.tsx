@@ -1,6 +1,6 @@
 "use client";
 
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from "@/components/shadcn-components/checkbox";
 import { cn } from "@/lib/tailwind/cn";
 import { CheckboxProps } from "./types";
 

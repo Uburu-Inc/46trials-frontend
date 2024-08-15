@@ -1,11 +1,11 @@
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Button } from "@/components/shadcn-components/button";
+import { Input } from "@/components/shadcn-components/input";
+import { Label } from "@/components/shadcn-components/label";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
+} from "@/components/shadcn-components/popover";
 
 export function SearchInputSelect() {
   return (
@@ -58,5 +58,5 @@ export function SearchInputSelect() {
         </div>
       </PopoverContent>
     </Popover>
-  )
+  );
 }

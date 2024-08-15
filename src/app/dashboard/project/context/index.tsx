@@ -1,6 +1,5 @@
-import { createContext, FC, ReactNode, useEffect, useState } from "react";
+import { createContext, ReactNode, useState } from "react";
 import { SelectedTags, Props } from "./type";
-import { AxiosResponse } from "axios";
 
 export const sqlQueryContext = createContext({} as Props);
 
