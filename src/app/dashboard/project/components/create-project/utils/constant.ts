@@ -126,15 +126,6 @@ export const Columns: RequiredColumnMainProps = [
     column: "provider_name",
     dictionaryKeys: dictionaryConverter,
   },
-
-  {
-    id: "30",
-    isSelected: false,
-    entries: "",
-    exclude: "",
-    column: "patient_contact",
-    dictionaryKeys: dictionaryConverter,
-  },
   {
     id: "31",
     isSelected: false,
