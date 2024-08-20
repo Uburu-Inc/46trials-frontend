@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { db } from "./constant";
 import { GlobeIcon } from "./globe-icon";
-import { ButtonComponent } from "@/components/button";
+import { ButtonComponent } from "@/app/components/reusable-components/button";
 import { Tag } from "../../../../../../components/tag";
 import { sqlQueryContext } from "../../../../context";
-import { Card } from "@/components/shadcn-components/card"
+import { Card } from "@/app/components/reusable-components/shadcn-components/card";
 
 export function SearchFilterMainSection() {
   const { count, setPhase, selectedColumns, lab, emr, claims } =
@@ -79,8 +79,6 @@ export function SearchFilterMainSection() {
             <div className={"bg-[#F6F7FC] w-[10rem] p-[1rem] mt-[.8rem]"}>
               <p className={"text-center text-[1rem] font-[500]"}>{count}</p>
             </div>
-
-           
           </div>
 
           <div className={"flex justify-end"}>
@@ -103,7 +101,6 @@ export function SearchFilterMainSection() {
               </ButtonComponent>
             </div>
           </div>
-
         </Card>
       </div>
     </>

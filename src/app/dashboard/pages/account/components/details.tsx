@@ -1,6 +1,6 @@
 "use client";
 
-import { Loader } from "@/components/loader";
+import { Loader } from "@/app/components/reusable-components/loader";
 import { useFetchProfile } from "../../../hooks/profile/fetch-profile";
 
 export function Detail() {

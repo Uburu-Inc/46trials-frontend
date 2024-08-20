@@ -1,5 +1,5 @@
 import { NextServerSideSearchParameterTypes } from "@/app/utils/types";
-import { Tab } from "@/components/tab";
+import { Tab } from "@/app/components/reusable-components/tab";
 import { OneRecord } from "./components/onerecord";
 import { HeaderTitle } from "../../components/header-title"
 

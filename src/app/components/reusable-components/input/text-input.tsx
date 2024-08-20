@@ -1,7 +1,7 @@
 import { InputProps } from "./types";
 import { Label } from "./components/label";
 import { Error } from "./components/error";
-import { Input } from "@/components/shadcn-components/input";
+import { Input } from "../shadcn-components/input";
 
 export function TextInput({
   label,

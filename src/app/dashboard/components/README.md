@@ -1,1 +1,1 @@
-## Components in t his directory belongs to files and folders with in the ./dashboard directory, you can refer to it as a global directoty for files with in ./dashboard
+## Components in this directory (./app/dashboard/components) belongs to files and folders with in the ./app/dashboard/ directory, you can refer to it as a global directoty for files with in ./app/dashboard/

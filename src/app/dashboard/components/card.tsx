@@ -1,9 +1,12 @@
 import Link from "next/link";
-import { Card, CardContent } from "@/components/shadcn-components/card";
+import {
+  Card,
+  CardContent,
+} from "@/app/components/reusable-components/shadcn-components/card";
 
 interface DashboardCardProps {
   title: string;
-  path: string
+  path: string;
   content: string;
 }
 

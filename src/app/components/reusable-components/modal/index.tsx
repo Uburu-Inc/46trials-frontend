@@ -1,5 +1,5 @@
 import React, { forwardRef, useCallback } from "react";
-import { Button } from "@/components/shadcn-components/button";
+import { Button } from "../shadcn-components/button";
 import {
   Dialog,
   DialogClose,
@@ -8,7 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/shadcn-components/dialog";
+} from "../shadcn-components/dialog";
 import { CloseModalIcon } from "../icons/close-modal-icon";
 import { ModalProps } from "./type";
 

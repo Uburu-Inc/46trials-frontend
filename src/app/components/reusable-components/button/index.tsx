@@ -1,5 +1,5 @@
-import { Button } from "@/components/shadcn-components/button";
-import { Spinner } from "@/components/spinner";
+import { Button } from "../shadcn-components/button";
+import { Spinner } from "../spinner";
 import { ButtonProps } from "./type";
 
 export function ButtonComponent({

@@ -1,4 +1,4 @@
-import { ButtonComponent } from "@/components/button";
+import { ButtonComponent } from "@/app/components/reusable-components/button";
 import { cn } from "@/lib/tailwind/cn";
 
 interface Props {

@@ -1,8 +1,8 @@
-import { Label } from "@/components/shadcn-components/label";
+import { Label } from "../shadcn-components/label";
 import {
   RadioGroup,
   RadioGroupItem,
-} from "@/components/shadcn-components/radio-group";
+} from "../shadcn-components/radio-group";
 
 interface Props {
   label: string;

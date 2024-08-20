@@ -1,7 +1,7 @@
 "use client";
 
-import { Checkbox } from "@/components/shadcn-components/checkbox";
 import { cn } from "@/lib/tailwind/cn";
+import { Checkbox } from "../shadcn-components/checkbox";
 import { CheckboxProps } from "./types";
 
 export function CheckBox({ children, labelClassName, onCheck }: CheckboxProps) {
