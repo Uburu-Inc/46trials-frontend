@@ -1,4 +1,5 @@
-import { FC } from "react";
+"use client";
+
 import { cn } from "@/lib/tailwind/cn";
 
 interface Props {
@@ -15,7 +16,7 @@ export function Tag({ onClick, label, className }: Props) {
   return (
     <div
       className={cn(
-        "bg-black text-white rounded-xl text-[0.8rem] p-[0.5rem] cursor-pointer font-[500]",
+        "bg-black text-white rounded-md text-[0.8rem] p-[0.5rem] cursor-pointer font-[500]",
         className
       )}
       onClick={tagClickFunction}

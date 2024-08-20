@@ -16,14 +16,14 @@ export function SideBar() {
         <AppIcon />
       </div>
 
-      <Link href={"/dashboard/project"}>
+      <Link href={"/dashboard/pages/project"}>
         <ButtonComponent className="flex gap-2 w-full bg-black font-[400] text-[0.8rem] mt-10">
           <Plus />
           <span>Create Project</span>
         </ButtonComponent>
       </Link>
 
-      <div className="px-5 mt-10">
+      <div className="px-2 mt-10">
         {MenuItems.map(({ text, Icon, path }, index) => (
           <Link href={path} key={index}>
             <button

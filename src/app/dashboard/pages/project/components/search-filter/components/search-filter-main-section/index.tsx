@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { db } from "./constant";
 import { GlobeIcon } from "./globe-icon";
 import { ButtonComponent } from "@/components/button";
-import { Tag } from "../../../tag";
+import { Tag } from "../../../../../../components/tag";
 import { sqlQueryContext } from "../../../../context";
 import { Card } from "@/components/shadcn-components/card"
 

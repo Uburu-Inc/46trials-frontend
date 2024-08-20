@@ -1,7 +1,7 @@
 "use client";
 
 import { Loader } from "@/components/loader";
-import { useFetchProfile } from "../../hooks/profile/fetch-profile";
+import { useFetchProfile } from "../../../hooks/profile/fetch-profile";
 
 export function Detail() {
   const { loading, data } = useFetchProfile();

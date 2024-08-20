@@ -5,6 +5,10 @@ export type AppInfoParams = {
   uid: string
 };
 
+export type User = {
+  email: string;
+}
+
 export type UserPaymentInfoPayload = {
   username?: string;
   phone_number?: string;
@@ -12,6 +16,8 @@ export type UserPaymentInfoPayload = {
 
 export type ContextPayload = {
   params: AppInfoParams;
+  userInfo: string;
+  setProfile: (payload: string) => void;
   setUser: (payload: AppInfoParams) => void;
 };
 

@@ -8,6 +8,7 @@ export const AppContext = createContext({} as ContextPayload);
 
 export function AppContextContainer({ children }: AppContainerProps) {
   const [appParams, setAppParams] = useState<AppInfoParams>(appParamsState);
+  const [userInfo, setUserInfo] = useState<string>("")
 
   const setUser = useCallback(function (payload: AppInfoParams) {
     if (payload) {
@@ -17,6 +18,10 @@ export function AppContextContainer({ children }: AppContainerProps) {
       }
     }
   }, []);
+
+  const setProfile = useCallback(function(payload: string) {
+    setUserInfo(payload)
+  }, [])
 
   const getAppParams = useCallback(
     function () {
@@ -34,7 +39,9 @@ export function AppContextContainer({ children }: AppContainerProps) {
     <AppContext.Provider
       value={{
         params: getAppParams(),
+        userInfo,
         setUser,
+        setProfile,
       }}
     >
       {children}

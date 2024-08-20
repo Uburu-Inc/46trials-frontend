@@ -1,5 +1,5 @@
 import { RequiredColumnMainProps, RequiredColumnProps } from "../../utils/type";
-import { Tag } from "../../../tag";
+import { Tag } from "../../../../../../components/tag";
 import { cn } from "@/lib/tailwind/cn";
 
 interface Props {

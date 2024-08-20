@@ -1,0 +1,1 @@
+## layout.tsx defines the global layout for files under /dashboard/pages directory
