@@ -4,7 +4,9 @@ import toast from "react-hot-toast";
 import { useLogout } from "@/app/hooks/logout";
 import { ApiResponse, UseAxiosResponse, AxiosFuncParams } from "./type";
 
-export function useNetworkRequest({ hideErrorAlert }: AxiosFuncParams): UseAxiosResponse {
+export function useNetworkRequest({
+  hideErrorAlert,
+}: AxiosFuncParams): UseAxiosResponse {
   const { logout } = useLogout();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -43,20 +45,23 @@ export function useNetworkRequest({ hideErrorAlert }: AxiosFuncParams): UseAxios
 
       const response = error.response;
 
-      if (response.status >= 500) {
-        toast.error("An unknown server error occurred");
-      } else if (response.status === 404) {
-        toast.error("Resource not found");
-      } else if (response.status === 401 && token) {
-        toast.error("Unauthorized");
-        logout();
-      } else {
-        if (!token && response.status === 401) {
-          toast.error(response.data.error.detail);
-          return;
+      if (!hideErrorAlert) {
+        if (response.status >= 500) {
+          toast.error("An unknown server error occurred");
+        } else if (response.status === 404) {
+          toast.error("Resource not found");
+        } else if (response.status === 401 && token) {
+          toast.error("Unauthorized");
+          logout();
+        } else {
+          if (!token && response.status === 401) {
+            toast.error(response.data.error.detail);
+            return;
+          }
+          toast.error(response.data.message);
         }
-        if (!hideErrorAlert) toast.error(response.data.message);
       }
+
       throw error;
     }
   );
