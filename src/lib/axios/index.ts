@@ -17,7 +17,7 @@ export function useNetworkRequest({
   }
 
   const axios = Axios.create({
-    baseURL: "https://dev-backend.uburu.ai/api/v1",
+    baseURL: "https://prod-backend.uburu.ai/api/v1",
   });
 
   axios.interceptors.request.use((config) => {
