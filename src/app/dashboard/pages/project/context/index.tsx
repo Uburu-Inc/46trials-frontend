@@ -5,7 +5,7 @@ export const sqlQueryContext = createContext({} as Props);
 
 export function SqlQueryLayoutContext({ children }: { children: ReactNode }) {
   const [count, setCount] = useState(0);
-  const [phase, setPhase] = useState(1);
+  const [phase, setPhase] = useState(0);
   const [selectedColumns, setSelectedColumns] = useState<SelectedTags>([]);
   const [lab, setLab] = useState("");
   const [emr, setEmr] = useState("");
