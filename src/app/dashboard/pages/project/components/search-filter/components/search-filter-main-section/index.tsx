@@ -120,7 +120,7 @@ export function SearchFilterMainSection() {
               >
                 Download
               </ButtonComponent> */}
-              <ButtonComponent className="bg-black" onClick={showDrawer}>
+              <ButtonComponent className="bg-black" onClick={showDrawer} disabled>
                 Proceed to Payment
               </ButtonComponent>
             </div>
