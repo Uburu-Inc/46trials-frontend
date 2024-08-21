@@ -13,11 +13,9 @@ function DataExchange({ searchParams }: NextServerSideSearchParameterTypes) {
         current={current as string}
         title={[
           { value: "onerecord", text: "One Record" },
-          { value: "46trials", text: "46 Trials" },
         ]}
         interfaceItems={[
           { value: "onerecord", component: <OneRecord /> },
-          { value: "46trials", component: <></> },
         ]}
       />
     </div>

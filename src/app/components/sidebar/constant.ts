@@ -10,7 +10,7 @@ export interface MenuItemsTypes {
 
 export const MenuItems: Array<MenuItemsTypes> = [
   {
-    text: "Data Exchange",
+    text: "Project",
     Icon: DataExchange,
     path: "/dashboard/pages/data-exchange",
   },
