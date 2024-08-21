@@ -1,11 +1,11 @@
-import { Button } from "@/components/shadcn-components/button";
-import { Input } from "@/components/shadcn-components/input";
-import { Label } from "@/components/shadcn-components/label";
+import { Button } from "../shadcn-components/button";
+import { Input } from "../shadcn-components/input";
+import { Label } from "../shadcn-components/label";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/shadcn-components/popover";
+} from "../shadcn-components/popover";
 
 export function SearchInputSelect() {
   return (

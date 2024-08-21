@@ -6,7 +6,7 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@/components/shadcn-components/tabs";
+} from "../shadcn-components/tabs";
 
 import { TabTypes } from "./type";
 import { cn } from "@/lib/tailwind/cn";

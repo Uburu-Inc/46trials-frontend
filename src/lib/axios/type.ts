@@ -12,3 +12,7 @@ export interface UseAxiosResponse {
   axios: AxiosInstance;
   loading: boolean;
 }
+
+export interface AxiosFuncParams {
+  hideErrorAlert?: boolean
+}

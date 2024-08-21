@@ -1,11 +1,11 @@
 import { ChangeEvent } from "react";
-import { TrashIcon } from "./components/trash-icon";
-import { TextInput } from "@/components/input/text-input";
+import { TextInput } from "@/app/components/reusable-components/input/text-input";
+import { ButtonComponent } from "@/app/components/reusable-components/button";
 import { useState } from "react";
+import { TrashIcon } from "./components/trash-icon";
 import { RequiredColumnProps } from "../../utils/type";
 import { dictionaryConverter } from "../../utils/constant";
 import { AgeInput } from "./components/age-input";
-import { ButtonComponent } from "@/components/button";
 
 interface Props {
   requiredColumn?: string;

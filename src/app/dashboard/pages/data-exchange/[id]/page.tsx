@@ -1,4 +1,4 @@
-import { Tab } from "@/components/tab";
+import { Tab } from "@/app/components/reusable-components/tab";
 import { HeaderTitle } from "../../../components/header-title";
 import { TagsScrollView } from "../../../components/tags-scroll-view";
 import { ProjectSummaryComponent } from "./components/project-summary";

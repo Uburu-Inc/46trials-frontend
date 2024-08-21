@@ -1,14 +1,23 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { db } from "./constant";
 import { GlobeIcon } from "./globe-icon";
-import { ButtonComponent } from "@/components/button";
+import { ButtonComponent } from "@/app/components/reusable-components/button";
 import { Tag } from "../../../../../../components/tag";
 import { sqlQueryContext } from "../../../../context";
-import { Card } from "@/components/shadcn-components/card"
+import {
+  Card,
+  CardContent,
+} from "@/app/components/reusable-components/shadcn-components/card";
+import { SuccessIcon } from "@/app/components/reusable-components/icons/success-icon"
+import Drawer from "@/app/components/reusable-components/drawer";
+import Modal from "@/app/components/reusable-components/modal";
 
 export function SearchFilterMainSection() {
   const { count, setPhase, selectedColumns, lab, emr, claims } =
     useContext(sqlQueryContext);
+
+  const drawerRef = useRef<HTMLButtonElement>(null);
+  const modalRef = useRef<HTMLButtonElement>(null);
 
   function downloadCSV(csv: string, filename: string) {
     var csvFile;
@@ -21,6 +30,18 @@ export function SearchFilterMainSection() {
     downloadLink.style.display = "none";
     document.body.appendChild(downloadLink);
     downloadLink.click();
+  }
+
+  function showDrawer() {
+    if (drawerRef.current) {
+      drawerRef.current.click();
+    }
+  }
+
+  function showModal() {
+    if (modalRef.current) {
+      modalRef.current.click();
+    }
   }
 
   return (
@@ -79,8 +100,6 @@ export function SearchFilterMainSection() {
             <div className={"bg-[#F6F7FC] w-[10rem] p-[1rem] mt-[.8rem]"}>
               <p className={"text-center text-[1rem] font-[500]"}>{count}</p>
             </div>
-
-           
           </div>
 
           <div className={"flex justify-end"}>
@@ -92,7 +111,7 @@ export function SearchFilterMainSection() {
               >
                 Back
               </ButtonComponent>
-              <ButtonComponent
+              {/* <ButtonComponent
                 onClick={() => {
                   downloadCSV(lab, "lab.xlsx");
                   downloadCSV(emr, "emr.xlsx");
@@ -100,12 +119,51 @@ export function SearchFilterMainSection() {
                 }}
               >
                 Download
+              </ButtonComponent> */}
+              <ButtonComponent className="bg-black" onClick={showDrawer}>
+                Proceed to Payment
               </ButtonComponent>
             </div>
           </div>
-
         </Card>
       </div>
+      <Drawer
+        title="Make Payment"
+        description="Kindly view the cost details of your request and proceed to payment."
+        proceedText="Confirm Payment"
+        ref={drawerRef}
+        onProceed={showModal}
+      >
+        <Card>
+          <CardContent className="pt-5">
+            <p className="text-[0.7rem] text-[#697681]">NUMBER OF RECORD</p>
+            <p className="text-sm text-[#051823]">1</p>
+
+            <p className="text-[0.7rem] text-[#697681] mt-2">BANK NAME</p>
+            <p className="text-sm text-[#051823]">Sterling Bank</p>
+
+            <p className="text-[0.7rem] text-[#697681] mt-4">ACCOUNT NUMBER</p>
+            <p className="text-sm text-[#051823]">0080088328</p>
+
+            <p className="text-[0.7rem] text-[#697681] mt-4">ACCOUNT NAME</p>
+            <p className="text-sm text-[#051823]">Uburu Health</p>
+
+            <p className="text-[0.7rem] text-[#697681] mt-4">TOTAL COST</p>
+            <p className="text-sm text-[#051823]">₦ 159000.00</p>
+          </CardContent>
+        </Card>
+      </Drawer>
+      <Modal
+        ref={modalRef}
+        modalIcon={<SuccessIcon />}
+        title="Request successful"
+        closeButtonTitle="Return to Home"
+      >
+        <p className="text-[#525A6E] text-sm">
+          Your request was sent successfully. You would receive a feedback
+          within 24 working hours. Thanks for your patience!
+        </p>
+      </Modal>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { Textarea } from "@/components/shadcn-components/textarea";
+import { Textarea } from "../shadcn-components/textarea";
 import { TextAreaProps } from "./types";
 import { Label } from "./components/label";
 import { Error } from "./components/error";

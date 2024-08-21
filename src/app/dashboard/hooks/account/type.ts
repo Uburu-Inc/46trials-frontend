@@ -17,5 +17,17 @@ export interface ProfileData {
 export interface FetchProfileResponse {
   success: boolean;
   loading: boolean;
-  data: ProfileData | null
+  data: ProfileData | null;
+}
+
+export interface UpdateProfilePayload {
+  old_password: string;
+  new_password: string;
+  confirm_new_password: string;
+}
+
+export interface UpdatePasswordFuncProps {
+  loading: boolean;
+  success: boolean;
+  handleUpdatePassword: (payload: UpdateProfilePayload) => void;
 }

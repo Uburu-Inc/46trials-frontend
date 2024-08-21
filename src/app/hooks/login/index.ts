@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 
 export function useLogin(): LoginFuncProps {
   const router = useRouter();
-  const { loading, axios } = useNetworkRequest();
+  const { loading, axios } = useNetworkRequest({});
   const { setUser } = useContext(AppContext);
 
   const handleLogin = useCallback(
@@ -26,7 +26,7 @@ export function useLogin(): LoginFuncProps {
             uid: res.data.account.uid
           });
 
-          void router.push("/dashboard/project");
+          void router.push("/dashboard/pages/project");
         }
       } catch (error) {
         console.error(error);

@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { AppIcon } from "@/components/icons/app-icon";
-import { TextInput } from "@/components/input/text-input";
-import { useFormik } from "formik";
 import { useLogin } from "@/app/hooks/login";
 import { loginSchema } from "@/app/hooks/login/schema";
-import { ButtonComponent } from "@/components/button";
-import { Card } from "@/components/shadcn-components/card";
+import { AppIcon } from "./reusable-components/icons/app-icon";
+import { TextInput } from "./reusable-components/input/text-input";
+import { useFormik } from "formik";
+import { ButtonComponent } from "./reusable-components/button";
+import { Card } from "./reusable-components/shadcn-components/card";
 
 export function LoginForm() {
   const { loading, handleLogin } = useLogin();

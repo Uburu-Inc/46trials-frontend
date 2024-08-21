@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { cn } from "@/lib/tailwind/cn";
 import {
   Select,
   SelectContent,
@@ -6,10 +7,9 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/shadcn-components/select";
-import { Card } from "@/components/shadcn-components/card";
-import { Input } from "@/components/shadcn-components/input";
-import { cn } from "@/lib/tailwind/cn";
+} from "../shadcn-components/select";
+import { Card } from "../shadcn-components/card";
+import { Input } from "../shadcn-components/input";
 import { SelectProps } from "./types";
 import { Label } from "./components/label";
 import { Error } from "./components/error";

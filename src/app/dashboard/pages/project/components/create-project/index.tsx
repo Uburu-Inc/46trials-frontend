@@ -1,11 +1,11 @@
-import { TextInput } from "@/components/input/text-input";
+import { TextInput } from "@/app/components/reusable-components/input/text-input";
 import { ColumnTags } from "../create-project/components/column-tags";
 import { CreateProjectValidationInitialProps } from "./utils/type";
 import { Columns, createProjectValidationInitial } from "./utils/constant";
 import { RequiredColumnEntry } from "./components/required-column-entry";
 import { useEffect, useState, useContext } from "react";
 import { RequiredColumnProps } from "./utils/type";
-import { ButtonComponent } from "@/components/button";
+import { ButtonComponent } from "@/app/components/reusable-components/button";
 import { useFormik } from "formik";
 import { createProjectValidation } from "./utils/helpers/validation";
 import { sqlQueryGenerator } from "./utils/helpers/sql/sql-query-generator";

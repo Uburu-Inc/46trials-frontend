@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AppIcon } from "@/components/icons/app-icon";
-import { ButtonComponent } from "@/components/button";
+import { AppIcon } from "../reusable-components/icons/app-icon";
+import { ButtonComponent } from "../reusable-components/button";
 import { MenuItems } from "./constant";
 import { Plus } from "./icons/plus";
 import { cn } from "@/lib/tailwind/cn";

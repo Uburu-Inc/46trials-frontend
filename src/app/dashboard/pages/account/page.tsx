@@ -1,5 +1,5 @@
 import { NextServerSideSearchParameterTypes } from "@/app/utils/types";
-import { Tab } from "@/components/tab";
+import { Tab } from "@/app/components/reusable-components/tab";
 import { Detail } from "./components/details";
 import { Security } from "./components/security";
 

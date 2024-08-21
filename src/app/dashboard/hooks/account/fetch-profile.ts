@@ -9,7 +9,7 @@ export function useFetchProfile(): FetchProfileResponse {
   const [data, setData] = useState<ProfileData | null>(null);
 
   const [success, setSuccess] = useState(false);
-  const { axios, loading } = useNetworkRequest();
+  const { axios, loading } = useNetworkRequest({});
   const isRequestMade = useRef(false);
 
   useEffect(() => {

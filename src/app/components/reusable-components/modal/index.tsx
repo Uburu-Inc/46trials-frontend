@@ -1,5 +1,5 @@
-import React, { forwardRef, useCallback } from "react";
-import { Button } from "@/components/shadcn-components/button";
+import React, { forwardRef } from "react";
+import { Button } from "../shadcn-components/button";
 import {
   Dialog,
   DialogClose,
@@ -8,17 +8,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/shadcn-components/dialog";
+} from "../shadcn-components/dialog";
 import { CloseModalIcon } from "../icons/close-modal-icon";
 import { ModalProps } from "./type";
 
 const Modal = forwardRef<HTMLButtonElement, ModalProps>(function (
-  { title, description, children, closeButtonTitle },
+  { title, description, children, closeButtonTitle, modalIcon },
   ref
 ) {
-  const handleReturnToHomeScreen = useCallback(function () {
-    location.reload();
-  }, []);
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -31,20 +28,19 @@ const Modal = forwardRef<HTMLButtonElement, ModalProps>(function (
             <CloseModalIcon />
           </button>
         </DialogClose>
+        <div className="flex justify-center">{modalIcon}</div>
         <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
+          <DialogTitle className="text-center text-2xl">{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         <div>{children}</div>
         {closeButtonTitle && (
           <div className="flex justify-center">
-            <Button
-              type="button"
-              variant="secondary"
-              onClick={handleReturnToHomeScreen}
-            >
-              {closeButtonTitle}
-            </Button>
+            <DialogClose asChild>
+              <Button type="button" variant="secondary">
+                {closeButtonTitle}
+              </Button>
+            </DialogClose>
           </div>
         )}
       </DialogContent>

@@ -1,4 +1,7 @@
-import { Card, CardContent } from "@/components/shadcn-components/card";
+import {
+  Card,
+  CardContent,
+} from "@/app/components/reusable-components/shadcn-components/card";
 
 export function ProjectSummaryComponent() {
   return (
@@ -20,7 +23,9 @@ export function ProjectSummaryComponent() {
         <Card className="pt-6 w-[32%]">
           <CardContent>
             <p className="text-[gray] text-sm">Analysis Timeline</p>
-            <p className="text-md text-[gray] font-[600]">1/1/2022 - 1/1/2024</p>
+            <p className="text-md text-[gray] font-[600]">
+              1/1/2022 - 1/1/2024
+            </p>
           </CardContent>
         </Card>
       </div>
