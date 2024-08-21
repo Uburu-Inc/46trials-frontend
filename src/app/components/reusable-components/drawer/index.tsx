@@ -57,4 +57,5 @@ const Drawer = forwardRef<HTMLButtonElement, DrawerProps>(function (
   );
 });
 
+Drawer.displayName = "Drawer";
 export default Drawer;

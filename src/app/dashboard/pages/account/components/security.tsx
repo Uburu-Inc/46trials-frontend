@@ -1,11 +1,14 @@
 "use client";
 
 import { useFormik } from "formik";
-import { ButtonComponent } from "@/app/components/reusable-components/button"
+import { ButtonComponent } from "@/app/components/reusable-components/button";
 import { accountSchema } from "@/app/dashboard/hooks/account/schema";
 import { TextInput } from "@/app/components/reusable-components/input/text-input";
+import { useUpdateProfile } from "@/app/dashboard/hooks/account/update-profile";
 
 export function Security() {
+  const { loading, handleUpdatePassword } = useUpdateProfile();
+
   const formik = useFormik({
     initialValues: {
       old_password: "",
@@ -13,12 +16,14 @@ export function Security() {
       confirm_new_password: "",
     },
     validationSchema: accountSchema,
-    onSubmit: (payload) => console.log(payload),
+    onSubmit: (payload) => handleUpdatePassword(payload),
   });
+
   return (
     <div className="w-[40rem]">
       <form onSubmit={formik.handleSubmit}>
         <TextInput
+          type="password"
           className="w-full"
           label="Old Password"
           value={formik.values.old_password}
@@ -28,6 +33,7 @@ export function Security() {
         />
         <div className="mt-3">
           <TextInput
+            type="password"
             className="w-full"
             label="New Password"
             value={formik.values.new_password}
@@ -38,6 +44,7 @@ export function Security() {
         </div>
         <div className="mt-3">
           <TextInput
+            type="password"
             className="w-full"
             label="Confirm new password"
             value={formik.values.confirm_new_password}
@@ -47,7 +54,9 @@ export function Security() {
           />
         </div>
 
-        <ButtonComponent className="mt-8">Update</ButtonComponent>
+        <ButtonComponent loading={loading} className="mt-8">
+          {loading ? "Loading..." : "Update"}
+        </ButtonComponent>
       </form>
     </div>
   );

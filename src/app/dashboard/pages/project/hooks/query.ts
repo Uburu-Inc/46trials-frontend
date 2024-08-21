@@ -3,7 +3,7 @@ import { useNetworkRequest } from "@/lib/axios";
 import { QueryPayload } from "./type";
 
 export function useSendQuery() {
-  const { axios } = useNetworkRequest();
+  const { axios } = useNetworkRequest({});
 
   const runQuery = useCallback(
     async function (payload: QueryPayload) {

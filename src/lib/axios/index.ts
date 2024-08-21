@@ -2,9 +2,9 @@ import Axios, { AxiosError, AxiosRequestHeaders, AxiosResponse } from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useLogout } from "@/app/hooks/logout";
-import { ApiResponse, UseAxiosResponse } from "./type";
+import { ApiResponse, UseAxiosResponse, AxiosFuncParams } from "./type";
 
-export function useNetworkRequest(): UseAxiosResponse {
+export function useNetworkRequest({ hideErrorAlert }: AxiosFuncParams): UseAxiosResponse {
   const { logout } = useLogout();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -55,7 +55,7 @@ export function useNetworkRequest(): UseAxiosResponse {
           toast.error(response.data.error.detail);
           return;
         }
-        toast.error(response.data.message);
+        if (!hideErrorAlert) toast.error(response.data.message);
       }
       throw error;
     }
