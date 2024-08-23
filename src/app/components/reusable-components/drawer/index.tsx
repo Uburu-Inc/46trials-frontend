@@ -11,9 +11,10 @@ import {
 } from "../shadcn-components/sheet";
 import { DrawerProps } from "./type";
 import { LeftArrow } from "./left-arrow";
+import { ButtonComponent } from "../button";
 
 const Drawer = forwardRef<HTMLButtonElement, DrawerProps>(function (
-  { title, description, proceedText, onProceed, children },
+  { title, description, proceedText, onProceed, loading, children },
   ref
 ) {
   return (
@@ -48,9 +49,14 @@ const Drawer = forwardRef<HTMLButtonElement, DrawerProps>(function (
             </Button>
           </SheetClose>
 
-          <Button type="submit" className="font-normal" onClick={onProceed}>
-            {proceedText}
-          </Button>
+          <ButtonComponent
+            type="submit"
+            className="font-normal bg-black"
+            onClick={onProceed}
+            loading={loading}
+          >
+            {loading ? "Loading..." : proceedText}
+          </ButtonComponent>
         </div>
       </SheetContent>
     </Sheet>

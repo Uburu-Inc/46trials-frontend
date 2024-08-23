@@ -1,3 +1,5 @@
+"use client";
+
 import { ButtonComponent } from "@/app/components/reusable-components/button";
 import { cn } from "@/lib/tailwind/cn";
 
@@ -6,6 +8,7 @@ interface Props {
   location: string;
   date: string;
   className?: string;
+  onDownload?: () => void
 }
 
 export function InfoListView({
@@ -13,6 +16,7 @@ export function InfoListView({
   location,
   date,
   className,
+  onDownload
 }: Props) {
   return (
     <div
@@ -37,7 +41,7 @@ export function InfoListView({
       </div>
 
       <div className="w-[30%] flex justify-end mt-2">
-        <ButtonComponent>Download</ButtonComponent>
+        <ButtonComponent onClick={onDownload}>Download</ButtonComponent>
       </div>
     </div>
   );

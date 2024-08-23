@@ -1,5 +1,5 @@
 import { AppContextContainer } from "@/app/context";
-import { SideBar } from "@/app/components/sidebar";
+import { SideBar } from "./components/sidebar";
 import { Navigation } from "./components/navigation"
 
 function DashboardLayout({

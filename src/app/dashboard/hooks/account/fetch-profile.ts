@@ -17,7 +17,7 @@ export function useFetchProfile(): FetchProfileResponse {
     if (isRequestMade.current) return;
     isRequestMade.current = true;
 
-    async function getInstitutions() {
+    async function getAccount() {
       try {
         const res = await axios.get(routes.FETCH_PROFILE(params.uid));
         if (res.data) setData(res.data);
@@ -27,8 +27,8 @@ export function useFetchProfile(): FetchProfileResponse {
       }
     }
 
-    getInstitutions();
-  }, [params.uid]);
+    getAccount();
+  }, [axios, params.uid]);
 
   return { loading, success, data };
 }

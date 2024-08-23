@@ -6,4 +6,5 @@ export interface DrawerProps {
   onProceed?: () => void;
   description: string;
   children: ReactNode;
+  loading?: boolean;
 }

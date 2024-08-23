@@ -26,7 +26,7 @@ export function useLogin(): LoginFuncProps {
             uid: res.data.account.uid
           });
 
-          void router.push("/dashboard/pages/project");
+          void router.push("/dashboard/pages/create-project");
         }
       } catch (error) {
         console.error(error);
