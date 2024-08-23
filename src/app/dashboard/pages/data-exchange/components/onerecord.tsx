@@ -4,11 +4,11 @@ import { cn } from "@/lib/tailwind/cn";
 import { useState } from "react";
 import { DashboardCard } from "../../../components/card";
 
-export function OneRecord() {
+export function FortySixTrials() {
   const [status, setStatus] = useState(0);
   return (
     <section>
-      <div className="flex gap-3">
+      {/* <div className="flex gap-3">
         <button
           onClick={() => setStatus(0)}
           className={cn(
@@ -31,9 +31,9 @@ export function OneRecord() {
         >
           Fulfilled
         </button>
-      </div>
+      </div> */}
 
-      <div className="py-10">
+      {/* <div className="py-10">
         {status === 0 && (
           <div className="flex justify-between">
             <div className="w-[31%]">
@@ -84,7 +84,7 @@ export function OneRecord() {
             </div>
           </div>
         )}
-      </div>
+      </div> */}
     </section>
   );
 }
