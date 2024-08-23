@@ -10,7 +10,7 @@ export function FortySixTrials() {
   const [status, setStatus] = useState(0);
   return (
     <section>
-      <div className="flex gap-3">
+      {/* <div className="flex gap-3">
         <button
           onClick={() => setStatus(0)}
           className={cn(
@@ -33,7 +33,7 @@ export function FortySixTrials() {
         >
           Fulfilled
         </button>
-      </div>
+      </div> */}
 
       <div className="py-3">
         {status === 0 && (
