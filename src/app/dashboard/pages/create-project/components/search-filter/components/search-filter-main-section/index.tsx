@@ -1,4 +1,5 @@
 import { useContext, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation"
 import { db } from "./constant";
 import { GlobeIcon } from "./globe-icon";
 import { ButtonComponent } from "@/app/components/reusable-components/button";
@@ -16,6 +17,7 @@ import { useFetchExchangeRate } from "@/app/dashboard/hooks/payment/fetch-exchan
 import { AppContext } from "@/app/context";
 
 export function SearchFilterMainSection() {
+  const { push } = useRouter();
   const { params } = useContext(AppContext);
 
   const { count, setPhase, selectedColumns, lab, emr, claims, projectProps } =
@@ -31,19 +33,6 @@ export function SearchFilterMainSection() {
 
   const drawerRef = useRef<HTMLButtonElement>(null);
   const modalRef = useRef<HTMLButtonElement>(null);
-
-  function downloadCSV(csv: string, filename: string) {
-    var csvFile;
-    var downloadLink;
-
-    csvFile = new Blob([csv], { type: "text/csv" });
-    downloadLink = document.createElement("a");
-    downloadLink.download = filename;
-    downloadLink.href = URL.createObjectURL(csvFile);
-    downloadLink.style.display = "none";
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-  }
 
   function showDrawer() {
     if (drawerRef.current) {
@@ -128,15 +117,6 @@ export function SearchFilterMainSection() {
               >
                 Back
               </ButtonComponent>
-              {/* <ButtonComponent
-                onClick={() => {
-                  downloadCSV(lab, "lab.xlsx");
-                  downloadCSV(emr, "emr.xlsx");
-                  downloadCSV(claims, "claims.xlsx");
-                }}
-              >
-                Download
-              </ButtonComponent> */}
               <ButtonComponent
                 className="bg-black"
                 onClick={showDrawer}
@@ -193,6 +173,7 @@ export function SearchFilterMainSection() {
         modalIcon={<SuccessIcon />}
         title="Request successful"
         closeButtonTitle="Return to Home"
+        onProceed={() => void push("/dashboard/pages/projects")}
       >
         <p className="text-[#525A6E] text-sm">
           Your request was sent successfully. You would receive a feedback

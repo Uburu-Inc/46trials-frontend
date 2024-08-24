@@ -13,7 +13,7 @@ import { CloseModalIcon } from "../icons/close-modal-icon";
 import { ModalProps } from "./type";
 
 const Modal = forwardRef<HTMLButtonElement, ModalProps>(function (
-  { title, description, children, closeButtonTitle, modalIcon },
+  { title, description, children, closeButtonTitle, modalIcon, onProceed },
   ref
 ) {
   return (
@@ -37,7 +37,7 @@ const Modal = forwardRef<HTMLButtonElement, ModalProps>(function (
         {closeButtonTitle && (
           <div className="flex justify-center">
             <DialogClose asChild>
-              <Button type="button" variant="secondary">
+              <Button type="button" variant="secondary" onClick={onProceed}>
                 {closeButtonTitle}
               </Button>
             </DialogClose>

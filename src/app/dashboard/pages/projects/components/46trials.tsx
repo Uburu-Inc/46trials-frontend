@@ -42,9 +42,13 @@ export function FortySixTrials() {
               <div className="w-[31%]" key={index}>
                 <DashboardCard
                   className="mt-7"
-                  title={`Created on ${new Date(item.created_at).toDateString()}`}
+                  title={`Created on ${new Date(
+                    item.created_at
+                  ).toDateString()}`}
                   content={item.name}
-                  path={`/dashboard/pages/projects/${item.id}`}
+                  path={`/dashboard/pages/projects/${
+                    item.id
+                  }/${item.name.replaceAll(" ", "-")}`}
                 />
               </div>
             ))}
@@ -52,17 +56,21 @@ export function FortySixTrials() {
         )}
         {status === 1 && (
           <div className="flex justify-between flex-wrap">
-          {data?.results.map((item, index) => (
-            <div className="w-[31%]" key={index}>
-              <DashboardCard
-                className="mt-7"
-                title={`Created on ${new Date(item.created_at).toDateString()}`}
-                content={item.name}
-                path={`/dashboard/pages/projects/${item.id}`}
-              />
-            </div>
-          ))}
-        </div>
+            {data?.results.map((item, index) => (
+              <div className="w-[31%]" key={index}>
+                <DashboardCard
+                  className="mt-7"
+                  title={`Created on ${new Date(
+                    item.created_at
+                  ).toDateString()}`}
+                  content={item.name}
+                  path={`/dashboard/pages/projects/${
+                    item.id
+                  }/${item.name.replaceAll(" ", "-").toLowerCase()}`}
+                />
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </section>

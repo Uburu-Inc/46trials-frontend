@@ -1,0 +1,1 @@
+## This folder ===> /src/app/dashboard/pages/projects has the [id] and [slug] id for project id and slug for project name

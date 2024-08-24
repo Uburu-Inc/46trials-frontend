@@ -6,4 +6,5 @@ export type ModalProps = {
   modalIcon?: ReactNode;
   closeButtonTitle?: string;
   children: ReactNode;
+  onProceed?: () => void;
 };

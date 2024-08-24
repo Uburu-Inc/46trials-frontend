@@ -1,19 +1,22 @@
 "use client"
 import { Tab } from "@/app/components/reusable-components/tab";
-import { HeaderTitle } from "../../../../components/header-title";
-import { TagsScrollView } from "../../../../components/tags-scroll-view";
+import { HeaderTitle } from "@/app/dashboard/components/header-title";
+import { TagsScrollView } from "@/app/dashboard/components/tags-scroll-view";
 import { ProjectSummaryComponent } from "./project-summary";
 import { Response } from "./response";
-import { singleData } from "../../components/constant";
 import { useFetch46TrialById } from "@/app/dashboard/hooks/projects/46trials/fetch-trial-by-id"
 
+interface Props {
+  id: string;
+  slug: string
+}
 
-export function ViewProjectSummary({ id }: { id: string }) {
+export function ViewProjectSummary({ id, slug }: Props) {
   const { data } = useFetch46TrialById(Number(id))
   return (
     <div className="px-10">
       <HeaderTitle
-        title={["Projects", "Ebola research"]}
+        title={["Projects", slug.replaceAll("-"," ")]}
         header="Ebola Reasearch"
       />
       <div className="px-1">
