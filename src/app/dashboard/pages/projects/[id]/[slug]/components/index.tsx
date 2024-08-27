@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { Tab } from "@/app/components/reusable-components/tab";
 import { Loader } from "@/app/components/reusable-components/loader";
 import { HeaderTitle } from "@/app/dashboard/components/header-title";
@@ -14,6 +15,9 @@ interface Props {
 }
 
 export function ViewProjectSummary({ id, slug }: Props) {
+  const searchParams = useSearchParams();
+  const quertParams = searchParams.get("current");
+
   const { loading, data } = useFetch46TrialById(Number(id));
   const projectName = slug.replaceAll("-", " ");
   return (
@@ -41,7 +45,7 @@ export function ViewProjectSummary({ id, slug }: Props) {
           <>
             <Tab
               className="mt-5"
-              current="project-summary"
+              current={quertParams ?? "project-summary"}
               title={[
                 { value: "project-summary", text: "Project Summary" },
                 { value: "response", text: "Response" },

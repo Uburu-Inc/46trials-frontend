@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import {
   Card,
   CardContent,
@@ -18,8 +19,7 @@ export function ProjectSummaryComponent({
   endDate,
 }: Props) {
   return (
-    <>
-      {/* <p className="font-[600]">Acne.Inc</p> */}
+    <section>
       <div className="mt-3 flex justify-between">
         <Card className="pt-6 w-[32%]">
           <CardContent>
@@ -37,12 +37,11 @@ export function ProjectSummaryComponent({
           <CardContent>
             <p className="text-[gray] text-sm">Analysis Timeline</p>
             <p className="text-md text-[gray] font-[600]">
-              {/* {startDate ?? ""} {" "}
-              {endDate ?? ""} */}
+              {startDate ?? ""} - {endDate ?? ""}
             </p>
           </CardContent>
         </Card>
       </div>
-    </>
+    </section>
   );
 }
