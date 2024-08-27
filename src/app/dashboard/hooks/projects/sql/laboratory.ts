@@ -42,8 +42,6 @@ export function useLaboratoryNetworkRequest() {
 
       setDataset(datasetRes?.dataset);
 
-      
-
       setIsDone(true);
     } catch (e) {
       setLoading(false);

@@ -137,8 +137,8 @@ export function SearchFilterMainSection() {
         onProceed={() =>
           void registerPayment({
             name: projectProps.projectName,
-            sample_size: projectProps.sampleSize,
-            budget: rate * 159000.0 * Number(projectProps.sampleSize),
+            sample_size: count,
+            budget: rate * 159000.0 * Number(count),
             start_date: projectProps.startDate,
             end_date: projectProps.endDate,
             fulfilled: true,
@@ -150,7 +150,7 @@ export function SearchFilterMainSection() {
         <Card>
           <CardContent className="pt-5">
             <p className="text-[0.7rem] text-[#697681]">NUMBER OF RECORD</p>
-            <p className="text-sm text-[#051823]">1</p>
+            <p className="text-sm text-[#051823]">{count}</p>
 
             <p className="text-[0.7rem] text-[#697681] mt-2">BANK NAME</p>
             <p className="text-sm text-[#051823]">Sterling Bank</p>
@@ -163,7 +163,7 @@ export function SearchFilterMainSection() {
 
             <p className="text-[0.7rem] text-[#697681] mt-4">TOTAL COST</p>
             <p className="text-sm text-[#051823]">
-              ₦ {rate * 159000.0 * Number(projectProps.sampleSize)}
+              ₦ {rate * 159000.0 * Number(count)}
             </p>
           </CardContent>
         </Card>
