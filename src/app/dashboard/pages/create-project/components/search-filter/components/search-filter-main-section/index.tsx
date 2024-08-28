@@ -1,5 +1,5 @@
-import { useContext, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation"
+import { useContext, useEffect, useMemo, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { db } from "./constant";
 import { GlobeIcon } from "./globe-icon";
 import { ButtonComponent } from "@/app/components/reusable-components/button";
@@ -48,7 +48,11 @@ export function SearchFilterMainSection() {
     }
   }, [registeringPayment, isPaymentRegistered]);
 
-  console.log(params);
+  const costPrice = useMemo(() => {
+    if (rate && count) {
+      return rate * 100 * count;
+    }
+  }, [rate, count]);
 
   return (
     <>
@@ -138,7 +142,7 @@ export function SearchFilterMainSection() {
           void registerPayment({
             name: projectProps.projectName,
             sample_size: count,
-            budget: rate * 159000.0 * Number(count),
+            budget: costPrice,
             start_date: projectProps.startDate,
             end_date: projectProps.endDate,
             fulfilled: true,
@@ -162,9 +166,7 @@ export function SearchFilterMainSection() {
             <p className="text-sm text-[#051823]">Uburu Health</p>
 
             <p className="text-[0.7rem] text-[#697681] mt-4">TOTAL COST</p>
-            <p className="text-sm text-[#051823]">
-              ₦ {rate * 159000.0 * Number(count)}
-            </p>
+            <p className="text-sm text-[#051823]">₦ {costPrice}</p>
           </CardContent>
         </Card>
       </Drawer>
