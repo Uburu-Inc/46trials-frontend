@@ -1,9 +1,7 @@
-import exp from "constants";
-
 export interface PaymentPayload {
   name?: string;
   sample_size?: number;
-  budget?: number;
+  budget?: number | string;
   start_date?: string;
   end_date?: string;
   fulfilled?: boolean;

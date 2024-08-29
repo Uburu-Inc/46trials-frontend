@@ -50,7 +50,7 @@ export function SearchFilterMainSection() {
 
   const costPrice = useMemo(() => {
     if (rate && count) {
-      return rate * 100 * count;
+      return (rate * 100 * count).toLocaleString();
     }
   }, [rate, count]);
 
