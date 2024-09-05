@@ -1,18 +1,17 @@
 /* READ THE CODE PROPERLY BEFORE MAKING EDITS TO THIS FILE */
 
-import { dictionaryConverter } from "../../../constant";
 import { sqlQueryBuilder } from "../sql-query-builder";
-import { Props, Databases, DataBaseColumns } from "../../../type";
+import { Props, DataBaseColumns } from "../../../type";
 
-export const laboratoryQuery = ({ selection, action, entries }: Props) => {
+export function createQuery({ selection, action, entries, table, dictionaryConverter }: Props) {
 
   if (action === "count") {
     const countQuery = `${sqlQueryBuilder.SELECT_COUNT({
       all: "*",
-    })}${sqlQueryBuilder.FROM({ table: Databases.LABORATORY })}${selection.find(({ id }) => id === "1")?.entries &&
+    })}${sqlQueryBuilder.FROM({ table: table ?? "" })}${selection.find(({ id }) => id === "1")?.entries &&
         !selection.find(({ id }) => id === "1")?.exclude
         ? sqlQueryBuilder
-          .WHERE({ key: dictionaryConverter.laboratory.diagnosis })
+          .WHERE({ key: dictionaryConverter.diagnosis })
           // @ts-ignore
           ?.LIKES({
             values:
@@ -22,7 +21,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
       }${!selection.find(({ id }) => id === "1")?.entries &&
         selection.find(({ id }) => id === "1")?.exclude
         ? sqlQueryBuilder
-          .WHERE({ key: dictionaryConverter.laboratory.diagnosis })
+          .WHERE({ key: dictionaryConverter.diagnosis })
           // @ts-ignore
           ?.NOT_LIKES({
             values:
@@ -32,13 +31,13 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
       }${selection.find(({ id }) => id === "1")?.entries &&
         selection.find(({ id }) => id === "1")?.exclude
         ? `${sqlQueryBuilder
-          .WHERE({ key: dictionaryConverter.laboratory.diagnosis })
+          .WHERE({ key: dictionaryConverter.diagnosis })
           // @ts-ignore
           ?.LIKES({
             values:
               selection.find(({ id }) => id === "1")?.entries?.split(",") ?? [],
           })}${sqlQueryBuilder
-            .WHERE({ key: dictionaryConverter.laboratory.diagnosis })
+            .WHERE({ key: dictionaryConverter.diagnosis })
             // @ts-ignore
             ?.NOT_LIKES({
               values:
@@ -47,18 +46,18 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
         : ""
       }${selection.find(({ id }) => id === "4")?.entries &&
         !selection.find(({ id }) => id === "4")?.exclude
-        ? ` AND (${dictionaryConverter.laboratory.age} ${selection.find(({ id }) => id === "4")?.entries ?? ""
+        ? ` AND (${dictionaryConverter.age} ${selection.find(({ id }) => id === "4")?.entries ?? ""
         })`
         : ""
       }${!selection.find(({ id }) => id === "4")?.entries &&
         selection.find(({ id }) => id === "4")?.exclude
-        ? ` AND (${dictionaryConverter.laboratory.age} ${selection.find(({ id }) => id === "4")?.exclude ?? ""
+        ? ` AND (${dictionaryConverter.age} ${selection.find(({ id }) => id === "4")?.exclude ?? ""
         })`
         : ""
       }${selection.find(({ id }) => id === "4")?.entries &&
         selection.find(({ id }) => id === "4")?.exclude
-        ? ` AND (${dictionaryConverter.laboratory.age} ${selection.find(({ id }) => id === "4")?.entries
-        }) AND (${dictionaryConverter.laboratory.age} ${selection.find(({ id }) => id === "4")?.exclude
+        ? ` AND (${dictionaryConverter.age} ${selection.find(({ id }) => id === "4")?.entries
+        }) AND (${dictionaryConverter.age} ${selection.find(({ id }) => id === "4")?.exclude
         })`
         : ""
       }${selection.find(({ id }) => id === "22")?.entries &&
@@ -66,7 +65,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
         ? sqlQueryBuilder.COMPARE({
           query: [
             {
-              key: dictionaryConverter.laboratory.firstname,
+              key: dictionaryConverter.firstname,
               value: selection.find(({ id }) => id === "22")?.entries ?? "",
               sqlKeyWord: "AND",
               operator: "=",
@@ -79,7 +78,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
         ? sqlQueryBuilder.COMPARE({
           query: [
             {
-              key: dictionaryConverter.laboratory.firstname,
+              key: dictionaryConverter.firstname,
               sqlKeyWord: "AND",
               operator: "<>",
               value: selection.find(({ id }) => id === "22")?.exclude ?? "",
@@ -92,7 +91,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
         ? `${sqlQueryBuilder.COMPARE({
           query: [
             {
-              key: dictionaryConverter.laboratory.firstname,
+              key: dictionaryConverter.firstname,
               operator: "=",
               sqlKeyWord: "AND",
               value: selection.find(({ id }) => id === "22")?.entries ?? "",
@@ -101,7 +100,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
         })}${sqlQueryBuilder.COMPARE({
           query: [
             {
-              key: dictionaryConverter.laboratory.firstname,
+              key: dictionaryConverter.firstname,
               operator: "<>",
               sqlKeyWord: "AND",
               value: selection.find(({ id }) => id === "22")?.exclude ?? "",
@@ -114,7 +113,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
         ? sqlQueryBuilder.COMPARE({
           query: [
             {
-              key: dictionaryConverter.laboratory.lastname,
+              key: dictionaryConverter.lastname,
               value: selection.find(({ id }) => id === "23")?.entries ?? "",
               sqlKeyWord: "AND",
               operator: "=",
@@ -127,7 +126,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
         ? sqlQueryBuilder.COMPARE({
           query: [
             {
-              key: dictionaryConverter.laboratory.lastname,
+              key: dictionaryConverter.lastname,
               value: selection.find(({ id }) => id === "23")?.entries ?? "",
               sqlKeyWord: "AND",
               operator: "<>",
@@ -140,7 +139,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
         ? `${sqlQueryBuilder.COMPARE({
           query: [
             {
-              key: dictionaryConverter.laboratory.lastname,
+              key: dictionaryConverter.lastname,
               value: selection.find(({ id }) => id === "23")?.entries ?? "",
               sqlKeyWord: "AND",
               operator: "=",
@@ -149,7 +148,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
         })}${sqlQueryBuilder.COMPARE({
           query: [
             {
-              key: dictionaryConverter.laboratory.lastname,
+              key: dictionaryConverter.lastname,
               value: selection.find(({ id }) => id === "23")?.entries ?? "",
               sqlKeyWord: "AND",
               operator: "<>",
@@ -169,12 +168,12 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
           .map(
             (val, index) =>
               `${index === 0
-                ? `${dictionaryConverter.laboratory.region} iLIKE '%${val}%'${selection.find(({ id }) => id === "14")?.entries?.split(",")
+                ? `${dictionaryConverter.region} iLIKE '%${val}%'${selection.find(({ id }) => id === "14")?.entries?.split(",")
                   .length === 1
                   ? ""
                   : ""
                 }`
-                : ` OR ${dictionaryConverter.laboratory.region} iLIKE '%${val}%'`
+                : ` OR ${dictionaryConverter.region} iLIKE '%${val}%'`
               }`
           )
           .join("")
@@ -188,13 +187,13 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
           .map(
             (val, index) =>
               `${index === 0
-                ? ` AND (${dictionaryConverter.laboratory.region
+                ? ` AND (${dictionaryConverter.region
                 } NOT iLIKE '%${val}%'${selection.find(({ id }) => id === "14")?.entries?.split(",")
                   .length === 1
                   ? ")"
                   : ""
                 }`
-                : ` OR ${dictionaryConverter.laboratory.region} NOT iLIKE '%${val}%') `
+                : ` OR ${dictionaryConverter.region} NOT iLIKE '%${val}%') `
               }`
           )
           .join("")
@@ -207,13 +206,13 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
           .map(
             (val, index) =>
               `${index === 0
-                ? ` AND (${dictionaryConverter.laboratory.region
+                ? ` AND (${dictionaryConverter.region
                 } iLIKE '%${val}%'${selection.find(({ id }) => id === "14")?.entries?.split(",")
                   .length === 1
                   ? ")"
                   : ""
                 }`
-                : ` OR ${dictionaryConverter.laboratory.region} iLIKE '%${val}%') `
+                : ` OR ${dictionaryConverter.region} iLIKE '%${val}%') `
               }`
           )
           .join("")} ${selection
@@ -222,13 +221,13 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             .map(
               (val, index) =>
                 `${index === 0
-                  ? ` AND (${dictionaryConverter.laboratory.region
+                  ? ` AND (${dictionaryConverter.region
                   } NOT iLIKE '%${val}%'${selection.find(({ id }) => id === "14")?.exclude?.split(",")
                     .length === 1
                     ? ")"
                     : ""
                   }`
-                  : ` OR ${dictionaryConverter.laboratory.region} NOT iLIKE '%${val}%')`
+                  : ` OR ${dictionaryConverter.region} NOT iLIKE '%${val}%')`
                 }`
             )
             .join("")}`
@@ -240,7 +239,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "28")?.entries?.split(",") ?? []
           ).map((providerName, index) => {
             return {
-              key: dictionaryConverter.laboratory.provider_name,
+              key: dictionaryConverter.provider_name,
               operator: "=",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: providerName,
@@ -255,7 +254,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "28")?.exclude?.split(",") ?? []
           ).map((providerName, index) => {
             return {
-              key: dictionaryConverter.laboratory.provider_name,
+              key: dictionaryConverter.provider_name,
               operator: "<>",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: providerName,
@@ -270,7 +269,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "28")?.entries?.split(",") ?? []
           ).map((providerName, index) => {
             return {
-              key: dictionaryConverter.laboratory.provider_name,
+              key: dictionaryConverter.provider_name,
               operator: "=",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: providerName,
@@ -281,7 +280,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "28")?.exclude?.split(",") ?? []
           ).map((providerName, index) => {
             return {
-              key: dictionaryConverter.laboratory.provider_name,
+              key: dictionaryConverter.provider_name,
               operator: "<>",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: providerName,
@@ -296,7 +295,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "30")?.entries?.split(",") ?? []
           ).map((patientContact, index) => {
             return {
-              key: dictionaryConverter.laboratory.patient_contact,
+              key: dictionaryConverter.patient_contact,
               operator: "=",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: patientContact,
@@ -311,7 +310,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "30")?.entries?.split(",") ?? []
           ).map((patientContact, index) => {
             return {
-              key: dictionaryConverter.laboratory.patient_contact,
+              key: dictionaryConverter.patient_contact,
               operator: "<>",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: patientContact,
@@ -326,7 +325,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "30")?.entries?.split(",") ?? []
           ).map((patientContact, index) => {
             return {
-              key: dictionaryConverter.laboratory.patient_contact,
+              key: dictionaryConverter.patient_contact,
               operator: "=",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: patientContact,
@@ -337,7 +336,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "30")?.exclude?.split(",") ?? []
           ).map((patientContact, index) => {
             return {
-              key: dictionaryConverter.laboratory.patient_contact,
+              key: dictionaryConverter.patient_contact,
               operator: "<>",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: patientContact,
@@ -352,7 +351,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "31")?.entries?.split(",") ?? []
           ).map((patientContact, index) => {
             return {
-              key: dictionaryConverter.laboratory.provider_contact,
+              key: dictionaryConverter.provider_contact,
               operator: "=",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: patientContact,
@@ -367,7 +366,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "31")?.exclude?.split(",") ?? []
           ).map((patientContact, index) => {
             return {
-              key: dictionaryConverter.laboratory.provider_contact,
+              key: dictionaryConverter.provider_contact,
               operator: "<>",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: patientContact,
@@ -382,7 +381,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "31")?.entries?.split(",") ?? []
           ).map((providerContact, index) => {
             return {
-              key: dictionaryConverter.laboratory.provider_contact,
+              key: dictionaryConverter.provider_contact,
               operator: "=",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: providerContact,
@@ -393,7 +392,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "31")?.exclude?.split(",") ?? []
           ).map((providerContact, index) => {
             return {
-              key: dictionaryConverter.laboratory.provider_contact,
+              key: dictionaryConverter.provider_contact,
               operator: "<>",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: providerContact,
@@ -416,13 +415,13 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
                 (val, index) =>
                   `${
                     index === 0
-                      ? `${dictionaryConverter.laboratory.test_request} iLIKE '%${val}%'${
+                      ? `${dictionaryConverter.test_request} iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "11")?.entries?.split(",")
                             .length === 1
                             ? ""
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.laboratory.test_request} iLIKE '%${val}%'`
+                      : ` OR ${dictionaryConverter.test_request} iLIKE '%${val}%'`
                   }`
               )
               .join("")
@@ -439,14 +438,14 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
                   `${
                     index === 0
                       ? ` AND (${
-                          dictionaryConverter.laboratory.test_request
+                          dictionaryConverter.test_request
                         } NOT iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "11")?.entries?.split(",")
                             .length === 1
                             ? ")"
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.laboratory.test_request} NOT iLIKE '%${val}%') `
+                      : ` OR ${dictionaryConverter.test_request} NOT iLIKE '%${val}%') `
                   }`
               )
               .join("")
@@ -462,14 +461,14 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
                   `${
                     index === 0
                       ? ` AND (${
-                          dictionaryConverter.laboratory.test_request
+                          dictionaryConverter.test_request
                         } iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "11")?.entries?.split(",")
                             .length === 1
                             ? ")"
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.laboratory.test_request} iLIKE '%${val}%') `
+                      : ` OR ${dictionaryConverter.test_request} iLIKE '%${val}%') `
                   }`
               )
               .join("")} ${selection
@@ -480,14 +479,14 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
                   `${
                     index === 0
                       ? ` AND (${
-                          dictionaryConverter.laboratory.test_request
+                          dictionaryConverter.test_request
                         } NOT iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "11")?.exclude?.split(",")
                             .length === 1
                             ? ")"
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.laboratory.test_request} NOT iLIKE '%${val}%')`
+                      : ` OR ${dictionaryConverter.test_request} NOT iLIKE '%${val}%')`
                   }`
               )
               .join("")}`
@@ -507,13 +506,13 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
                 (val, index) =>
                   `${
                     index === 0
-                      ? `${dictionaryConverter.laboratory.gender} iLIKE '%${val}%'${
+                      ? `${dictionaryConverter.gender} iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "3")?.entries?.split(",")
                             .length === 1
                             ? ""
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.laboratory.gender} iLIKE '%${val}%'`
+                      : ` OR ${dictionaryConverter.gender} iLIKE '%${val}%'`
                   }`
               )
               .join("")
@@ -530,14 +529,14 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
                   `${
                     index === 0
                       ? ` AND (${
-                          dictionaryConverter.laboratory.gender
+                          dictionaryConverter.gender
                         } NOT iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "3")?.entries?.split(",")
                             .length === 1
                             ? ")"
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.laboratory.gender} NOT iLIKE '%${val}%') `
+                      : ` OR ${dictionaryConverter.gender} NOT iLIKE '%${val}%') `
                   }`
               )
               .join("")
@@ -553,14 +552,14 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
                   `${
                     index === 0
                       ? ` AND (${
-                          dictionaryConverter.laboratory.gender
+                          dictionaryConverter.gender
                         } iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "3")?.entries?.split(",")
                             .length === 1
                             ? ")"
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.laboratory.gender} iLIKE '%${val}%') `
+                      : ` OR ${dictionaryConverter.gender} iLIKE '%${val}%') `
                   }`
               )
               .join("")} ${selection
@@ -571,14 +570,14 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
                   `${
                     index === 0
                       ? ` AND (${
-                          dictionaryConverter.laboratory.gender
+                          dictionaryConverter.gender
                         } NOT iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "3")?.exclude?.split(",")
                             .length === 1
                             ? ")"
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.laboratory.gender} NOT iLIKE '%${val}%')`
+                      : ` OR ${dictionaryConverter.gender} NOT iLIKE '%${val}%')`
                   }`
               )
               .join("")}`
@@ -608,12 +607,12 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
     const datasetQuery = `${sqlQueryBuilder.SELECT({
       items: selection.map(
         ({ column }) =>
-          dictionaryConverter.laboratory[column as keyof DataBaseColumns] ?? ""
+          dictionaryConverter[column as keyof DataBaseColumns] ?? ""
       ),
-    })}${sqlQueryBuilder.FROM({ table: Databases.LABORATORY })}${selection.find(({ id }) => id === "1")?.entries &&
+    })}${sqlQueryBuilder.FROM({ table: table ?? "" })}${selection.find(({ id }) => id === "1")?.entries &&
         !selection.find(({ id }) => id === "1")?.exclude
         ? sqlQueryBuilder
-          .WHERE({ key: dictionaryConverter.laboratory.diagnosis })
+          .WHERE({ key: dictionaryConverter.diagnosis })
           // @ts-ignore
           ?.LIKES({
             values:
@@ -623,7 +622,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
       }${!selection.find(({ id }) => id === "1")?.entries &&
         selection.find(({ id }) => id === "1")?.exclude
         ? sqlQueryBuilder
-          .WHERE({ key: dictionaryConverter.laboratory.diagnosis })
+          .WHERE({ key: dictionaryConverter.diagnosis })
           // @ts-ignore
           ?.NOT_LIKE({
             value: selection.find(({ id }) => id === "1")?.exclude ?? "",
@@ -632,13 +631,13 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
       }${selection.find(({ id }) => id === "1")?.entries &&
         selection.find(({ id }) => id === "1")?.exclude
         ? `${sqlQueryBuilder
-          .WHERE({ key: dictionaryConverter.laboratory.diagnosis })
+          .WHERE({ key: dictionaryConverter.diagnosis })
           // @ts-ignore
           ?.LIKES({
             values:
               selection.find(({ id }) => id === "1")?.entries?.split(",") ?? [],
           })}${sqlQueryBuilder
-            .WHERE({ key: dictionaryConverter.laboratory.diagnosis })
+            .WHERE({ key: dictionaryConverter.diagnosis })
             // @ts-ignore
             ?.NOT_LIKES({
               values:
@@ -647,24 +646,24 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
         : ""
       }${selection.find(({ id }) => id === "4")?.entries &&
         !selection.find(({ id }) => id === "4")?.exclude
-        ? ` AND (${dictionaryConverter.laboratory.age} ${selection.find(({ id }) => id === "4")?.entries ?? ""
+        ? ` AND (${dictionaryConverter.age} ${selection.find(({ id }) => id === "4")?.entries ?? ""
         })`
         : ""
       }${!selection.find(({ id }) => id === "4")?.entries &&
         selection.find(({ id }) => id === "4")?.exclude
-        ? ` AND (${dictionaryConverter.laboratory.age} ${selection.find(({ id }) => id === "4")?.exclude ?? ""
+        ? ` AND (${dictionaryConverter.age} ${selection.find(({ id }) => id === "4")?.exclude ?? ""
         })`
         : ""
       }${selection.find(({ id }) => id === "4")?.entries &&
         selection.find(({ id }) => id === "4")?.exclude
-        ? ` AND (${dictionaryConverter.laboratory.age} ${selection.find(({ id }) => id === "4")?.entries
-        }) AND (${dictionaryConverter.laboratory.age} ${selection.find(({ id }) => id === "4")?.exclude
+        ? ` AND (${dictionaryConverter.age} ${selection.find(({ id }) => id === "4")?.entries
+        }) AND (${dictionaryConverter.age} ${selection.find(({ id }) => id === "4")?.exclude
         })`
         : ""
       }${sqlQueryBuilder.COMPARE({
         query: [
           {
-            key: dictionaryConverter.laboratory.firstname,
+            key: dictionaryConverter.firstname,
             value: selection.find(({ id }) => id === "22")?.entries ?? "",
             sqlKeyWord: "AND",
             operator: "=",
@@ -673,7 +672,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
       })}${sqlQueryBuilder.COMPARE({
         query: [
           {
-            key: dictionaryConverter.laboratory.lastname,
+            key: dictionaryConverter.lastname,
             value: selection.find(({ id }) => id === "23")?.entries ?? "",
             sqlKeyWord: "AND",
             operator: "=",
@@ -691,12 +690,12 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
           .map(
             (val, index) =>
               `${index === 0
-                ? `${dictionaryConverter.laboratory.region} iLIKE '%${val}%'${selection.find(({ id }) => id === "14")?.entries?.split(",")
+                ? `${dictionaryConverter.region} iLIKE '%${val}%'${selection.find(({ id }) => id === "14")?.entries?.split(",")
                   .length === 1
                   ? ""
                   : ""
                 }`
-                : ` OR ${dictionaryConverter.laboratory.region} iLIKE '%${val}%'`
+                : ` OR ${dictionaryConverter.region} iLIKE '%${val}%'`
               }`
           )
           .join("")
@@ -710,13 +709,13 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
           .map(
             (val, index) =>
               `${index === 0
-                ? ` AND (${dictionaryConverter.laboratory.region
+                ? ` AND (${dictionaryConverter.region
                 } NOT iLIKE '%${val}%'${selection.find(({ id }) => id === "14")?.entries?.split(",")
                   .length === 1
                   ? ")"
                   : ""
                 }`
-                : ` OR ${dictionaryConverter.laboratory.region} NOT iLIKE '%${val}%') `
+                : ` OR ${dictionaryConverter.region} NOT iLIKE '%${val}%') `
               }`
           )
           .join("")
@@ -729,13 +728,13 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
           .map(
             (val, index) =>
               `${index === 0
-                ? ` AND (${dictionaryConverter.laboratory.region
+                ? ` AND (${dictionaryConverter.region
                 } iLIKE '%${val}%'${selection.find(({ id }) => id === "14")?.entries?.split(",")
                   .length === 1
                   ? ")"
                   : ""
                 }`
-                : ` OR ${dictionaryConverter.laboratory.region} iLIKE '%${val}%') `
+                : ` OR ${dictionaryConverter.region} iLIKE '%${val}%') `
               }`
           )
           .join("")} ${selection
@@ -744,13 +743,13 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             .map(
               (val, index) =>
                 `${index === 0
-                  ? ` AND (${dictionaryConverter.laboratory.region
+                  ? ` AND (${dictionaryConverter.region
                   } NOT iLIKE '%${val}%'${selection.find(({ id }) => id === "14")?.exclude?.split(",")
                     .length === 1
                     ? ")"
                     : ""
                   }`
-                  : ` OR ${dictionaryConverter.laboratory.region} NOT iLIKE '%${val}%')`
+                  : ` OR ${dictionaryConverter.region} NOT iLIKE '%${val}%')`
                 }`
             )
             .join("")}`
@@ -762,7 +761,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "28")?.entries?.split(",") ?? []
           ).map((providerName, index) => {
             return {
-              key: dictionaryConverter.laboratory.provider_name,
+              key: dictionaryConverter.provider_name,
               operator: "=",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: providerName,
@@ -777,7 +776,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "28")?.exclude?.split(",") ?? []
           ).map((providerName, index) => {
             return {
-              key: dictionaryConverter.laboratory.provider_name,
+              key: dictionaryConverter.provider_name,
               operator: "<>",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: providerName,
@@ -792,7 +791,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "28")?.entries?.split(",") ?? []
           ).map((providerName, index) => {
             return {
-              key: dictionaryConverter.laboratory.provider_name,
+              key: dictionaryConverter.provider_name,
               operator: "=",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: providerName,
@@ -803,7 +802,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "28")?.exclude?.split(",") ?? []
           ).map((providerName, index) => {
             return {
-              key: dictionaryConverter.laboratory.provider_name,
+              key: dictionaryConverter.provider_name,
               operator: "<>",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: providerName,
@@ -816,7 +815,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
         ? sqlQueryBuilder.COMPARE({
           query: [
             {
-              key: dictionaryConverter.laboratory.patient_contact,
+              key: dictionaryConverter.patient_contact,
               operator: "=",
               sqlKeyWord: "AND",
               value: selection.find(({ id }) => id === "30")?.entries ?? "",
@@ -831,7 +830,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "30")?.entries?.split(",") ?? []
           ).map((patientContact, index) => {
             return {
-              key: dictionaryConverter.laboratory.patient_contact,
+              key: dictionaryConverter.patient_contact,
               operator: "=",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: patientContact,
@@ -846,7 +845,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "30")?.entries?.split(",") ?? []
           ).map((patientContact, index) => {
             return {
-              key: dictionaryConverter.laboratory.patient_contact,
+              key: dictionaryConverter.patient_contact,
               operator: "<>",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: patientContact,
@@ -861,7 +860,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "30")?.entries?.split(",") ?? []
           ).map((patientContact, index) => {
             return {
-              key: dictionaryConverter.laboratory.patient_contact,
+              key: dictionaryConverter.patient_contact,
               operator: "=",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: patientContact,
@@ -872,7 +871,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "30")?.exclude?.split(",") ?? []
           ).map((patientContact, index) => {
             return {
-              key: dictionaryConverter.laboratory.patient_contact,
+              key: dictionaryConverter.patient_contact,
               operator: "<>",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: patientContact,
@@ -895,13 +894,13 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
                 (val, index) =>
                   `${
                     index === 0
-                      ? `${dictionaryConverter.laboratory.test_request} iLIKE '%${val}%'${
+                      ? `${dictionaryConverter.test_request} iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "11")?.entries?.split(",")
                             .length === 1
                             ? ""
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.laboratory.test_request} iLIKE '%${val}%'`
+                      : ` OR ${dictionaryConverter.test_request} iLIKE '%${val}%'`
                   }`
               )
               .join("")
@@ -918,14 +917,14 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
                   `${
                     index === 0
                       ? ` AND (${
-                          dictionaryConverter.laboratory.test_request
+                          dictionaryConverter.test_request
                         } NOT iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "11")?.entries?.split(",")
                             .length === 1
                             ? ")"
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.laboratory.test_request} NOT iLIKE '%${val}%') `
+                      : ` OR ${dictionaryConverter.test_request} NOT iLIKE '%${val}%') `
                   }`
               )
               .join("")
@@ -941,14 +940,14 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
                   `${
                     index === 0
                       ? ` AND (${
-                          dictionaryConverter.laboratory.test_request
+                          dictionaryConverter.test_request
                         } iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "11")?.entries?.split(",")
                             .length === 1
                             ? ")"
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.laboratory.test_request} iLIKE '%${val}%') `
+                      : ` OR ${dictionaryConverter.test_request} iLIKE '%${val}%') `
                   }`
               )
               .join("")} ${selection
@@ -959,14 +958,14 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
                   `${
                     index === 0
                       ? ` AND (${
-                          dictionaryConverter.laboratory.test_request
+                          dictionaryConverter.test_request
                         } NOT iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "11")?.exclude?.split(",")
                             .length === 1
                             ? ")"
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.laboratory.test_request} NOT iLIKE '%${val}%')`
+                      : ` OR ${dictionaryConverter.test_request} NOT iLIKE '%${val}%')`
                   }`
               )
               .join("")}`
@@ -978,7 +977,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "31")?.entries?.split(",") ?? []
           ).map((patientContact, index) => {
             return {
-              key: dictionaryConverter.laboratory.provider_contact,
+              key: dictionaryConverter.provider_contact,
               operator: "=",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: patientContact,
@@ -993,7 +992,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "31")?.exclude?.split(",") ?? []
           ).map((patientContact, index) => {
             return {
-              key: dictionaryConverter.laboratory.provider_contact,
+              key: dictionaryConverter.provider_contact,
               operator: "<>",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: patientContact,
@@ -1008,7 +1007,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "31")?.entries?.split(",") ?? []
           ).map((providerContact, index) => {
             return {
-              key: dictionaryConverter.laboratory.provider_contact,
+              key: dictionaryConverter.provider_contact,
               operator: "=",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: providerContact,
@@ -1019,7 +1018,7 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
             selection.find(({ id }) => id === "31")?.exclude?.split(",") ?? []
           ).map((providerContact, index) => {
             return {
-              key: dictionaryConverter.laboratory.provider_contact,
+              key: dictionaryConverter.provider_contact,
               operator: "<>",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: providerContact,
@@ -1042,13 +1041,13 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
                 (val, index) =>
                   `${
                     index === 0
-                      ? `${dictionaryConverter.laboratory.gender} iLIKE '%${val}%'${
+                      ? `${dictionaryConverter.gender} iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "3")?.entries?.split(",")
                             .length === 1
                             ? ""
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.laboratory.gender} iLIKE '%${val}%'`
+                      : ` OR ${dictionaryConverter.gender} iLIKE '%${val}%'`
                   }`
               )
               .join("")
@@ -1065,14 +1064,14 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
                   `${
                     index === 0
                       ? ` AND (${
-                          dictionaryConverter.laboratory.gender
+                          dictionaryConverter.gender
                         } NOT iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "3")?.entries?.split(",")
                             .length === 1
                             ? ")"
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.laboratory.gender} NOT iLIKE '%${val}%') `
+                      : ` OR ${dictionaryConverter.gender} NOT iLIKE '%${val}%') `
                   }`
               )
               .join("")
@@ -1088,14 +1087,14 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
                   `${
                     index === 0
                       ? ` AND (${
-                          dictionaryConverter.laboratory.gender
+                          dictionaryConverter.gender
                         } iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "3")?.entries?.split(",")
                             .length === 1
                             ? ")"
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.laboratory.gender} iLIKE '%${val}%') `
+                      : ` OR ${dictionaryConverter.gender} iLIKE '%${val}%') `
                   }`
               )
               .join("")} ${selection
@@ -1106,14 +1105,14 @@ export const laboratoryQuery = ({ selection, action, entries }: Props) => {
                   `${
                     index === 0
                       ? ` AND (${
-                          dictionaryConverter.laboratory.gender
+                          dictionaryConverter.gender
                         } NOT iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "3")?.exclude?.split(",")
                             .length === 1
                             ? ")"
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.laboratory.gender} NOT iLIKE '%${val}%')`
+                      : ` OR ${dictionaryConverter.gender} NOT iLIKE '%${val}%')`
                   }`
               )
               .join("")}`

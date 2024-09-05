@@ -9,9 +9,11 @@ export interface Queries {
   claimsQuery?: DataSetQuery;
 }
 
+export type QueryActionMode = "count" | "database";
+
 export interface QueryPayload {
   sql_query: string;
-  action: "count" | "dataset";
+  action: QueryActionMode;
   db_name: "laboratory" | "emr" | "claims";
 }
 

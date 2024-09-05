@@ -19,7 +19,7 @@ export function useEmrNetworkRequest() {
     try {
       const datasetRes = await runQuery({
         sql_query: payload.emrQuery?.datasetQuery ?? "",
-        action: "dataset",
+        action: "dataset" as any,
         db_name: Databases.EMR,
       }) as any
 

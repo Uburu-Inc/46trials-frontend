@@ -563,8 +563,6 @@ export const emrQuery = ({ selection, action, entries }: Props) => {
       .replace(/\s+/g, " ")
       .trim();
 
-    console.log(query);
-
     return query;
   }
 

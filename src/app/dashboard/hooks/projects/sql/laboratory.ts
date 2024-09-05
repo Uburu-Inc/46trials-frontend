@@ -25,7 +25,7 @@ export function useLaboratoryNetworkRequest() {
     try {
       const datasetRes = (await runQuery({
         sql_query: payload.laboratoryQuery?.datasetQuery ?? "",
-        action: "dataset",
+        action: "" as any,
         db_name: Databases.LABORATORY,
       })) as any;
 

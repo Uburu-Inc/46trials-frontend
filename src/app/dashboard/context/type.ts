@@ -1,19 +1,25 @@
 import { RequiredColumnProps } from "@/app/dashboard/hooks/projects/sql/utils/type";
 import { CreateProjectValidationInitialProps } from "@/app/dashboard/hooks/projects/sql/utils/type";
+import { QueryResponse } from "@/app/dashboard/hooks/projects/sql/run-query/type";
+import { RunQueryPayload } from "@/app/dashboard/hooks/projects/sql/run-query/type";
 
 export type SelectedTags = Array<RequiredColumnProps>;
 
 export interface Props {
   phase: number;
-  setPhase: (currentPhase: number) => void;
   count: number;
-  setCount: (currentCount: number) => void;
   selectedColumns: SelectedTags;
-  setSelectedColumns: (currentTags: SelectedTags) => void;
-  handleSetCSV: (type: string, csvFile: string) => void;
   lab: string;
   emr: string;
   claims: string;
-  projectProps: CreateProjectValidationInitialProps
-  handleSetProjectData: (payload: CreateProjectValidationInitialProps) => void
+  queryParams: RunQueryPayload;
+  phase2Data: QueryResponse;
+  projectProps: CreateProjectValidationInitialProps;
+  onSetQueryParams: (sqlQueryParams: RunQueryPayload) => void;
+  setPhase: (currentPhase: number) => void;
+  setCount: (currentCount: number) => void;
+  setSelectedColumns: (currentTags: SelectedTags) => void;
+  handleSetCSV: (type: string, csvFile: string) => void;
+  setData: (payload: CreateProjectValidationInitialProps) => void;
+  setQueryResultPhase2: (payload: QueryResponse) => void;
 }

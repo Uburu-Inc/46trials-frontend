@@ -537,8 +537,6 @@ export const claimsQuery = ({ selection, action, entries }: Props) => {
       .replace(/\s+/g, " ")
       .trim();
 
-    console.log(query, 'count query');
-
     return query;
   }
 
@@ -1011,8 +1009,7 @@ export const claimsQuery = ({ selection, action, entries }: Props) => {
       .replace(/\s+AND\s+/g, " AND ")
       .replace(/\s+/g, " ")
       .trim();
-
-    console.log(query);
+      
     return query;
   }
 };

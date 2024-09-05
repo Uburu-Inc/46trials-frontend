@@ -30,7 +30,7 @@ export function useFetch46TrialById(id: number): TrialResponseFunc {
     }
 
     getTrialById();
-  }, [axios]);
+  }, [axios, id]);
 
   return { loading, success, data };
 }

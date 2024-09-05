@@ -26,7 +26,7 @@ export function useClaimsNetworkRequest() {
     try {
       const datasetRes = await runQuery({
         sql_query: payload.claimsQuery?.datasetQuery ?? "",
-        action: "dataset",
+        action: "" as any,
         db_name: Databases.CLAIMS,
       }) as any
 

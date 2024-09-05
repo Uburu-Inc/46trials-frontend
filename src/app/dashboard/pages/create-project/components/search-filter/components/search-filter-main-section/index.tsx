@@ -1,6 +1,5 @@
-import { useContext, useEffect, useMemo, useRef } from "react";
+import { useCallback, useContext, useEffect, useMemo, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { db } from "./constant";
 import { GlobeIcon } from "./globe-icon";
 import { ButtonComponent } from "@/app/components/reusable-components/button";
 import { Tag } from "@/app/dashboard/components/tag";
@@ -15,13 +14,27 @@ import Modal from "@/app/components/reusable-components/modal";
 import { useRegisterPayment } from "@/app/dashboard/hooks/payment/register-payment";
 import { useFetchExchangeRate } from "@/app/dashboard/hooks/payment/fetch-exchange-rate";
 import { AppContext } from "@/app/context";
+import { useSqlQueryRequest } from "@/app/dashboard/hooks/projects/sql/run-query";
 
 export function SearchFilterMainSection() {
   const { push } = useRouter();
   const { params } = useContext(AppContext);
+  
+  const {
+    loading,
+    success: querySuccess,
+    data,
+    sendQuery,
+  } = useSqlQueryRequest();
 
-  const { count, setPhase, selectedColumns, lab, emr, claims, projectProps } =
-    useContext(sqlQueryContext);
+  const {
+    count,
+    setPhase,
+    selectedColumns,
+    phase2Data,
+    queryParams,
+    projectProps,
+  } = useContext(sqlQueryContext);
 
   const {
     registerPayment,
@@ -29,10 +42,38 @@ export function SearchFilterMainSection() {
     success: isPaymentRegistered,
   } = useRegisterPayment();
 
-  const { loading: fetchingRate, rate } = useFetchExchangeRate();
+  const { loading: fetchingRate, success, rate } = useFetchExchangeRate();
 
   const drawerRef = useRef<HTMLButtonElement>(null);
   const modalRef = useRef<HTMLButtonElement>(null);
+
+  const costPrice = useMemo(() => {
+    if (!fetchingRate && success && rate && count) {
+      const cost = rate * 100 * count;
+      if (cost) return cost;
+    }
+  }, [fetchingRate, success, rate, count]);
+
+  console.log(data.map((csv) => csv.data.dataset));
+
+  const onRegisterPayment = useCallback(function () {
+    void sendQuery(queryParams);
+  }, []);
+
+  useEffect(() => {
+    if (!loading && querySuccess && data) {
+      void registerPayment({
+        name: projectProps.projectName,
+        sample_size: count,
+        budget: costPrice,
+        start_date: projectProps.startDate,
+        end_date: projectProps.endDate,
+        fulfilled: true,
+        uploaded_files: `${data.map((csv) => csv.data.dataset)}`,
+        client: params.uid,
+      });
+    }
+  }, [loading, querySuccess, data]);
 
   function showDrawer() {
     if (drawerRef.current) {
@@ -48,12 +89,6 @@ export function SearchFilterMainSection() {
     }
   }, [registeringPayment, isPaymentRegistered]);
 
-  const costPrice = useMemo(() => {
-    if (rate && count) {
-      return (rate * 100 * count).toLocaleString();
-    }
-  }, [rate, count]);
-
   return (
     <>
       <div className={"w-full flex justify-between h-[80vh] mt-[1.3rem]"}>
@@ -62,7 +97,7 @@ export function SearchFilterMainSection() {
             "w-[30%] bg-white shadow-xl rounded-[0.5rem] h-full overflow-auto"
           }
         >
-          {db.map(({ dbName, description }, index) => (
+          {phase2Data.map(({ data: { description, code } }, index) => (
             <div
               key={index}
               className={
@@ -73,8 +108,8 @@ export function SearchFilterMainSection() {
                 <GlobeIcon />
               </div>
               <div>
-                <p>{dbName}</p>
-                <p>{description}</p>
+                <p>{code}</p>
+                <p>{description ?? ""}</p>
               </div>
             </div>
           ))}
@@ -137,19 +172,8 @@ export function SearchFilterMainSection() {
         description="Kindly view the cost details of your request and proceed to payment."
         proceedText="Confirm Payment"
         ref={drawerRef}
-        loading={registeringPayment}
-        onProceed={() =>
-          void registerPayment({
-            name: projectProps.projectName,
-            sample_size: count,
-            budget: costPrice,
-            start_date: projectProps.startDate,
-            end_date: projectProps.endDate,
-            fulfilled: true,
-            uploaded_files: `${lab} ${emr} ${claims}`,
-            client: params.uid,
-          })
-        }
+        loading={loading || registeringPayment}
+        onProceed={onRegisterPayment}
       >
         <Card>
           <CardContent className="pt-5">
@@ -166,7 +190,9 @@ export function SearchFilterMainSection() {
             <p className="text-sm text-[#051823]">Uburu Health</p>
 
             <p className="text-[0.7rem] text-[#697681] mt-4">TOTAL COST</p>
-            <p className="text-sm text-[#051823]">₦ {costPrice}</p>
+            <p className="text-sm text-[#051823]">
+              ₦ {costPrice?.toLocaleString()}
+            </p>
           </CardContent>
         </Card>
       </Drawer>

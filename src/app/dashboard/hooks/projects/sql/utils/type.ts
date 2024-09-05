@@ -38,9 +38,11 @@ export interface CreateProjectValidationInitialProps {
   sampleSize?: number;
 }
 export interface Props {
+  dictionaryConverter: any;
   entries?: CreateProjectValidationInitialProps;
   selection: Array<RequiredColumnProps>;
   action: "count" | "dataset";
+  table?: string
 }
 
 export enum Databases {
