@@ -113,6 +113,7 @@ export function CreateProject() {
         projectName: payload.projectName,
         startDate: payload.startDate,
         endDate: payload.endDate,
+        sampleSize: payload.sampleSize
       });
     },
   });

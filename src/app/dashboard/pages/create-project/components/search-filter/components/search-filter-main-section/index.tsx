@@ -64,7 +64,7 @@ export function SearchFilterMainSection() {
     if (!loading && querySuccess && data) {
       void registerPayment({
         name: projectProps.projectName,
-        sample_size: count,
+        sample_size: projectProps.sampleSize,
         budget: costPrice,
         start_date: projectProps.startDate,
         end_date: projectProps.endDate,
