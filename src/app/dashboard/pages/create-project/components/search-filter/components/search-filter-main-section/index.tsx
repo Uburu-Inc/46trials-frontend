@@ -49,8 +49,7 @@ export function SearchFilterMainSection() {
 
   const costPrice = useMemo(() => {
     if (!fetchingRate && success && rate && count) {
-      const cost = rate * 100 * count;
-      if (cost) return cost;
+      return rate * 100 * count;
     }
   }, [fetchingRate, success, rate, count]);
 

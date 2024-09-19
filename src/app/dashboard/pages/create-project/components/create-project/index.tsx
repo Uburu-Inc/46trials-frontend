@@ -82,6 +82,11 @@ export function CreateProject() {
               table: table_name,
               action: "count",
               dictionaryConverter: data_dictionary,
+              entries: {
+                sampleSize: payload.sampleSize,
+                startDate: payload.startDate,
+                endDate: payload.endDate,
+              },
             }),
             paid: false,
             action: "count",
@@ -98,6 +103,11 @@ export function CreateProject() {
               table: table_name,
               action: "dataset",
               dictionaryConverter: data_dictionary,
+              entries: {
+                sampleSize: payload.sampleSize,
+                startDate: payload.startDate,
+                endDate: payload.endDate,
+              },
             }),
             paid: true,
             action: "dataset",
@@ -108,12 +118,12 @@ export function CreateProject() {
 
       sendQuery(countQuery);
       onSetQueryParams(datasetQuery);
-      
+
       setData({
         projectName: payload.projectName,
         startDate: payload.startDate,
         endDate: payload.endDate,
-        sampleSize: payload.sampleSize
+        sampleSize: payload.sampleSize,
       });
     },
   });
