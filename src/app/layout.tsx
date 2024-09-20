@@ -26,7 +26,7 @@ const workSans = Work_Sans({
 
 export const metadata: Metadata = {
   title: "46 Trials",
-  description: "Instant Data Retrieval Across Health Systems using OneRecord",
+  description: "Instant Data Retrieval Across Health Systems",
   icons: {
     icon: "/favicon.png",
   },
