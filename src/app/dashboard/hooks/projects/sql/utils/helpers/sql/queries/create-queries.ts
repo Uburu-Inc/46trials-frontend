@@ -582,7 +582,7 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
               )
               .join("")}`
           : ""
-      }`;
+      } AND date BETWEEN '${entries?.startDate}' AND '${entries?.endDate}'`;
     if (
       !selection.find(({ id }) => id === "1")?.entries &&
       !selection.find(({ id }) => id === "1")?.entries
@@ -1117,7 +1117,7 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
               )
               .join("")}`
           : ""
-      }`;
+      } AND date BETWEEN '${entries?.startDate}' AND '${entries?.endDate}' LIMIT ${entries?.sampleSize?.toLocaleString()}`;
     if (
       !selection.find(({ id }) => id === "1")?.entries &&
       !selection.find(({ id }) => id === "1")?.entries
