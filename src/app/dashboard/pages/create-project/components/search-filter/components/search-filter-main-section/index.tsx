@@ -61,6 +61,7 @@ export function SearchFilterMainSection() {
 
   useEffect(() => {
     if (!loading && querySuccess && data) {
+      console.log(data)
       void registerPayment({
         name: projectProps.projectName,
         sample_size: projectProps.sampleSize,
@@ -68,7 +69,12 @@ export function SearchFilterMainSection() {
         start_date: projectProps.startDate,
         end_date: projectProps.endDate,
         fulfilled: true,
-        uploaded_files: `${data.map((csv) => csv.data.dataset)}`,
+        uploaded_files: data.map((item) => {
+          return {
+            code: item.data.code,
+            dataset: item.data.dataset
+          }
+        }),
         client: params.uid,
       });
     }

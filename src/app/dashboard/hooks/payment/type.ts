@@ -1,3 +1,7 @@
+export interface UploadFilePayload {
+  dataset: string;
+  code: string;
+}
 export interface PaymentPayload {
   name?: string;
   sample_size?: number;
@@ -5,7 +9,7 @@ export interface PaymentPayload {
   start_date?: string;
   end_date?: string;
   fulfilled?: boolean;
-  uploaded_files: string;
+  uploaded_files: Array<UploadFilePayload>;
   client?: string;
 }
 

@@ -14,15 +14,20 @@ export function useRegisterPayment() {
     async function (payload: PaymentPayload) {
       try {
         const formData = new FormData();
-        const blob = new Blob([payload.uploaded_files], { type: 'text/csv' });
+
+        payload.uploaded_files.forEach((files) => {
+          const csvContent = files.dataset.replace(/\r\n/g, ",");
+          const blob = new Blob([csvContent], { type: "text/csv" });
+          formData.append("uploaded_files", blob, `${files.code}.csv`);
+        });
+
         formData.append("name", String(payload.name));
         formData.append("sample_size", String(payload.sample_size));
         formData.append("budget", String(payload.budget));
         formData.append("start_date", String(payload.start_date));
-        formData.append("end_date", String(payload.end_date))
+        formData.append("end_date", String(payload.end_date));
         formData.append("fulfilled", String(payload.fulfilled));
         formData.append("client", String(payload.client));
-        formData.append("uploaded_files", blob)
 
         const res = await axios.post(routes.TRIALS, formData, {
           headers: {
@@ -37,6 +42,7 @@ export function useRegisterPayment() {
       } catch (error) {
         console.error(error);
         setSuccess(false);
+        toast.error("An error occurred while registering payment");
       }
     },
     [axios]
