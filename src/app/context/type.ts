@@ -2,12 +2,12 @@ import { ReactNode } from "react";
 
 export type AppInfoParams = {
   token: string;
-  uid: string
+  uid: string;
 };
 
 export type User = {
   email: string;
-}
+};
 
 export type UserPaymentInfoPayload = {
   username?: string;

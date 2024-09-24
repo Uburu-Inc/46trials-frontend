@@ -10,7 +10,7 @@ export function useSendQuery() {
       try {
         const response = await axios.post("/projects/get-database/", payload);
         if (payload.action === "count") return { count: response.data };
-        if (payload.action === "dataset" as any) return { dataset: response };
+        if (payload.action === "dataset" as string) return { dataset: response };
       } catch (error) {
         console.error(error);
       }
