@@ -266,7 +266,7 @@ export function CreateProject() {
               </div>
               <div className={"flex mt-[1rem] gap-[1rem] mb-[2rem]"}>
                 <ButtonComponent type={"button"}>Cancel</ButtonComponent>
-                <ButtonComponent loading={sendingQueries}>
+                <ButtonComponent loading={sendingQueries} type={"submit"}>
                   {sendingQueries ? "Loading..." : "Next"}
                 </ButtonComponent>
               </div>

@@ -57,7 +57,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "diagnosis",
+    column: "Diagnosis",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -65,7 +65,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "Diagnosis_code",
+    column: "DiagnosisCode",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -73,7 +73,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "gender",
+    column: "Gender",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -81,7 +81,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "age",
+    column: "Age",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -89,7 +89,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "procedure_desc",
+    column: "ProcedureDescription",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -97,7 +97,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "date",
+    column: "Date",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -105,7 +105,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "cost",
+    column: "Cost",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -113,7 +113,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "facility_type",
+    column: "FacilityType",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -121,7 +121,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "facility_name",
+    column: "FacilityName",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -129,7 +129,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "test_result",
+    column: "TestRequest",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -137,7 +137,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "test_request",
+    column: "TestResult",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -145,7 +145,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "dosage_of_drug",
+    column: "DosageOfDrug",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -153,7 +153,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "dosage_frequency",
+    column: "DosageFrequency",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -161,7 +161,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "region",
+    column: "Region",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -169,7 +169,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "Service_type",
+    column: "Product",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -177,7 +177,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "product",
+    column: "Inpatient",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -185,7 +185,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "inpatient",
+    column: "Outpatient",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -193,7 +193,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "Outpatient",
+    column: "FacilityLocation",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -201,7 +201,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "facility_location",
+    column: "PatientID",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -209,7 +209,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "patient_id",
+    column: "SpecimenType",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -217,7 +217,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "specimen_type",
+    column: "FirstName",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -225,7 +225,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "firstname",
+    column: "MiddleName",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -233,7 +233,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "lastname",
+    column: "LastName",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -241,7 +241,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "DOB",
+    column: "DateOfBirth",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -249,7 +249,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "address",
+    column: "SateOfOrigin",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -257,7 +257,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "city",
+    column: "ProviderID",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -265,7 +265,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "Provider_id",
+    column: "ProviderName",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -273,7 +273,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "provider_name",
+    column: "Specialty",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -281,7 +281,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "specialty",
+    column: "PatientContact",
     dictionaryKeys: dictionaryConverter,
   },
   {
@@ -289,15 +289,7 @@ export const Columns: RequiredColumnMainProps = [
     isSelected: false,
     entries: "",
     exclude: "",
-    column: "patient_contact",
-    dictionaryKeys: dictionaryConverter,
-  },
-  {
-    id: "31",
-    isSelected: false,
-    entries: "",
-    exclude: "",
-    column: "provider_contact",
+    column: "ProviderContact",
     dictionaryKeys: dictionaryConverter,
   },
 ];

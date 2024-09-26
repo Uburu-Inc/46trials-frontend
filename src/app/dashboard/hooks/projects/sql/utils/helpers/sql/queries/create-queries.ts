@@ -11,7 +11,7 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
     })}${sqlQueryBuilder.FROM({ table: table ?? "" })}${selection.find(({ id }) => id === "1")?.entries &&
         !selection.find(({ id }) => id === "1")?.exclude
         ? sqlQueryBuilder
-          .WHERE({ key: dictionaryConverter.diagnosis })
+          .WHERE({ key: dictionaryConverter.Diagnosis })
           // @ts-ignore
           ?.LIKES({
             values:
@@ -21,7 +21,7 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
       }${!selection.find(({ id }) => id === "1")?.entries &&
         selection.find(({ id }) => id === "1")?.exclude
         ? sqlQueryBuilder
-          .WHERE({ key: dictionaryConverter.diagnosis })
+          .WHERE({ key: dictionaryConverter.Diagnosis })
           // @ts-ignore
           ?.NOT_LIKES({
             values:
@@ -31,13 +31,13 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
       }${selection.find(({ id }) => id === "1")?.entries &&
         selection.find(({ id }) => id === "1")?.exclude
         ? `${sqlQueryBuilder
-          .WHERE({ key: dictionaryConverter.diagnosis })
+          .WHERE({ key: dictionaryConverter.Diagnosis })
           // @ts-ignore
           ?.LIKES({
             values:
               selection.find(({ id }) => id === "1")?.entries?.split(",") ?? [],
           })}${sqlQueryBuilder
-            .WHERE({ key: dictionaryConverter.diagnosis })
+            .WHERE({ key: dictionaryConverter.Diagnosis })
             // @ts-ignore
             ?.NOT_LIKES({
               values:
@@ -46,64 +46,147 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
         : ""
       }${selection.find(({ id }) => id === "4")?.entries &&
         !selection.find(({ id }) => id === "4")?.exclude
-        ? ` AND (${dictionaryConverter.age} ${selection.find(({ id }) => id === "4")?.entries ?? ""
+        ? ` AND (${dictionaryConverter.Age} ${selection.find(({ id }) => id === "4")?.entries ?? ""
         })`
         : ""
       }${!selection.find(({ id }) => id === "4")?.entries &&
         selection.find(({ id }) => id === "4")?.exclude
-        ? ` AND (${dictionaryConverter.age} ${selection.find(({ id }) => id === "4")?.exclude ?? ""
+        ? ` AND (${dictionaryConverter.Age} ${selection.find(({ id }) => id === "4")?.exclude ?? ""
         })`
         : ""
       }${selection.find(({ id }) => id === "4")?.entries &&
         selection.find(({ id }) => id === "4")?.exclude
-        ? ` AND (${dictionaryConverter.age} ${selection.find(({ id }) => id === "4")?.entries
-        }) AND (${dictionaryConverter.age} ${selection.find(({ id }) => id === "4")?.exclude
+        ? ` AND (${dictionaryConverter.Age} ${selection.find(({ id }) => id === "4")?.entries
+        }) AND (${dictionaryConverter.Age} ${selection.find(({ id }) => id === "4")?.exclude
         })`
         : ""
-      }${selection.find(({ id }) => id === "22")?.entries &&
-        !selection.find(({ id }) => id === "22")?.exclude
+      }${
+        selection.find(({ id }) => id === "5")?.entries &&
+        !selection.find(({ id }) => id === "5")?.exclude
+          ? selection
+              .find(({ id }) => id === "5")
+              ?.entries?.split(",")
+              .map(
+                (val) =>
+                  `${` AND (${
+                    dictionaryConverter.ProcedureDescription
+                  } iLIKE '%${val}%' ${
+                    (selection.find(({ id }) => id === "5")?.entries?.split(",")
+                      .length as number) > 1
+                      ? `OR ${dictionaryConverter.ProcedureDescription} iLIKE '%${val}%'`
+                      : ``
+                  }) `}`
+              )
+              .join("")
+          : ""
+      }${
+        !selection.find(({ id }) => id === "5")?.entries &&
+        selection.find(({ id }) => id === "5")?.exclude
+          ? selection
+              .find(({ id }) => id === "5")
+              ?.exclude?.split(",")
+              .map(
+                (val, index) =>
+                  `${
+                    index === 0
+                      ? ` AND (${
+                          dictionaryConverter.ProcedureDescription
+                        } NOT LIKE '%${val}%'${
+                          selection.find(({ id }) => id === "5")?.exclude?.split(",")
+                            .length === 1
+                            ? ")"
+                            : ""
+                        }`
+                      : ` OR ${dictionaryConverter.ProcedureDescription} NOT LIKE '%${val}%')`
+                  }`
+              )
+              .join("")
+          : ""
+      }${
+        selection.find(({ id }) => id === "5")?.entries &&
+        selection.find(({ id }) => id === "5")?.exclude
+          ? `${selection
+              .find(({ id }) => id === "5")
+              ?.entries?.split(",")
+              .map(
+                (val, index) =>
+                  `${
+                    index === 0
+                      ? ` AND (${
+                          dictionaryConverter.ProcedureDescription
+                        } LIKE '%${val}%'${
+                          selection.find(({ id }) => id === "5")?.entries?.split(",")
+                            .length === 1
+                            ? ")"
+                            : ""
+                        }`
+                      : ` OR ${dictionaryConverter.ProcedureDescription} LIKE '%${val}%')`
+                  }`
+              )
+              .join("")} ${selection
+              .find(({ id }) => id === "5")
+              ?.exclude?.split(",")
+              .map(
+                (val, index) =>
+                  `${
+                    index === 0
+                      ? ` AND (${
+                          dictionaryConverter.ProcedureDescription
+                        } NOT LIKE '%${val}%'${
+                          selection.find(({ id }) => id === "5")?.exclude?.split(",")
+                            .length === 1
+                            ? ")"
+                            : ""
+                        }`
+                      : ` OR ${dictionaryConverter.ProcedureDescription} NOT LIKE '%${val}%')`
+                  }`
+              )
+              .join("")}`
+          : ""
+      }${selection.find(({ id }) => id === "21")?.entries &&
+        !selection.find(({ id }) => id === "21")?.exclude
         ? sqlQueryBuilder.COMPARE({
           query: [
             {
-              key: dictionaryConverter.firstname,
-              value: selection.find(({ id }) => id === "22")?.entries ?? "",
+              key: dictionaryConverter.FirstName,
+              value: selection.find(({ id }) => id === "21")?.entries ?? "",
               sqlKeyWord: "AND",
               operator: "=",
             },
           ],
         })
         : ""
-      }${!selection.find(({ id }) => id === "22")?.entries &&
-        selection.find(({ id }) => id === "22")?.exclude
+      }${!selection.find(({ id }) => id === "21")?.entries &&
+        selection.find(({ id }) => id === "21")?.exclude
         ? sqlQueryBuilder.COMPARE({
           query: [
             {
-              key: dictionaryConverter.firstname,
+              key: dictionaryConverter.FirstName,
               sqlKeyWord: "AND",
               operator: "<>",
-              value: selection.find(({ id }) => id === "22")?.exclude ?? "",
+              value: selection.find(({ id }) => id === "21")?.exclude ?? "",
             },
           ],
         })
         : ""
-      }${selection.find(({ id }) => id === "22")?.entries &&
-        selection.find(({ id }) => id === "22")?.exclude
+      }${selection.find(({ id }) => id === "21")?.entries &&
+        selection.find(({ id }) => id === "21")?.exclude
         ? `${sqlQueryBuilder.COMPARE({
           query: [
             {
-              key: dictionaryConverter.firstname,
+              key: dictionaryConverter.FirstName,
               operator: "=",
               sqlKeyWord: "AND",
-              value: selection.find(({ id }) => id === "22")?.entries ?? "",
+              value: selection.find(({ id }) => id === "21")?.entries ?? "",
             },
           ],
         })}${sqlQueryBuilder.COMPARE({
           query: [
             {
-              key: dictionaryConverter.firstname,
+              key: dictionaryConverter.FirstName,
               operator: "<>",
               sqlKeyWord: "AND",
-              value: selection.find(({ id }) => id === "22")?.exclude ?? "",
+              value: selection.find(({ id }) => id === "21")?.exclude ?? "",
             },
           ],
         })}`
@@ -113,7 +196,7 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
         ? sqlQueryBuilder.COMPARE({
           query: [
             {
-              key: dictionaryConverter.lastname,
+              key: dictionaryConverter.LastName,
               value: selection.find(({ id }) => id === "23")?.entries ?? "",
               sqlKeyWord: "AND",
               operator: "=",
@@ -126,7 +209,7 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
         ? sqlQueryBuilder.COMPARE({
           query: [
             {
-              key: dictionaryConverter.lastname,
+              key: dictionaryConverter.LastName,
               value: selection.find(({ id }) => id === "23")?.entries ?? "",
               sqlKeyWord: "AND",
               operator: "<>",
@@ -139,7 +222,7 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
         ? `${sqlQueryBuilder.COMPARE({
           query: [
             {
-              key: dictionaryConverter.lastname,
+              key: dictionaryConverter.LastName,
               value: selection.find(({ id }) => id === "23")?.entries ?? "",
               sqlKeyWord: "AND",
               operator: "=",
@@ -148,7 +231,7 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
         })}${sqlQueryBuilder.COMPARE({
           query: [
             {
-              key: dictionaryConverter.lastname,
+              key: dictionaryConverter.LastName,
               value: selection.find(({ id }) => id === "23")?.entries ?? "",
               sqlKeyWord: "AND",
               operator: "<>",
@@ -168,12 +251,12 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
           .map(
             (val, index) =>
               `${index === 0
-                ? `${dictionaryConverter.region} iLIKE '%${val}%'${selection.find(({ id }) => id === "14")?.entries?.split(",")
+                ? `${dictionaryConverter.Region} iLIKE '%${val}%'${selection.find(({ id }) => id === "14")?.entries?.split(",")
                   .length === 1
                   ? ""
                   : ""
                 }`
-                : ` OR ${dictionaryConverter.region} iLIKE '%${val}%'`
+                : ` OR ${dictionaryConverter.Region} iLIKE '%${val}%'`
               }`
           )
           .join("")
@@ -187,13 +270,13 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
           .map(
             (val, index) =>
               `${index === 0
-                ? ` AND (${dictionaryConverter.region
+                ? ` AND (${dictionaryConverter.Region
                 } NOT iLIKE '%${val}%'${selection.find(({ id }) => id === "14")?.entries?.split(",")
                   .length === 1
                   ? ")"
                   : ""
                 }`
-                : ` OR ${dictionaryConverter.region} NOT iLIKE '%${val}%') `
+                : ` OR ${dictionaryConverter.Region} NOT iLIKE '%${val}%') `
               }`
           )
           .join("")
@@ -206,13 +289,13 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
           .map(
             (val, index) =>
               `${index === 0
-                ? ` AND (${dictionaryConverter.region
+                ? ` AND (${dictionaryConverter.Region
                 } iLIKE '%${val}%'${selection.find(({ id }) => id === "14")?.entries?.split(",")
                   .length === 1
                   ? ")"
                   : ""
                 }`
-                : ` OR ${dictionaryConverter.region} iLIKE '%${val}%') `
+                : ` OR ${dictionaryConverter.Region} iLIKE '%${val}%') `
               }`
           )
           .join("")} ${selection
@@ -221,25 +304,25 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
             .map(
               (val, index) =>
                 `${index === 0
-                  ? ` AND (${dictionaryConverter.region
+                  ? ` AND (${dictionaryConverter.Region
                   } NOT iLIKE '%${val}%'${selection.find(({ id }) => id === "14")?.exclude?.split(",")
                     .length === 1
                     ? ")"
                     : ""
                   }`
-                  : ` OR ${dictionaryConverter.region} NOT iLIKE '%${val}%')`
+                  : ` OR ${dictionaryConverter.Region} NOT iLIKE '%${val}%')`
                 }`
             )
             .join("")}`
         : ""
-      }${selection.find(({ id }) => id === "28")?.entries &&
-        !selection.find(({ id }) => id === "28")?.exclude
+      }${selection.find(({ id }) => id === "27")?.entries &&
+        !selection.find(({ id }) => id === "27")?.exclude
         ? sqlQueryBuilder.COMPARE({
           query: (
-            selection.find(({ id }) => id === "28")?.entries?.split(",") ?? []
+            selection.find(({ id }) => id === "27")?.entries?.split(",") ?? []
           ).map((providerName, index) => {
             return {
-              key: dictionaryConverter.provider_name,
+              key: dictionaryConverter.ProviderName,
               operator: "=",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: providerName,
@@ -247,14 +330,14 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
           }),
         })
         : ""
-      }${!selection.find(({ id }) => id === "28")?.entries &&
-        selection.find(({ id }) => id === "28")?.exclude
+      }${!selection.find(({ id }) => id === "27")?.entries &&
+        selection.find(({ id }) => id === "27")?.exclude
         ? sqlQueryBuilder.COMPARE({
           query: (
-            selection.find(({ id }) => id === "28")?.exclude?.split(",") ?? []
+            selection.find(({ id }) => id === "27")?.exclude?.split(",") ?? []
           ).map((providerName, index) => {
             return {
-              key: dictionaryConverter.provider_name,
+              key: dictionaryConverter.ProviderName,
               operator: "<>",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: providerName,
@@ -262,14 +345,14 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
           }),
         })
         : ""
-      }${selection.find(({ id }) => id === "28")?.entries &&
-        selection.find(({ id }) => id === "28")?.exclude
+      }${selection.find(({ id }) => id === "27")?.entries &&
+        selection.find(({ id }) => id === "27")?.exclude
         ? `${sqlQueryBuilder.COMPARE({
           query: (
-            selection.find(({ id }) => id === "28")?.entries?.split(",") ?? []
+            selection.find(({ id }) => id === "27")?.entries?.split(",") ?? []
           ).map((providerName, index) => {
             return {
-              key: dictionaryConverter.provider_name,
+              key: dictionaryConverter.ProviderName,
               operator: "=",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: providerName,
@@ -277,13 +360,69 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
           }),
         })}${sqlQueryBuilder.COMPARE({
           query: (
-            selection.find(({ id }) => id === "28")?.exclude?.split(",") ?? []
+            selection.find(({ id }) => id === "27")?.exclude?.split(",") ?? []
           ).map((providerName, index) => {
             return {
-              key: dictionaryConverter.provider_name,
+              key: dictionaryConverter.ProviderName,
               operator: "<>",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: providerName,
+            };
+          }),
+        })}`
+        : ""
+      }${selection.find(({ id }) => id === "29")?.entries &&
+        !selection.find(({ id }) => id === "29")?.exclude
+        ? sqlQueryBuilder.COMPARE({
+          query: (
+            selection.find(({ id }) => id === "29")?.entries?.split(",") ?? []
+          ).map((patientContact, index) => {
+            return {
+              key: dictionaryConverter.PatientContact,
+              operator: "=",
+              sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
+              value: patientContact,
+            };
+          }),
+        })
+        : ""
+      }${!selection.find(({ id }) => id === "29")?.entries &&
+        selection.find(({ id }) => id === "29")?.exclude
+        ? sqlQueryBuilder.COMPARE({
+          query: (
+            selection.find(({ id }) => id === "29")?.entries?.split(",") ?? []
+          ).map((patientContact, index) => {
+            return {
+              key: dictionaryConverter.PatientContact,
+              operator: "<>",
+              sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
+              value: patientContact,
+            };
+          }),
+        })
+        : ""
+      }${selection.find(({ id }) => id === "29")?.entries &&
+        selection.find(({ id }) => id === "29")?.exclude
+        ? `${sqlQueryBuilder.COMPARE({
+          query: (
+            selection.find(({ id }) => id === "29")?.entries?.split(",") ?? []
+          ).map((patientContact, index) => {
+            return {
+              key: dictionaryConverter.PatientContact,
+              operator: "=",
+              sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
+              value: patientContact,
+            };
+          }),
+        })}${sqlQueryBuilder.COMPARE({
+          query: (
+            selection.find(({ id }) => id === "29")?.exclude?.split(",") ?? []
+          ).map((patientContact, index) => {
+            return {
+              key: dictionaryConverter.PatientContact,
+              operator: "<>",
+              sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
+              value: patientContact,
             };
           }),
         })}`
@@ -295,7 +434,7 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
             selection.find(({ id }) => id === "30")?.entries?.split(",") ?? []
           ).map((patientContact, index) => {
             return {
-              key: dictionaryConverter.patient_contact,
+              key: dictionaryConverter.ProviderContact,
               operator: "=",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: patientContact,
@@ -307,10 +446,10 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
         selection.find(({ id }) => id === "30")?.exclude
         ? sqlQueryBuilder.COMPARE({
           query: (
-            selection.find(({ id }) => id === "30")?.entries?.split(",") ?? []
+            selection.find(({ id }) => id === "30")?.exclude?.split(",") ?? []
           ).map((patientContact, index) => {
             return {
-              key: dictionaryConverter.patient_contact,
+              key: dictionaryConverter.ProviderContact,
               operator: "<>",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: patientContact,
@@ -323,76 +462,20 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
         ? `${sqlQueryBuilder.COMPARE({
           query: (
             selection.find(({ id }) => id === "30")?.entries?.split(",") ?? []
-          ).map((patientContact, index) => {
+          ).map((providerContact, index) => {
             return {
-              key: dictionaryConverter.patient_contact,
+              key: dictionaryConverter.ProviderContact,
               operator: "=",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
-              value: patientContact,
+              value: providerContact,
             };
           }),
         })}${sqlQueryBuilder.COMPARE({
           query: (
             selection.find(({ id }) => id === "30")?.exclude?.split(",") ?? []
-          ).map((patientContact, index) => {
-            return {
-              key: dictionaryConverter.patient_contact,
-              operator: "<>",
-              sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
-              value: patientContact,
-            };
-          }),
-        })}`
-        : ""
-      }${selection.find(({ id }) => id === "31")?.entries &&
-        !selection.find(({ id }) => id === "31")?.exclude
-        ? sqlQueryBuilder.COMPARE({
-          query: (
-            selection.find(({ id }) => id === "31")?.entries?.split(",") ?? []
-          ).map((patientContact, index) => {
-            return {
-              key: dictionaryConverter.provider_contact,
-              operator: "=",
-              sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
-              value: patientContact,
-            };
-          }),
-        })
-        : ""
-      }${!selection.find(({ id }) => id === "31")?.entries &&
-        selection.find(({ id }) => id === "31")?.exclude
-        ? sqlQueryBuilder.COMPARE({
-          query: (
-            selection.find(({ id }) => id === "31")?.exclude?.split(",") ?? []
-          ).map((patientContact, index) => {
-            return {
-              key: dictionaryConverter.provider_contact,
-              operator: "<>",
-              sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
-              value: patientContact,
-            };
-          }),
-        })
-        : ""
-      }${selection.find(({ id }) => id === "31")?.entries &&
-        selection.find(({ id }) => id === "31")?.exclude
-        ? `${sqlQueryBuilder.COMPARE({
-          query: (
-            selection.find(({ id }) => id === "31")?.entries?.split(",") ?? []
           ).map((providerContact, index) => {
             return {
-              key: dictionaryConverter.provider_contact,
-              operator: "=",
-              sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
-              value: providerContact,
-            };
-          }),
-        })}${sqlQueryBuilder.COMPARE({
-          query: (
-            selection.find(({ id }) => id === "31")?.exclude?.split(",") ?? []
-          ).map((providerContact, index) => {
-            return {
-              key: dictionaryConverter.provider_contact,
+              key: dictionaryConverter.ProviderContact,
               operator: "<>",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: providerContact,
@@ -401,92 +484,92 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
         })}`
         : ""
       }${
-        selection.find(({ id }) => id === "11")?.entries ||
-        selection.find(({ id }) => id === "11")?.exclude
+        selection.find(({ id }) => id === "10")?.entries ||
+        selection.find(({ id }) => id === "10")?.exclude
           ? "AND ("
           : ""
       }  ${
-        selection.find(({ id }) => id === "11")?.entries &&
-        !selection.find(({ id }) => id === "11")?.exclude
+        selection.find(({ id }) => id === "10")?.entries &&
+        !selection.find(({ id }) => id === "10")?.exclude
           ? selection
-              .find(({ id }) => id === "11")
+              .find(({ id }) => id === "10")
               ?.entries?.split(",")
               .map(
                 (val, index) =>
                   `${
                     index === 0
-                      ? `${dictionaryConverter.test_request} iLIKE '%${val}%'${
-                          selection.find(({ id }) => id === "11")?.entries?.split(",")
+                      ? `${dictionaryConverter.TestRequest} iLIKE '%${val}%'${
+                          selection.find(({ id }) => id === "10")?.entries?.split(",")
                             .length === 1
                             ? ""
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.test_request} iLIKE '%${val}%'`
+                      : ` OR ${dictionaryConverter.TestRequest} iLIKE '%${val}%'`
                   }`
               )
               .join("")
           : ""
-      } ${selection.find(({ id }) => id === "11")?.entries ||
-      selection.find(({ id }) => id === "11")?.exclude ? ')':''}${
-        !selection.find(({ id }) => id === "11")?.entries &&
-        selection.find(({ id }) => id === "11")?.exclude
+      } ${selection.find(({ id }) => id === "10")?.entries ||
+      selection.find(({ id }) => id === "10")?.exclude ? ')':''}${
+        !selection.find(({ id }) => id === "10")?.entries &&
+        selection.find(({ id }) => id === "10")?.exclude
           ? selection
-              .find(({ id }) => id === "11")
+              .find(({ id }) => id === "10")
               ?.exclude?.split(",")
               .map(
                 (val, index) =>
                   `${
                     index === 0
                       ? ` AND (${
-                          dictionaryConverter.test_request
+                          dictionaryConverter.TestRequest
                         } NOT iLIKE '%${val}%'${
-                          selection.find(({ id }) => id === "11")?.entries?.split(",")
+                          selection.find(({ id }) => id === "10")?.entries?.split(",")
                             .length === 1
                             ? ")"
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.test_request} NOT iLIKE '%${val}%') `
+                      : ` OR ${dictionaryConverter.TestRequest} NOT iLIKE '%${val}%') `
                   }`
               )
               .join("")
           : ""
       }${
-        selection.find(({ id }) => id === "11")?.entries &&
-        selection.find(({ id }) => id === "11")?.exclude
+        selection.find(({ id }) => id === "10")?.entries &&
+        selection.find(({ id }) => id === "10")?.exclude
           ? `${selection
-              .find(({ id }) => id === "11")
+              .find(({ id }) => id === "10")
               ?.entries?.split(",")
               .map(
                 (val, index) =>
                   `${
                     index === 0
                       ? ` AND (${
-                          dictionaryConverter.test_request
+                          dictionaryConverter.TestRequest
                         } iLIKE '%${val}%'${
-                          selection.find(({ id }) => id === "11")?.entries?.split(",")
+                          selection.find(({ id }) => id === "10")?.entries?.split(",")
                             .length === 1
                             ? ")"
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.test_request} iLIKE '%${val}%') `
+                      : ` OR ${dictionaryConverter.TestRequest} iLIKE '%${val}%') `
                   }`
               )
               .join("")} ${selection
-              .find(({ id }) => id === "11")
+              .find(({ id }) => id === "10")
               ?.exclude?.split(",")
               .map(
                 (val, index) =>
                   `${
                     index === 0
                       ? ` AND (${
-                          dictionaryConverter.test_request
+                          dictionaryConverter.TestRequest
                         } NOT iLIKE '%${val}%'${
-                          selection.find(({ id }) => id === "11")?.exclude?.split(",")
+                          selection.find(({ id }) => id === "10")?.exclude?.split(",")
                             .length === 1
                             ? ")"
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.test_request} NOT iLIKE '%${val}%')`
+                      : ` OR ${dictionaryConverter.TestRequest} NOT iLIKE '%${val}%')`
                   }`
               )
               .join("")}`
@@ -506,13 +589,13 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
                 (val, index) =>
                   `${
                     index === 0
-                      ? `${dictionaryConverter.gender} iLIKE '%${val}%'${
+                      ? `${dictionaryConverter.Gender} iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "3")?.entries?.split(",")
                             .length === 1
                             ? ""
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.gender} iLIKE '%${val}%'`
+                      : ` OR ${dictionaryConverter.Gender} iLIKE '%${val}%'`
                   }`
               )
               .join("")
@@ -529,14 +612,14 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
                   `${
                     index === 0
                       ? ` AND (${
-                          dictionaryConverter.gender
+                          dictionaryConverter.Gender
                         } NOT iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "3")?.entries?.split(",")
                             .length === 1
                             ? ")"
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.gender} NOT iLIKE '%${val}%') `
+                      : ` OR ${dictionaryConverter.Gender} NOT iLIKE '%${val}%') `
                   }`
               )
               .join("")
@@ -552,14 +635,14 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
                   `${
                     index === 0
                       ? ` AND (${
-                          dictionaryConverter.gender
+                          dictionaryConverter.Gender
                         } iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "3")?.entries?.split(",")
                             .length === 1
                             ? ")"
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.gender} iLIKE '%${val}%') `
+                      : ` OR ${dictionaryConverter.Gender} iLIKE '%${val}%') `
                   }`
               )
               .join("")} ${selection
@@ -570,19 +653,19 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
                   `${
                     index === 0
                       ? ` AND (${
-                          dictionaryConverter.gender
+                          dictionaryConverter.Gender
                         } NOT iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "3")?.exclude?.split(",")
                             .length === 1
                             ? ")"
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.gender} NOT iLIKE '%${val}%')`
+                      : ` OR ${dictionaryConverter.Gender} NOT iLIKE '%${val}%')`
                   }`
               )
               .join("")}`
           : ""
-      } AND ${dictionaryConverter.date} BETWEEN '${entries?.startDate}' AND '${entries?.endDate}'`;
+      } ${dictionaryConverter.date ? `AND ${dictionaryConverter.date} BETWEEN '${entries?.startDate}' AND '${entries?.endDate}'`:""}`;
     if (
       !selection.find(({ id }) => id === "1")?.entries &&
       !selection.find(({ id }) => id === "1")?.entries
@@ -612,7 +695,7 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
     })}${sqlQueryBuilder.FROM({ table: table ?? "" })}${selection.find(({ id }) => id === "1")?.entries &&
         !selection.find(({ id }) => id === "1")?.exclude
         ? sqlQueryBuilder
-          .WHERE({ key: dictionaryConverter.diagnosis })
+          .WHERE({ key: dictionaryConverter.Diagnosis })
           // @ts-ignore
           ?.LIKES({
             values:
@@ -622,7 +705,7 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
       }${!selection.find(({ id }) => id === "1")?.entries &&
         selection.find(({ id }) => id === "1")?.exclude
         ? sqlQueryBuilder
-          .WHERE({ key: dictionaryConverter.diagnosis })
+          .WHERE({ key: dictionaryConverter.Diagnosis })
           // @ts-ignore
           ?.NOT_LIKE({
             value: selection.find(({ id }) => id === "1")?.exclude ?? "",
@@ -631,13 +714,13 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
       }${selection.find(({ id }) => id === "1")?.entries &&
         selection.find(({ id }) => id === "1")?.exclude
         ? `${sqlQueryBuilder
-          .WHERE({ key: dictionaryConverter.diagnosis })
+          .WHERE({ key: dictionaryConverter.Diagnosis })
           // @ts-ignore
           ?.LIKES({
             values:
               selection.find(({ id }) => id === "1")?.entries?.split(",") ?? [],
           })}${sqlQueryBuilder
-            .WHERE({ key: dictionaryConverter.diagnosis })
+            .WHERE({ key: dictionaryConverter.Diagnosis })
             // @ts-ignore
             ?.NOT_LIKES({
               values:
@@ -646,33 +729,155 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
         : ""
       }${selection.find(({ id }) => id === "4")?.entries &&
         !selection.find(({ id }) => id === "4")?.exclude
-        ? ` AND (${dictionaryConverter.age} ${selection.find(({ id }) => id === "4")?.entries ?? ""
+        ? ` AND (${dictionaryConverter.Age} ${selection.find(({ id }) => id === "4")?.entries ?? ""
         })`
         : ""
       }${!selection.find(({ id }) => id === "4")?.entries &&
         selection.find(({ id }) => id === "4")?.exclude
-        ? ` AND (${dictionaryConverter.age} ${selection.find(({ id }) => id === "4")?.exclude ?? ""
+        ? ` AND (${dictionaryConverter.Age} ${selection.find(({ id }) => id === "4")?.exclude ?? ""
         })`
         : ""
       }${selection.find(({ id }) => id === "4")?.entries &&
         selection.find(({ id }) => id === "4")?.exclude
-        ? ` AND (${dictionaryConverter.age} ${selection.find(({ id }) => id === "4")?.entries
-        }) AND (${dictionaryConverter.age} ${selection.find(({ id }) => id === "4")?.exclude
+        ? ` AND (${dictionaryConverter.Age} ${selection.find(({ id }) => id === "4")?.entries
+        }) AND (${dictionaryConverter.Age} ${selection.find(({ id }) => id === "4")?.exclude
         })`
         : ""
-      }${sqlQueryBuilder.COMPARE({
+      }${
+        selection.find(({ id }) => id === "5")?.entries &&
+        !selection.find(({ id }) => id === "5")?.exclude
+          ? selection
+              .find(({ id }) => id === "5")
+              ?.entries?.split(",")
+              .map(
+                (val) =>
+                  `${` AND (${
+                    dictionaryConverter.ProcedureDescription
+                  } iLIKE '%${val}%' ${
+                    (selection.find(({ id }) => id === "5")?.entries?.split(",")
+                      .length as number) > 1
+                      ? `OR ${dictionaryConverter.ProcedureDescription} iLIKE '%${val}%'`
+                      : ``
+                  }) `}`
+              )
+              .join("")
+          : ""
+      }${
+        !selection.find(({ id }) => id === "5")?.entries &&
+        selection.find(({ id }) => id === "5")?.exclude
+          ? selection
+              .find(({ id }) => id === "5")
+              ?.exclude?.split(",")
+              .map(
+                (val, index) =>
+                  `${
+                    index === 0
+                      ? ` AND (${
+                          dictionaryConverter.ProcedureDescription
+                        } NOT LIKE '%${val}%'${
+                          selection.find(({ id }) => id === "5")?.exclude?.split(",")
+                            .length === 1
+                            ? ")"
+                            : ""
+                        }`
+                      : ` OR ${dictionaryConverter.ProcedureDescription} NOT LIKE '%${val}%')`
+                  }`
+              )
+              .join("")
+          : ""
+      }${
+        selection.find(({ id }) => id === "5")?.entries &&
+        selection.find(({ id }) => id === "5")?.exclude
+          ? `${selection
+              .find(({ id }) => id === "5")
+              ?.entries?.split(",")
+              .map(
+                (val, index) =>
+                  `${
+                    index === 0
+                      ? ` AND (${
+                          dictionaryConverter.ProcedureDescription
+                        } LIKE '%${val}%'${
+                          selection.find(({ id }) => id === "5")?.entries?.split(",")
+                            .length === 1
+                            ? ")"
+                            : ""
+                        }`
+                      : ` OR ${dictionaryConverter.ProcedureDescription} LIKE '%${val}%')`
+                  }`
+              )
+              .join("")} ${selection
+              .find(({ id }) => id === "5")
+              ?.exclude?.split(",")
+              .map(
+                (val, index) =>
+                  `${
+                    index === 0
+                      ? ` AND (${
+                          dictionaryConverter.ProcedureDescription
+                        } NOT LIKE '%${val}%'${
+                          selection.find(({ id }) => id === "5")?.exclude?.split(",")
+                            .length === 1
+                            ? ")"
+                            : ""
+                        }`
+                      : ` OR ${dictionaryConverter.ProcedureDescription} NOT LIKE '%${val}%')`
+                  }`
+              )
+              .join("")}`
+          : ""
+      }${selection.find(({ id }) => id === "21")?.entries &&
+      !selection.find(({ id }) => id === "21")?.exclude
+      ? sqlQueryBuilder.COMPARE({
         query: [
           {
-            key: dictionaryConverter.firstname,
-            value: selection.find(({ id }) => id === "22")?.entries ?? "",
+            key: dictionaryConverter.FirstName,
+            value: selection.find(({ id }) => id === "21")?.entries ?? "",
             sqlKeyWord: "AND",
             operator: "=",
+          },
+        ],
+      })
+      : ""
+    }${!selection.find(({ id }) => id === "21")?.entries &&
+      selection.find(({ id }) => id === "21")?.exclude
+      ? sqlQueryBuilder.COMPARE({
+        query: [
+          {
+            key: dictionaryConverter.FirstName,
+            sqlKeyWord: "AND",
+            operator: "<>",
+            value: selection.find(({ id }) => id === "21")?.exclude ?? "",
+          },
+        ],
+      })
+      : ""
+    }${selection.find(({ id }) => id === "21")?.entries &&
+      selection.find(({ id }) => id === "21")?.exclude
+      ? `${sqlQueryBuilder.COMPARE({
+        query: [
+          {
+            key: dictionaryConverter.FirstName,
+            operator: "=",
+            sqlKeyWord: "AND",
+            value: selection.find(({ id }) => id === "21")?.entries ?? "",
           },
         ],
       })}${sqlQueryBuilder.COMPARE({
         query: [
           {
-            key: dictionaryConverter.lastname,
+            key: dictionaryConverter.FirstName,
+            operator: "<>",
+            sqlKeyWord: "AND",
+            value: selection.find(({ id }) => id === "21")?.exclude ?? "",
+          },
+        ],
+      })}`
+      : ""
+    }${sqlQueryBuilder.COMPARE({
+        query: [
+          {
+            key: dictionaryConverter.LastName,
             value: selection.find(({ id }) => id === "23")?.entries ?? "",
             sqlKeyWord: "AND",
             operator: "=",
@@ -690,12 +895,12 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
           .map(
             (val, index) =>
               `${index === 0
-                ? `${dictionaryConverter.region} iLIKE '%${val}%'${selection.find(({ id }) => id === "14")?.entries?.split(",")
+                ? `${dictionaryConverter.Region} iLIKE '%${val}%'${selection.find(({ id }) => id === "14")?.entries?.split(",")
                   .length === 1
                   ? ""
                   : ""
                 }`
-                : ` OR ${dictionaryConverter.region} iLIKE '%${val}%'`
+                : ` OR ${dictionaryConverter.Region} iLIKE '%${val}%'`
               }`
           )
           .join("")
@@ -709,13 +914,13 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
           .map(
             (val, index) =>
               `${index === 0
-                ? ` AND (${dictionaryConverter.region
+                ? ` AND (${dictionaryConverter.Region
                 } NOT iLIKE '%${val}%'${selection.find(({ id }) => id === "14")?.entries?.split(",")
                   .length === 1
                   ? ")"
                   : ""
                 }`
-                : ` OR ${dictionaryConverter.region} NOT iLIKE '%${val}%') `
+                : ` OR ${dictionaryConverter.Region} NOT iLIKE '%${val}%') `
               }`
           )
           .join("")
@@ -728,13 +933,13 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
           .map(
             (val, index) =>
               `${index === 0
-                ? ` AND (${dictionaryConverter.region
+                ? ` AND (${dictionaryConverter.Region
                 } iLIKE '%${val}%'${selection.find(({ id }) => id === "14")?.entries?.split(",")
                   .length === 1
                   ? ")"
                   : ""
                 }`
-                : ` OR ${dictionaryConverter.region} iLIKE '%${val}%') `
+                : ` OR ${dictionaryConverter.Region} iLIKE '%${val}%') `
               }`
           )
           .join("")} ${selection
@@ -743,25 +948,25 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
             .map(
               (val, index) =>
                 `${index === 0
-                  ? ` AND (${dictionaryConverter.region
+                  ? ` AND (${dictionaryConverter.Region
                   } NOT iLIKE '%${val}%'${selection.find(({ id }) => id === "14")?.exclude?.split(",")
                     .length === 1
                     ? ")"
                     : ""
                   }`
-                  : ` OR ${dictionaryConverter.region} NOT iLIKE '%${val}%')`
+                  : ` OR ${dictionaryConverter.Region} NOT iLIKE '%${val}%')`
                 }`
             )
             .join("")}`
         : ""
-      }${selection.find(({ id }) => id === "28")?.entries &&
-        !selection.find(({ id }) => id === "28")?.exclude
+      }${selection.find(({ id }) => id === "27")?.entries &&
+        !selection.find(({ id }) => id === "27")?.exclude
         ? sqlQueryBuilder.COMPARE({
           query: (
-            selection.find(({ id }) => id === "28")?.entries?.split(",") ?? []
+            selection.find(({ id }) => id === "27")?.entries?.split(",") ?? []
           ).map((providerName, index) => {
             return {
-              key: dictionaryConverter.provider_name,
+              key: dictionaryConverter.ProviderName,
               operator: "=",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: providerName,
@@ -769,14 +974,14 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
           }),
         })
         : ""
-      }${!selection.find(({ id }) => id === "28")?.entries &&
-        selection.find(({ id }) => id === "28")?.exclude
+      }${!selection.find(({ id }) => id === "27")?.entries &&
+        selection.find(({ id }) => id === "27")?.exclude
         ? sqlQueryBuilder.COMPARE({
           query: (
-            selection.find(({ id }) => id === "28")?.exclude?.split(",") ?? []
+            selection.find(({ id }) => id === "27")?.exclude?.split(",") ?? []
           ).map((providerName, index) => {
             return {
-              key: dictionaryConverter.provider_name,
+              key: dictionaryConverter.ProviderName,
               operator: "<>",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: providerName,
@@ -784,14 +989,14 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
           }),
         })
         : ""
-      }${selection.find(({ id }) => id === "28")?.entries &&
-        selection.find(({ id }) => id === "28")?.exclude
+      }${selection.find(({ id }) => id === "27")?.entries &&
+        selection.find(({ id }) => id === "27")?.exclude
         ? `${sqlQueryBuilder.COMPARE({
           query: (
-            selection.find(({ id }) => id === "28")?.entries?.split(",") ?? []
+            selection.find(({ id }) => id === "27")?.entries?.split(",") ?? []
           ).map((providerName, index) => {
             return {
-              key: dictionaryConverter.provider_name,
+              key: dictionaryConverter.ProviderName,
               operator: "=",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: providerName,
@@ -799,10 +1004,10 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
           }),
         })}${sqlQueryBuilder.COMPARE({
           query: (
-            selection.find(({ id }) => id === "28")?.exclude?.split(",") ?? []
+            selection.find(({ id }) => id === "27")?.exclude?.split(",") ?? []
           ).map((providerName, index) => {
             return {
-              key: dictionaryConverter.provider_name,
+              key: dictionaryConverter.ProviderName,
               operator: "<>",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: providerName,
@@ -810,19 +1015,166 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
           }),
         })}`
         : ""
-      }${selection.find(({ id }) => id === "30")?.entries &&
-        !selection.find(({ id }) => id === "30")?.exclude
+      }${selection.find(({ id }) => id === "29")?.entries &&
+        !selection.find(({ id }) => id === "29")?.exclude
         ? sqlQueryBuilder.COMPARE({
           query: [
             {
-              key: dictionaryConverter.patient_contact,
+              key: dictionaryConverter.PatientContact,
               operator: "=",
               sqlKeyWord: "AND",
-              value: selection.find(({ id }) => id === "30")?.entries ?? "",
+              value: selection.find(({ id }) => id === "29")?.entries ?? "",
             },
           ],
         })
         : ""
+      }${selection.find(({ id }) => id === "29")?.entries &&
+        !selection.find(({ id }) => id === "29")?.exclude
+        ? sqlQueryBuilder.COMPARE({
+          query: (
+            selection.find(({ id }) => id === "29")?.entries?.split(",") ?? []
+          ).map((patientContact, index) => {
+            return {
+              key: dictionaryConverter.PatientContact,
+              operator: "=",
+              sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
+              value: patientContact,
+            };
+          }),
+        })
+        : ""
+      }${!selection.find(({ id }) => id === "29")?.entries &&
+        selection.find(({ id }) => id === "29")?.exclude
+        ? sqlQueryBuilder.COMPARE({
+          query: (
+            selection.find(({ id }) => id === "29")?.entries?.split(",") ?? []
+          ).map((patientContact, index) => {
+            return {
+              key: dictionaryConverter.PatientContact,
+              operator: "<>",
+              sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
+              value: patientContact,
+            };
+          }),
+        })
+        : ""
+      }${selection.find(({ id }) => id === "29")?.entries &&
+        selection.find(({ id }) => id === "29")?.exclude
+        ? `${sqlQueryBuilder.COMPARE({
+          query: (
+            selection.find(({ id }) => id === "29")?.entries?.split(",") ?? []
+          ).map((patientContact, index) => {
+            return {
+              key: dictionaryConverter.PatientContact,
+              operator: "=",
+              sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
+              value: patientContact,
+            };
+          }),
+        })}${sqlQueryBuilder.COMPARE({
+          query: (
+            selection.find(({ id }) => id === "29")?.exclude?.split(",") ?? []
+          ).map((patientContact, index) => {
+            return {
+              key: dictionaryConverter.PatientContact,
+              operator: "<>",
+              sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
+              value: patientContact,
+            };
+          }),
+        })}`
+        : ""
+      }${
+        selection.find(({ id }) => id === "10")?.entries ||
+        selection.find(({ id }) => id === "10")?.exclude
+          ? "AND ("
+          : ""
+      }  ${
+        selection.find(({ id }) => id === "10")?.entries &&
+        !selection.find(({ id }) => id === "10")?.exclude
+          ? selection
+              .find(({ id }) => id === "10")
+              ?.entries?.split(",")
+              .map(
+                (val, index) =>
+                  `${
+                    index === 0
+                      ? `${dictionaryConverter.TestRequest} iLIKE '%${val}%'${
+                          selection.find(({ id }) => id === "10")?.entries?.split(",")
+                            .length === 1
+                            ? ""
+                            : ""
+                        }`
+                      : ` OR ${dictionaryConverter.TestRequest} iLIKE '%${val}%'`
+                  }`
+              )
+              .join("")
+          : ""
+      } ${selection.find(({ id }) => id === "10")?.entries ||
+      selection.find(({ id }) => id === "10")?.exclude ? ')':''}${
+        !selection.find(({ id }) => id === "10")?.entries &&
+        selection.find(({ id }) => id === "10")?.exclude
+          ? selection
+              .find(({ id }) => id === "10")
+              ?.exclude?.split(",")
+              .map(
+                (val, index) =>
+                  `${
+                    index === 0
+                      ? ` AND (${
+                          dictionaryConverter.TestRequest
+                        } NOT iLIKE '%${val}%'${
+                          selection.find(({ id }) => id === "10")?.entries?.split(",")
+                            .length === 1
+                            ? ")"
+                            : ""
+                        }`
+                      : ` OR ${dictionaryConverter.TestRequest} NOT iLIKE '%${val}%') `
+                  }`
+              )
+              .join("")
+          : ""
+      }${
+        selection.find(({ id }) => id === "10")?.entries &&
+        selection.find(({ id }) => id === "10")?.exclude
+          ? `${selection
+              .find(({ id }) => id === "10")
+              ?.entries?.split(",")
+              .map(
+                (val, index) =>
+                  `${
+                    index === 0
+                      ? ` AND (${
+                          dictionaryConverter.TestRequest
+                        } iLIKE '%${val}%'${
+                          selection.find(({ id }) => id === "10")?.entries?.split(",")
+                            .length === 1
+                            ? ")"
+                            : ""
+                        }`
+                      : ` OR ${dictionaryConverter.TestRequest} iLIKE '%${val}%') `
+                  }`
+              )
+              .join("")} ${selection
+              .find(({ id }) => id === "10")
+              ?.exclude?.split(",")
+              .map(
+                (val, index) =>
+                  `${
+                    index === 0
+                      ? ` AND (${
+                          dictionaryConverter.TestRequest
+                        } NOT iLIKE '%${val}%'${
+                          selection.find(({ id }) => id === "10")?.exclude?.split(",")
+                            .length === 1
+                            ? ")"
+                            : ""
+                        }`
+                      : ` OR ${dictionaryConverter.TestRequest} NOT iLIKE '%${val}%')`
+                  }`
+              )
+              .join("")}`
+          : ""
       }${selection.find(({ id }) => id === "30")?.entries &&
         !selection.find(({ id }) => id === "30")?.exclude
         ? sqlQueryBuilder.COMPARE({
@@ -830,7 +1182,7 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
             selection.find(({ id }) => id === "30")?.entries?.split(",") ?? []
           ).map((patientContact, index) => {
             return {
-              key: dictionaryConverter.patient_contact,
+              key: dictionaryConverter.ProviderContact,
               operator: "=",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: patientContact,
@@ -842,10 +1194,10 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
         selection.find(({ id }) => id === "30")?.exclude
         ? sqlQueryBuilder.COMPARE({
           query: (
-            selection.find(({ id }) => id === "30")?.entries?.split(",") ?? []
+            selection.find(({ id }) => id === "30")?.exclude?.split(",") ?? []
           ).map((patientContact, index) => {
             return {
-              key: dictionaryConverter.patient_contact,
+              key: dictionaryConverter.ProviderContact,
               operator: "<>",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: patientContact,
@@ -858,156 +1210,9 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
         ? `${sqlQueryBuilder.COMPARE({
           query: (
             selection.find(({ id }) => id === "30")?.entries?.split(",") ?? []
-          ).map((patientContact, index) => {
-            return {
-              key: dictionaryConverter.patient_contact,
-              operator: "=",
-              sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
-              value: patientContact,
-            };
-          }),
-        })}${sqlQueryBuilder.COMPARE({
-          query: (
-            selection.find(({ id }) => id === "30")?.exclude?.split(",") ?? []
-          ).map((patientContact, index) => {
-            return {
-              key: dictionaryConverter.patient_contact,
-              operator: "<>",
-              sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
-              value: patientContact,
-            };
-          }),
-        })}`
-        : ""
-      }${
-        selection.find(({ id }) => id === "11")?.entries ||
-        selection.find(({ id }) => id === "11")?.exclude
-          ? "AND ("
-          : ""
-      }  ${
-        selection.find(({ id }) => id === "11")?.entries &&
-        !selection.find(({ id }) => id === "11")?.exclude
-          ? selection
-              .find(({ id }) => id === "11")
-              ?.entries?.split(",")
-              .map(
-                (val, index) =>
-                  `${
-                    index === 0
-                      ? `${dictionaryConverter.test_request} iLIKE '%${val}%'${
-                          selection.find(({ id }) => id === "11")?.entries?.split(",")
-                            .length === 1
-                            ? ""
-                            : ""
-                        }`
-                      : ` OR ${dictionaryConverter.test_request} iLIKE '%${val}%'`
-                  }`
-              )
-              .join("")
-          : ""
-      } ${selection.find(({ id }) => id === "11")?.entries ||
-      selection.find(({ id }) => id === "11")?.exclude ? ')':''}${
-        !selection.find(({ id }) => id === "11")?.entries &&
-        selection.find(({ id }) => id === "11")?.exclude
-          ? selection
-              .find(({ id }) => id === "11")
-              ?.exclude?.split(",")
-              .map(
-                (val, index) =>
-                  `${
-                    index === 0
-                      ? ` AND (${
-                          dictionaryConverter.test_request
-                        } NOT iLIKE '%${val}%'${
-                          selection.find(({ id }) => id === "11")?.entries?.split(",")
-                            .length === 1
-                            ? ")"
-                            : ""
-                        }`
-                      : ` OR ${dictionaryConverter.test_request} NOT iLIKE '%${val}%') `
-                  }`
-              )
-              .join("")
-          : ""
-      }${
-        selection.find(({ id }) => id === "11")?.entries &&
-        selection.find(({ id }) => id === "11")?.exclude
-          ? `${selection
-              .find(({ id }) => id === "11")
-              ?.entries?.split(",")
-              .map(
-                (val, index) =>
-                  `${
-                    index === 0
-                      ? ` AND (${
-                          dictionaryConverter.test_request
-                        } iLIKE '%${val}%'${
-                          selection.find(({ id }) => id === "11")?.entries?.split(",")
-                            .length === 1
-                            ? ")"
-                            : ""
-                        }`
-                      : ` OR ${dictionaryConverter.test_request} iLIKE '%${val}%') `
-                  }`
-              )
-              .join("")} ${selection
-              .find(({ id }) => id === "11")
-              ?.exclude?.split(",")
-              .map(
-                (val, index) =>
-                  `${
-                    index === 0
-                      ? ` AND (${
-                          dictionaryConverter.test_request
-                        } NOT iLIKE '%${val}%'${
-                          selection.find(({ id }) => id === "11")?.exclude?.split(",")
-                            .length === 1
-                            ? ")"
-                            : ""
-                        }`
-                      : ` OR ${dictionaryConverter.test_request} NOT iLIKE '%${val}%')`
-                  }`
-              )
-              .join("")}`
-          : ""
-      }${selection.find(({ id }) => id === "31")?.entries &&
-        !selection.find(({ id }) => id === "31")?.exclude
-        ? sqlQueryBuilder.COMPARE({
-          query: (
-            selection.find(({ id }) => id === "31")?.entries?.split(",") ?? []
-          ).map((patientContact, index) => {
-            return {
-              key: dictionaryConverter.provider_contact,
-              operator: "=",
-              sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
-              value: patientContact,
-            };
-          }),
-        })
-        : ""
-      }${!selection.find(({ id }) => id === "31")?.entries &&
-        selection.find(({ id }) => id === "31")?.exclude
-        ? sqlQueryBuilder.COMPARE({
-          query: (
-            selection.find(({ id }) => id === "31")?.exclude?.split(",") ?? []
-          ).map((patientContact, index) => {
-            return {
-              key: dictionaryConverter.provider_contact,
-              operator: "<>",
-              sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
-              value: patientContact,
-            };
-          }),
-        })
-        : ""
-      }${selection.find(({ id }) => id === "31")?.entries &&
-        selection.find(({ id }) => id === "31")?.exclude
-        ? `${sqlQueryBuilder.COMPARE({
-          query: (
-            selection.find(({ id }) => id === "31")?.entries?.split(",") ?? []
           ).map((providerContact, index) => {
             return {
-              key: dictionaryConverter.provider_contact,
+              key: dictionaryConverter.ProviderContact,
               operator: "=",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: providerContact,
@@ -1015,10 +1220,10 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
           }),
         })}${sqlQueryBuilder.COMPARE({
           query: (
-            selection.find(({ id }) => id === "31")?.exclude?.split(",") ?? []
+            selection.find(({ id }) => id === "30")?.exclude?.split(",") ?? []
           ).map((providerContact, index) => {
             return {
-              key: dictionaryConverter.provider_contact,
+              key: dictionaryConverter.ProviderContact,
               operator: "<>",
               sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
               value: providerContact,
@@ -1041,13 +1246,13 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
                 (val, index) =>
                   `${
                     index === 0
-                      ? `${dictionaryConverter.gender} iLIKE '%${val}%'${
+                      ? `${dictionaryConverter.Gender} iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "3")?.entries?.split(",")
                             .length === 1
                             ? ""
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.gender} iLIKE '%${val}%'`
+                      : ` OR ${dictionaryConverter.Gender} iLIKE '%${val}%'`
                   }`
               )
               .join("")
@@ -1064,14 +1269,14 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
                   `${
                     index === 0
                       ? ` AND (${
-                          dictionaryConverter.gender
+                          dictionaryConverter.Gender
                         } NOT iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "3")?.entries?.split(",")
                             .length === 1
                             ? ")"
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.gender} NOT iLIKE '%${val}%') `
+                      : ` OR ${dictionaryConverter.Gender} NOT iLIKE '%${val}%') `
                   }`
               )
               .join("")
@@ -1087,14 +1292,14 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
                   `${
                     index === 0
                       ? ` AND (${
-                          dictionaryConverter.gender
+                          dictionaryConverter.Gender
                         } iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "3")?.entries?.split(",")
                             .length === 1
                             ? ")"
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.gender} iLIKE '%${val}%') `
+                      : ` OR ${dictionaryConverter.Gender} iLIKE '%${val}%') `
                   }`
               )
               .join("")} ${selection
@@ -1105,19 +1310,19 @@ export function createQuery({ selection, action, entries, table, dictionaryConve
                   `${
                     index === 0
                       ? ` AND (${
-                          dictionaryConverter.gender
+                          dictionaryConverter.Gender
                         } NOT iLIKE '%${val}%'${
                           selection.find(({ id }) => id === "3")?.exclude?.split(",")
                             .length === 1
                             ? ")"
                             : ""
                         }`
-                      : ` OR ${dictionaryConverter.gender} NOT iLIKE '%${val}%')`
+                      : ` OR ${dictionaryConverter.Gender} NOT iLIKE '%${val}%')`
                   }`
               )
               .join("")}`
           : ""
-      } AND ${dictionaryConverter.date} BETWEEN '${entries?.startDate}' AND '${entries?.endDate}' LIMIT ${entries?.sampleSize?.toLocaleString()}`;
+      } ${dictionaryConverter.date ? `AND ${dictionaryConverter.date} BETWEEN '${entries?.startDate}' AND '${entries?.endDate}'`:""} LIMIT ${entries?.sampleSize?.toLocaleString()}`;
     if (
       !selection.find(({ id }) => id === "1")?.entries &&
       !selection.find(({ id }) => id === "1")?.entries
