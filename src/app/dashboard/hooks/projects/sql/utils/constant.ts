@@ -32,8 +32,8 @@ export const dictionaryConverter: HeaderKeys = {
     region: "state",
     procedure_desc: "procedure_description",
     provider_contact: "provider_contact",
-    facility_name:"name_of_facility",
-    facility_location: "facility_region"
+    facility_name: "name_of_facility",
+    facility_location: "facility_region",
   },
   claims: {
     diagnosis: "diagnosis_description",
@@ -47,7 +47,7 @@ export const dictionaryConverter: HeaderKeys = {
     procedure_desc: "item",
     age: "dob",
     facility_location: "city",
-    facility_name: "facility_name"
+    facility_name: "facility_name",
   },
 };
 
@@ -294,9 +294,10 @@ export const Columns: RequiredColumnMainProps = [
   },
 ];
 
-export const createProjectValidationInitial: CreateProjectValidationInitialProps = {
-  projectName: "",
-  startDate: "",
-  endDate: "",
-  sampleSize: 0,
-};
+export const createProjectValidationInitial: CreateProjectValidationInitialProps =
+  {
+    projectName: "",
+    startDate: "",
+    endDate: "",
+    sampleSize: 0,
+  };
