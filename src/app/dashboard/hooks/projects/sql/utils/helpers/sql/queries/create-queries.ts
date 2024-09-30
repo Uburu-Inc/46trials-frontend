@@ -57,20 +57,19 @@ export function createQuery({
             })}`
         : ""
     }${
-      selection.find(({ id }) => id === "4")?.entries &&
+      dictionaryConverter.Age && selection.find(({ id }) => id === "4")?.entries &&
       !selection.find(({ id }) => id === "4")?.exclude
         ? ` AND (${dictionaryConverter.Age} ${
             selection.find(({ id }) => id === "4")?.entries ?? ""
           })`
         : ""
-    }${
-      !selection.find(({ id }) => id === "4")?.entries &&
+    }${dictionaryConverter.Age && !selection.find(({ id }) => id === "4")?.entries &&
       selection.find(({ id }) => id === "4")?.exclude
         ? ` AND (${dictionaryConverter.Age} ${
             selection.find(({ id }) => id === "4")?.exclude ?? ""
           })`
         : ""
-    }${
+    }${dictionaryConverter.Age &&
       selection.find(({ id }) => id === "4")?.entries &&
       selection.find(({ id }) => id === "4")?.exclude
         ? ` AND (${dictionaryConverter.Age} ${
@@ -79,8 +78,8 @@ export function createQuery({
             selection.find(({ id }) => id === "4")?.exclude
           })`
         : ""
-    }${
-      selection.find(({ id }) => id === "5")?.entries && dictionaryConverter.ProcedureDescription &&
+    }${dictionaryConverter.ProcedureDescription &&
+      selection.find(({ id }) => id === "5")?.entries &&
       !selection.find(({ id }) => id === "5")?.exclude
         ? selection
             .find(({ id }) => id === "5")
@@ -98,9 +97,9 @@ export function createQuery({
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.ProcedureDescription &&
       !selection.find(({ id }) => id === "5")?.entries &&
-      selection.find(({ id }) => id === "5")?.exclude && dictionaryConverter.ProcedureDescription
+      selection.find(({ id }) => id === "5")?.exclude
         ? selection
             .find(({ id }) => id === "5")
             ?.exclude?.split(",")
@@ -122,8 +121,8 @@ export function createQuery({
             )
             .join("")
         : ""
-    }${
-      selection.find(({ id }) => id === "5")?.entries && dictionaryConverter.ProcedureDescription &&
+    }${dictionaryConverter.ProcedureDescription &&
+      selection.find(({ id }) => id === "5")?.entries &&
       selection.find(({ id }) => id === "5")?.exclude
         ? `${selection
             .find(({ id }) => id === "5")
@@ -173,7 +172,7 @@ export function createQuery({
     
     
     
-    ${
+    ${dictionaryConverter.FirstName &&
       selection.find(({ id }) => id === "21")?.entries &&
       !selection.find(({ id }) => id === "21")?.exclude
         ? sqlQueryBuilder.COMPARE({
@@ -187,7 +186,7 @@ export function createQuery({
             ],
           })
         : ""
-    }${
+    }${dictionaryConverter.FirstName &&
       !selection.find(({ id }) => id === "21")?.entries &&
       selection.find(({ id }) => id === "21")?.exclude
         ? sqlQueryBuilder.COMPARE({
@@ -201,7 +200,7 @@ export function createQuery({
             ],
           })
         : ""
-    }${
+    }${dictionaryConverter.FirstName &&
       selection.find(({ id }) => id === "21")?.entries &&
       selection.find(({ id }) => id === "21")?.exclude
         ? `${sqlQueryBuilder.COMPARE({
@@ -241,7 +240,7 @@ export function createQuery({
 
 
 
-     ${
+     ${dictionaryConverter.MiddleName &&
        selection.find(({ id }) => id === "22")?.entries &&
        !selection.find(({ id }) => id === "22")?.exclude
          ? sqlQueryBuilder.COMPARE({
@@ -255,7 +254,7 @@ export function createQuery({
              ],
            })
          : ""
-     }${
+     }${dictionaryConverter.MiddleName &&
       !selection.find(({ id }) => id === "22")?.entries &&
       selection.find(({ id }) => id === "22")?.exclude
         ? sqlQueryBuilder.COMPARE({
@@ -269,7 +268,7 @@ export function createQuery({
             ],
           })
         : ""
-    }${
+    }${dictionaryConverter.MiddleName &&
       selection.find(({ id }) => id === "22")?.entries &&
       selection.find(({ id }) => id === "22")?.exclude
         ? `${sqlQueryBuilder.COMPARE({
@@ -292,7 +291,7 @@ export function createQuery({
             ],
           })}`
         : ""
-    }${
+    }${dictionaryConverter.LastName &&
       selection.find(({ id }) => id === "23")?.entries &&
       !selection.find(({ id }) => id === "23")?.exclude
         ? sqlQueryBuilder.COMPARE({
@@ -306,7 +305,7 @@ export function createQuery({
             ],
           })
         : ""
-    }${
+    }${dictionaryConverter.LastName &&
       !selection.find(({ id }) => id === "23")?.entries &&
       selection.find(({ id }) => id === "23")?.exclude
         ? sqlQueryBuilder.COMPARE({
@@ -320,7 +319,7 @@ export function createQuery({
             ],
           })
         : ""
-    }${
+    }${dictionaryConverter.LastName &&
       selection.find(({ id }) => id === "23")?.entries &&
       selection.find(({ id }) => id === "23")?.exclude
         ? `${sqlQueryBuilder.COMPARE({
@@ -343,7 +342,7 @@ export function createQuery({
             ],
           })}`
         : ""
-    }${
+    }${dictionaryConverter.Region &&
       selection.find(({ id }) => id === "14")?.entries ||
       selection.find(({ id }) => id === "14")?.exclude
         ? "AND ("
@@ -370,12 +369,12 @@ export function createQuery({
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.Region &&
       selection.find(({ id }) => id === "14")?.entries ||
       selection.find(({ id }) => id === "14")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.Region &&
       !selection.find(({ id }) => id === "14")?.entries &&
       selection.find(({ id }) => id === "14")?.exclude
         ? selection
@@ -399,7 +398,7 @@ export function createQuery({
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.Region &&
       selection.find(({ id }) => id === "14")?.entries &&
       selection.find(({ id }) => id === "14")?.exclude
         ? `${selection
@@ -440,7 +439,7 @@ export function createQuery({
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.ProviderName &&
       selection.find(({ id }) => id === "27")?.entries &&
       !selection.find(({ id }) => id === "27")?.exclude
         ? sqlQueryBuilder.COMPARE({
@@ -456,7 +455,7 @@ export function createQuery({
             }),
           })
         : ""
-    }${
+    }${dictionaryConverter.ProviderName &&
       !selection.find(({ id }) => id === "27")?.entries &&
       selection.find(({ id }) => id === "27")?.exclude
         ? sqlQueryBuilder.COMPARE({
@@ -472,7 +471,7 @@ export function createQuery({
             }),
           })
         : ""
-    }${
+    }${ dictionaryConverter.ProviderName &&
       selection.find(({ id }) => id === "27")?.entries &&
       selection.find(({ id }) => id === "27")?.exclude
         ? `${sqlQueryBuilder.COMPARE({
@@ -499,7 +498,7 @@ export function createQuery({
             }),
           })}`
         : ""
-    }${
+    }${dictionaryConverter.PatientContact &&
       selection.find(({ id }) => id === "29")?.entries &&
       !selection.find(({ id }) => id === "29")?.exclude
         ? sqlQueryBuilder.COMPARE({
@@ -515,7 +514,7 @@ export function createQuery({
             }),
           })
         : ""
-    }${
+    }${dictionaryConverter.PatientContact &&
       !selection.find(({ id }) => id === "29")?.entries &&
       selection.find(({ id }) => id === "29")?.exclude
         ? sqlQueryBuilder.COMPARE({
@@ -531,7 +530,7 @@ export function createQuery({
             }),
           })
         : ""
-    }${
+    }${dictionaryConverter.PatientContact &&
       selection.find(({ id }) => id === "29")?.entries &&
       selection.find(({ id }) => id === "29")?.exclude
         ? `${sqlQueryBuilder.COMPARE({
@@ -558,7 +557,7 @@ export function createQuery({
             }),
           })}`
         : ""
-    }${
+    }${dictionaryConverter.ProviderContact &&
       selection.find(({ id }) => id === "30")?.entries &&
       !selection.find(({ id }) => id === "30")?.exclude
         ? sqlQueryBuilder.COMPARE({
@@ -574,7 +573,7 @@ export function createQuery({
             }),
           })
         : ""
-    }${
+    }${dictionaryConverter.ProviderContact &&
       !selection.find(({ id }) => id === "30")?.entries &&
       selection.find(({ id }) => id === "30")?.exclude
         ? sqlQueryBuilder.COMPARE({
@@ -590,7 +589,7 @@ export function createQuery({
             }),
           })
         : ""
-    }${
+    }${dictionaryConverter.ProviderContact &&
       selection.find(({ id }) => id === "30")?.entries &&
       selection.find(({ id }) => id === "30")?.exclude
         ? `${sqlQueryBuilder.COMPARE({
@@ -617,12 +616,12 @@ export function createQuery({
             }),
           })}`
         : ""
-    }${
+    }${dictionaryConverter.TestRequest &&
       selection.find(({ id }) => id === "10")?.entries ||
       selection.find(({ id }) => id === "10")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.TestRequest &&
       selection.find(({ id }) => id === "10")?.entries &&
       !selection.find(({ id }) => id === "10")?.exclude
         ? selection
@@ -644,12 +643,12 @@ export function createQuery({
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.TestRequest &&
       selection.find(({ id }) => id === "10")?.entries ||
       selection.find(({ id }) => id === "10")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.TestRequest &&
       !selection.find(({ id }) => id === "10")?.entries &&
       selection.find(({ id }) => id === "10")?.exclude
         ? selection
@@ -673,7 +672,7 @@ export function createQuery({
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.TestRequest &&
       selection.find(({ id }) => id === "10")?.entries &&
       selection.find(({ id }) => id === "10")?.exclude
         ? `${selection
@@ -716,12 +715,12 @@ export function createQuery({
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.Gender &&
       selection.find(({ id }) => id === "3")?.entries ||
       selection.find(({ id }) => id === "3")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.Gender &&
       selection.find(({ id }) => id === "3")?.entries &&
       !selection.find(({ id }) => id === "3")?.exclude
         ? selection
@@ -743,12 +742,12 @@ export function createQuery({
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.Gender &&
       selection.find(({ id }) => id === "3")?.entries ||
       selection.find(({ id }) => id === "3")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.Gender &&
       !selection.find(({ id }) => id === "3")?.entries &&
       selection.find(({ id }) => id === "3")?.exclude
         ? selection
@@ -772,7 +771,7 @@ export function createQuery({
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.Gender &&
       selection.find(({ id }) => id === "3")?.entries &&
       selection.find(({ id }) => id === "3")?.exclude
         ? `${selection
@@ -813,12 +812,12 @@ export function createQuery({
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.DiagnosisCode && 
       selection.find(({ id }) => id === "2")?.entries ||
       selection.find(({ id }) => id === "2")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.DiagnosisCode &&
       selection.find(({ id }) => id === "2")?.entries &&
       !selection.find(({ id }) => id === "2")?.exclude
         ? selection
@@ -840,12 +839,12 @@ export function createQuery({
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.DiagnosisCode &&
       selection.find(({ id }) => id === "2")?.entries ||
       selection.find(({ id }) => id === "2")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.DiagnosisCode &&
       !selection.find(({ id }) => id === "2")?.entries &&
       selection.find(({ id }) => id === "2")?.exclude
         ? selection
@@ -869,7 +868,7 @@ export function createQuery({
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.DiagnosisCode &&
       selection.find(({ id }) => id === "2")?.entries &&
       selection.find(({ id }) => id === "2")?.exclude
         ? `${selection
@@ -912,12 +911,12 @@ export function createQuery({
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.Cost &&
       selection.find(({ id }) => id === "7")?.entries ||
       selection.find(({ id }) => id === "7")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.Cost &&
       selection.find(({ id }) => id === "7")?.entries &&
       !selection.find(({ id }) => id === "7")?.exclude
         ? selection
@@ -939,12 +938,12 @@ export function createQuery({
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.Cost &&
       selection.find(({ id }) => id === "7")?.entries ||
       selection.find(({ id }) => id === "7")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.Cost &&
       !selection.find(({ id }) => id === "7")?.entries &&
       selection.find(({ id }) => id === "7")?.exclude
         ? selection
@@ -966,7 +965,7 @@ export function createQuery({
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.Cost &&
       selection.find(({ id }) => id === "7")?.entries &&
       selection.find(({ id }) => id === "7")?.exclude
         ? `${selection
@@ -1005,12 +1004,12 @@ export function createQuery({
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.FacilityType &&
       selection.find(({ id }) => id === "8")?.entries ||
       selection.find(({ id }) => id === "8")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.FacilityType &&
       selection.find(({ id }) => id === "8")?.entries &&
       !selection.find(({ id }) => id === "8")?.exclude
         ? selection
@@ -1032,12 +1031,12 @@ export function createQuery({
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.FacilityType &&
       selection.find(({ id }) => id === "8")?.entries ||
       selection.find(({ id }) => id === "8")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.FacilityType &&
       !selection.find(({ id }) => id === "8")?.entries &&
       selection.find(({ id }) => id === "8")?.exclude
         ? selection
@@ -1061,7 +1060,7 @@ export function createQuery({
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.FacilityType &&
       selection.find(({ id }) => id === "8")?.entries &&
       selection.find(({ id }) => id === "8")?.exclude
         ? `${selection
@@ -1104,12 +1103,12 @@ export function createQuery({
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.FacilityName &&
       selection.find(({ id }) => id === "9")?.entries ||
       selection.find(({ id }) => id === "9")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.FacilityName &&
       selection.find(({ id }) => id === "9")?.entries &&
       !selection.find(({ id }) => id === "9")?.exclude
         ? selection
@@ -1131,12 +1130,12 @@ export function createQuery({
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.FacilityName &&
       selection.find(({ id }) => id === "9")?.entries ||
       selection.find(({ id }) => id === "9")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.FacilityName &&
       !selection.find(({ id }) => id === "9")?.entries &&
       selection.find(({ id }) => id === "9")?.exclude
         ? selection
@@ -1160,7 +1159,7 @@ export function createQuery({
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.FacilityName &&
       selection.find(({ id }) => id === "9")?.entries &&
       selection.find(({ id }) => id === "9")?.exclude
         ? `${selection
@@ -1203,12 +1202,12 @@ export function createQuery({
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.TestResult &&
       selection.find(({ id }) => id === "11")?.entries ||
       selection.find(({ id }) => id === "11")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.TestResult &&
       selection.find(({ id }) => id === "11")?.entries &&
       !selection.find(({ id }) => id === "11")?.exclude
         ? selection
@@ -1230,12 +1229,12 @@ export function createQuery({
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.TestResult &&
       selection.find(({ id }) => id === "11")?.entries ||
       selection.find(({ id }) => id === "11")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.TestResult &&
       !selection.find(({ id }) => id === "11")?.entries &&
       selection.find(({ id }) => id === "11")?.exclude
         ? selection
@@ -1259,7 +1258,7 @@ export function createQuery({
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.TestResult &&
       selection.find(({ id }) => id === "11")?.entries &&
       selection.find(({ id }) => id === "11")?.exclude
         ? `${selection
@@ -1302,12 +1301,12 @@ export function createQuery({
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.DosageOfDrug &&
       selection.find(({ id }) => id === "12")?.entries ||
       selection.find(({ id }) => id === "12")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.DosageOfDrug &&
       selection.find(({ id }) => id === "12")?.entries &&
       !selection.find(({ id }) => id === "12")?.exclude
         ? selection
@@ -1329,12 +1328,12 @@ export function createQuery({
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.DosageOfDrug &&
       selection.find(({ id }) => id === "12")?.entries ||
       selection.find(({ id }) => id === "12")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.DosageOfDrug &&
       !selection.find(({ id }) => id === "12")?.entries &&
       selection.find(({ id }) => id === "12")?.exclude
         ? selection
@@ -1358,7 +1357,7 @@ export function createQuery({
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.DosageOfDrug &&
       selection.find(({ id }) => id === "12")?.entries &&
       selection.find(({ id }) => id === "12")?.exclude
         ? `${selection
@@ -1401,12 +1400,12 @@ export function createQuery({
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.DosageFrequency &&
       selection.find(({ id }) => id === "13")?.entries ||
       selection.find(({ id }) => id === "13")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.DosageFrequency &&
       selection.find(({ id }) => id === "13")?.entries &&
       !selection.find(({ id }) => id === "13")?.exclude
         ? selection
@@ -1428,12 +1427,12 @@ export function createQuery({
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.DosageFrequency &&
       selection.find(({ id }) => id === "13")?.entries ||
       selection.find(({ id }) => id === "13")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.DosageFrequency &&
       !selection.find(({ id }) => id === "13")?.entries &&
       selection.find(({ id }) => id === "13")?.exclude
         ? selection
@@ -1457,7 +1456,7 @@ export function createQuery({
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.DosageFrequency &&
       selection.find(({ id }) => id === "13")?.entries &&
       selection.find(({ id }) => id === "13")?.exclude
         ? `${selection
@@ -1500,12 +1499,12 @@ export function createQuery({
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.Product &&
       selection.find(({ id }) => id === "15")?.entries ||
       selection.find(({ id }) => id === "15")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.Product &&
       selection.find(({ id }) => id === "15")?.entries &&
       !selection.find(({ id }) => id === "15")?.exclude
         ? selection
@@ -1527,12 +1526,12 @@ export function createQuery({
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.Product &&
       selection.find(({ id }) => id === "15")?.entries ||
       selection.find(({ id }) => id === "15")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.Product &&
       !selection.find(({ id }) => id === "15")?.entries &&
       selection.find(({ id }) => id === "15")?.exclude
         ? selection
@@ -1556,7 +1555,7 @@ export function createQuery({
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.Product &&
       selection.find(({ id }) => id === "15")?.entries &&
       selection.find(({ id }) => id === "15")?.exclude
         ? `${selection
@@ -1597,12 +1596,12 @@ export function createQuery({
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.Inpatient &&
       selection.find(({ id }) => id === "16")?.entries ||
       selection.find(({ id }) => id === "16")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.Inpatient &&
       selection.find(({ id }) => id === "16")?.entries &&
       !selection.find(({ id }) => id === "16")?.exclude
         ? selection
@@ -1624,12 +1623,12 @@ export function createQuery({
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.Inpatient &&
       selection.find(({ id }) => id === "16")?.entries ||
       selection.find(({ id }) => id === "16")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.Inpatient &&
       !selection.find(({ id }) => id === "16")?.entries &&
       selection.find(({ id }) => id === "16")?.exclude
         ? selection
@@ -1653,7 +1652,7 @@ export function createQuery({
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.Inpatient &&
       selection.find(({ id }) => id === "16")?.entries &&
       selection.find(({ id }) => id === "16")?.exclude
         ? `${selection
@@ -1694,12 +1693,12 @@ export function createQuery({
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.Outpatient &&
       selection.find(({ id }) => id === "17")?.entries ||
       selection.find(({ id }) => id === "17")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.Outpatient &&
       selection.find(({ id }) => id === "17")?.entries &&
       !selection.find(({ id }) => id === "17")?.exclude
         ? selection
@@ -1721,12 +1720,12 @@ export function createQuery({
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.Outpatient &&
       selection.find(({ id }) => id === "17")?.entries ||
       selection.find(({ id }) => id === "17")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.Outpatient &&
       !selection.find(({ id }) => id === "17")?.entries &&
       selection.find(({ id }) => id === "17")?.exclude
         ? selection
@@ -1750,7 +1749,7 @@ export function createQuery({
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.Outpatient &&
       selection.find(({ id }) => id === "17")?.entries &&
       selection.find(({ id }) => id === "17")?.exclude
         ? `${selection
@@ -1793,12 +1792,12 @@ export function createQuery({
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.FacilityLocation &&
       selection.find(({ id }) => id === "18")?.entries ||
       selection.find(({ id }) => id === "18")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.FacilityLocation &&
       selection.find(({ id }) => id === "18")?.entries &&
       !selection.find(({ id }) => id === "18")?.exclude
         ? selection
@@ -1822,12 +1821,12 @@ export function createQuery({
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.FacilityLocation &&
       selection.find(({ id }) => id === "18")?.entries ||
       selection.find(({ id }) => id === "18")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.FacilityLocation &&
       !selection.find(({ id }) => id === "18")?.entries &&
       selection.find(({ id }) => id === "18")?.exclude
         ? selection
@@ -1851,7 +1850,7 @@ export function createQuery({
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.FacilityLocation &&
       selection.find(({ id }) => id === "18")?.entries &&
       selection.find(({ id }) => id === "18")?.exclude
         ? `${selection
@@ -1895,12 +1894,12 @@ export function createQuery({
             .join("")}`
         : ""
     }
-${
+${dictionaryConverter.PatientID &&
   selection.find(({ id }) => id === "19")?.entries ||
   selection.find(({ id }) => id === "19")?.exclude
     ? "AND ("
     : ""
-}${
+}${dictionaryConverter.PatientID &&
       selection.find(({ id }) => id === "19")?.entries &&
       !selection.find(({ id }) => id === "19")?.exclude
         ? selection
@@ -1922,12 +1921,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.PatientID &&
       selection.find(({ id }) => id === "19")?.entries ||
       selection.find(({ id }) => id === "19")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.PatientID &&
       !selection.find(({ id }) => id === "19")?.entries &&
       selection.find(({ id }) => id === "19")?.exclude
         ? selection
@@ -1951,7 +1950,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.PatientID &&
       selection.find(({ id }) => id === "19")?.entries &&
       selection.find(({ id }) => id === "19")?.exclude
         ? `${selection
@@ -1992,12 +1991,12 @@ ${
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.SpecimenType &&
       selection.find(({ id }) => id === "20")?.entries ||
       selection.find(({ id }) => id === "20")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.SpecimenType &&
       selection.find(({ id }) => id === "20")?.entries &&
       !selection.find(({ id }) => id === "20")?.exclude
         ? selection
@@ -2019,12 +2018,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.SpecimenType &&
       selection.find(({ id }) => id === "20")?.entries ||
       selection.find(({ id }) => id === "20")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.SpecimenType &&
       !selection.find(({ id }) => id === "20")?.entries &&
       selection.find(({ id }) => id === "20")?.exclude
         ? selection
@@ -2048,7 +2047,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.SpecimenType &&
       selection.find(({ id }) => id === "20")?.entries &&
       selection.find(({ id }) => id === "20")?.exclude
         ? `${selection
@@ -2091,12 +2090,12 @@ ${
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.DateOfBirth &&
       selection.find(({ id }) => id === "24")?.entries ||
       selection.find(({ id }) => id === "24")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.DateOfBirth &&
       selection.find(({ id }) => id === "24")?.entries &&
       !selection.find(({ id }) => id === "24")?.exclude
         ? selection
@@ -2118,12 +2117,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.DateOfBirth &&
       selection.find(({ id }) => id === "24")?.entries ||
       selection.find(({ id }) => id === "24")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.DateOfBirth &&
       !selection.find(({ id }) => id === "24")?.entries &&
       selection.find(({ id }) => id === "24")?.exclude
         ? selection
@@ -2147,7 +2146,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.DateOfBirth &&
       selection.find(({ id }) => id === "24")?.entries &&
       selection.find(({ id }) => id === "24")?.exclude
         ? `${selection
@@ -2191,12 +2190,12 @@ ${
             .join("")}`
         : ""
     }
-${
+${dictionaryConverter.SateOfOrigin &&
   selection.find(({ id }) => id === "25")?.entries ||
   selection.find(({ id }) => id === "25")?.exclude
     ? "AND ("
     : ""
-}  ${
+}  ${dictionaryConverter.SateOfOrigin &&
       selection.find(({ id }) => id === "25")?.entries &&
       !selection.find(({ id }) => id === "25")?.exclude
         ? selection
@@ -2218,12 +2217,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.SateOfOrigin &&
       selection.find(({ id }) => id === "25")?.entries ||
       selection.find(({ id }) => id === "25")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.SateOfOrigin &&
       !selection.find(({ id }) => id === "25")?.entries &&
       selection.find(({ id }) => id === "25")?.exclude
         ? selection
@@ -2247,7 +2246,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.SateOfOrigin &&
       selection.find(({ id }) => id === "25")?.entries &&
       selection.find(({ id }) => id === "25")?.exclude
         ? `${selection
@@ -2290,12 +2289,12 @@ ${
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.ProviderID &&
       selection.find(({ id }) => id === "26")?.entries ||
       selection.find(({ id }) => id === "26")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.ProviderID &&
       selection.find(({ id }) => id === "26")?.entries &&
       !selection.find(({ id }) => id === "26")?.exclude
         ? selection
@@ -2317,12 +2316,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.ProviderID &&
       selection.find(({ id }) => id === "26")?.entries ||
       selection.find(({ id }) => id === "26")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.ProviderID &&
       !selection.find(({ id }) => id === "26")?.entries &&
       selection.find(({ id }) => id === "26")?.exclude
         ? selection
@@ -2346,7 +2345,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.ProviderID &&
       selection.find(({ id }) => id === "26")?.entries &&
       selection.find(({ id }) => id === "26")?.exclude
         ? `${selection
@@ -2389,7 +2388,7 @@ ${
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.ProviderID &&
       selection.find(({ id }) => id === "26")?.entries ||
       selection.find(({ id }) => id === "26")?.exclude
         ? "AND ("
@@ -2416,7 +2415,7 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.ProviderID &&
       selection.find(({ id }) => id === "26")?.entries ||
       selection.find(({ id }) => id === "26")?.exclude
         ? ")"
@@ -2445,7 +2444,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.ProviderID &&
       selection.find(({ id }) => id === "26")?.entries &&
       selection.find(({ id }) => id === "26")?.exclude
         ? `${selection
@@ -2488,12 +2487,12 @@ ${
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.Specialty &&
       selection.find(({ id }) => id === "28")?.entries ||
       selection.find(({ id }) => id === "28")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.Specialty &&
       selection.find(({ id }) => id === "28")?.entries &&
       !selection.find(({ id }) => id === "28")?.exclude
         ? selection
@@ -2515,12 +2514,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.Specialty &&
       selection.find(({ id }) => id === "28")?.entries ||
       selection.find(({ id }) => id === "28")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.Specialty &&
       !selection.find(({ id }) => id === "28")?.entries &&
       selection.find(({ id }) => id === "28")?.exclude
         ? selection
@@ -2544,7 +2543,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.Specialty &&
       selection.find(({ id }) => id === "28")?.entries &&
       selection.find(({ id }) => id === "28")?.exclude
         ? `${selection
@@ -2658,20 +2657,19 @@ ${
             })}`
         : ""
     }${
-      selection.find(({ id }) => id === "4")?.entries &&
+      dictionaryConverter.Age && selection.find(({ id }) => id === "4")?.entries &&
       !selection.find(({ id }) => id === "4")?.exclude
         ? ` AND (${dictionaryConverter.Age} ${
             selection.find(({ id }) => id === "4")?.entries ?? ""
           })`
         : ""
-    }${
-      !selection.find(({ id }) => id === "4")?.entries &&
+    }${dictionaryConverter.Age && !selection.find(({ id }) => id === "4")?.entries &&
       selection.find(({ id }) => id === "4")?.exclude
         ? ` AND (${dictionaryConverter.Age} ${
             selection.find(({ id }) => id === "4")?.exclude ?? ""
           })`
         : ""
-    }${
+    }${dictionaryConverter.Age &&
       selection.find(({ id }) => id === "4")?.entries &&
       selection.find(({ id }) => id === "4")?.exclude
         ? ` AND (${dictionaryConverter.Age} ${
@@ -2680,7 +2678,7 @@ ${
             selection.find(({ id }) => id === "4")?.exclude
           })`
         : ""
-    }${
+    }${dictionaryConverter.ProcedureDescription &&
       selection.find(({ id }) => id === "5")?.entries &&
       !selection.find(({ id }) => id === "5")?.exclude
         ? selection
@@ -2699,7 +2697,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.ProcedureDescription &&
       !selection.find(({ id }) => id === "5")?.entries &&
       selection.find(({ id }) => id === "5")?.exclude
         ? selection
@@ -2723,7 +2721,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.ProcedureDescription &&
       selection.find(({ id }) => id === "5")?.entries &&
       selection.find(({ id }) => id === "5")?.exclude
         ? `${selection
@@ -2766,7 +2764,15 @@ ${
             )
             .join("")}`
         : ""
-    }${
+    }
+    
+    
+    
+    
+    
+    
+    
+    ${dictionaryConverter.FirstName &&
       selection.find(({ id }) => id === "21")?.entries &&
       !selection.find(({ id }) => id === "21")?.exclude
         ? sqlQueryBuilder.COMPARE({
@@ -2780,7 +2786,7 @@ ${
             ],
           })
         : ""
-    }${
+    }${dictionaryConverter.FirstName &&
       !selection.find(({ id }) => id === "21")?.entries &&
       selection.find(({ id }) => id === "21")?.exclude
         ? sqlQueryBuilder.COMPARE({
@@ -2794,7 +2800,7 @@ ${
             ],
           })
         : ""
-    }${
+    }${dictionaryConverter.FirstName &&
       selection.find(({ id }) => id === "21")?.entries &&
       selection.find(({ id }) => id === "21")?.exclude
         ? `${sqlQueryBuilder.COMPARE({
@@ -2817,21 +2823,38 @@ ${
             ],
           })}`
         : ""
-    }${
-      selection.find(({ id }) => id === "22")?.entries &&
-      !selection.find(({ id }) => id === "22")?.exclude
-        ? sqlQueryBuilder.COMPARE({
-            query: [
-              {
-                key: dictionaryConverter.MiddleName,
-                value: selection.find(({ id }) => id === "22")?.entries ?? "",
-                sqlKeyWord: "AND",
-                operator: "=",
-              },
-            ],
-          })
-        : ""
-    }${
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     ${dictionaryConverter.MiddleName &&
+       selection.find(({ id }) => id === "22")?.entries &&
+       !selection.find(({ id }) => id === "22")?.exclude
+         ? sqlQueryBuilder.COMPARE({
+             query: [
+               {
+                 key: dictionaryConverter.MiddleName,
+                 value: selection.find(({ id }) => id === "22")?.entries ?? "",
+                 sqlKeyWord: "AND",
+                 operator: "=",
+               },
+             ],
+           })
+         : ""
+     }${dictionaryConverter.MiddleName &&
       !selection.find(({ id }) => id === "22")?.entries &&
       selection.find(({ id }) => id === "22")?.exclude
         ? sqlQueryBuilder.COMPARE({
@@ -2845,7 +2868,7 @@ ${
             ],
           })
         : ""
-    }${
+    }${dictionaryConverter.MiddleName &&
       selection.find(({ id }) => id === "22")?.entries &&
       selection.find(({ id }) => id === "22")?.exclude
         ? `${sqlQueryBuilder.COMPARE({
@@ -2868,16 +2891,58 @@ ${
             ],
           })}`
         : ""
-    }${sqlQueryBuilder.COMPARE({
-      query: [
-        {
-          key: dictionaryConverter.LastName,
-          value: selection.find(({ id }) => id === "23")?.entries ?? "",
-          sqlKeyWord: "AND",
-          operator: "=",
-        },
-      ],
-    })} ${
+    }${dictionaryConverter.LastName &&
+      selection.find(({ id }) => id === "23")?.entries &&
+      !selection.find(({ id }) => id === "23")?.exclude
+        ? sqlQueryBuilder.COMPARE({
+            query: [
+              {
+                key: dictionaryConverter.LastName,
+                value: selection.find(({ id }) => id === "23")?.entries ?? "",
+                sqlKeyWord: "AND",
+                operator: "=",
+              },
+            ],
+          })
+        : ""
+    }${dictionaryConverter.LastName &&
+      !selection.find(({ id }) => id === "23")?.entries &&
+      selection.find(({ id }) => id === "23")?.exclude
+        ? sqlQueryBuilder.COMPARE({
+            query: [
+              {
+                key: dictionaryConverter.LastName,
+                value: selection.find(({ id }) => id === "23")?.entries ?? "",
+                sqlKeyWord: "AND",
+                operator: "<>",
+              },
+            ],
+          })
+        : ""
+    }${dictionaryConverter.LastName &&
+      selection.find(({ id }) => id === "23")?.entries &&
+      selection.find(({ id }) => id === "23")?.exclude
+        ? `${sqlQueryBuilder.COMPARE({
+            query: [
+              {
+                key: dictionaryConverter.LastName,
+                value: selection.find(({ id }) => id === "23")?.entries ?? "",
+                sqlKeyWord: "AND",
+                operator: "=",
+              },
+            ],
+          })}${sqlQueryBuilder.COMPARE({
+            query: [
+              {
+                key: dictionaryConverter.LastName,
+                value: selection.find(({ id }) => id === "23")?.entries ?? "",
+                sqlKeyWord: "AND",
+                operator: "<>",
+              },
+            ],
+          })}`
+        : ""
+    }${dictionaryConverter.Region &&
       selection.find(({ id }) => id === "14")?.entries ||
       selection.find(({ id }) => id === "14")?.exclude
         ? "AND ("
@@ -2904,12 +2969,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.Region &&
       selection.find(({ id }) => id === "14")?.entries ||
       selection.find(({ id }) => id === "14")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.Region &&
       !selection.find(({ id }) => id === "14")?.entries &&
       selection.find(({ id }) => id === "14")?.exclude
         ? selection
@@ -2933,7 +2998,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.Region &&
       selection.find(({ id }) => id === "14")?.entries &&
       selection.find(({ id }) => id === "14")?.exclude
         ? `${selection
@@ -2974,7 +3039,7 @@ ${
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.ProviderName &&
       selection.find(({ id }) => id === "27")?.entries &&
       !selection.find(({ id }) => id === "27")?.exclude
         ? sqlQueryBuilder.COMPARE({
@@ -2990,7 +3055,7 @@ ${
             }),
           })
         : ""
-    }${
+    }${dictionaryConverter.ProviderName &&
       !selection.find(({ id }) => id === "27")?.entries &&
       selection.find(({ id }) => id === "27")?.exclude
         ? sqlQueryBuilder.COMPARE({
@@ -3006,7 +3071,7 @@ ${
             }),
           })
         : ""
-    }${
+    }${ dictionaryConverter.ProviderName &&
       selection.find(({ id }) => id === "27")?.entries &&
       selection.find(({ id }) => id === "27")?.exclude
         ? `${sqlQueryBuilder.COMPARE({
@@ -3033,21 +3098,7 @@ ${
             }),
           })}`
         : ""
-    }${
-      selection.find(({ id }) => id === "29")?.entries &&
-      !selection.find(({ id }) => id === "29")?.exclude
-        ? sqlQueryBuilder.COMPARE({
-            query: [
-              {
-                key: dictionaryConverter.PatientContact,
-                operator: "=",
-                sqlKeyWord: "AND",
-                value: selection.find(({ id }) => id === "29")?.entries ?? "",
-              },
-            ],
-          })
-        : ""
-    }${
+    }${dictionaryConverter.PatientContact &&
       selection.find(({ id }) => id === "29")?.entries &&
       !selection.find(({ id }) => id === "29")?.exclude
         ? sqlQueryBuilder.COMPARE({
@@ -3063,7 +3114,7 @@ ${
             }),
           })
         : ""
-    }${
+    }${dictionaryConverter.PatientContact &&
       !selection.find(({ id }) => id === "29")?.entries &&
       selection.find(({ id }) => id === "29")?.exclude
         ? sqlQueryBuilder.COMPARE({
@@ -3079,7 +3130,7 @@ ${
             }),
           })
         : ""
-    }${
+    }${dictionaryConverter.PatientContact &&
       selection.find(({ id }) => id === "29")?.entries &&
       selection.find(({ id }) => id === "29")?.exclude
         ? `${sqlQueryBuilder.COMPARE({
@@ -3106,12 +3157,71 @@ ${
             }),
           })}`
         : ""
-    }${
+    }${dictionaryConverter.ProviderContact &&
+      selection.find(({ id }) => id === "30")?.entries &&
+      !selection.find(({ id }) => id === "30")?.exclude
+        ? sqlQueryBuilder.COMPARE({
+            query: (
+              selection.find(({ id }) => id === "30")?.entries?.split(",") ?? []
+            ).map((patientContact, index) => {
+              return {
+                key: dictionaryConverter.ProviderContact,
+                operator: "=",
+                sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
+                value: patientContact,
+              };
+            }),
+          })
+        : ""
+    }${dictionaryConverter.ProviderContact &&
+      !selection.find(({ id }) => id === "30")?.entries &&
+      selection.find(({ id }) => id === "30")?.exclude
+        ? sqlQueryBuilder.COMPARE({
+            query: (
+              selection.find(({ id }) => id === "30")?.exclude?.split(",") ?? []
+            ).map((patientContact, index) => {
+              return {
+                key: dictionaryConverter.ProviderContact,
+                operator: "<>",
+                sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
+                value: patientContact,
+              };
+            }),
+          })
+        : ""
+    }${dictionaryConverter.ProviderContact &&
+      selection.find(({ id }) => id === "30")?.entries &&
+      selection.find(({ id }) => id === "30")?.exclude
+        ? `${sqlQueryBuilder.COMPARE({
+            query: (
+              selection.find(({ id }) => id === "30")?.entries?.split(",") ?? []
+            ).map((providerContact, index) => {
+              return {
+                key: dictionaryConverter.ProviderContact,
+                operator: "=",
+                sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
+                value: providerContact,
+              };
+            }),
+          })}${sqlQueryBuilder.COMPARE({
+            query: (
+              selection.find(({ id }) => id === "30")?.exclude?.split(",") ?? []
+            ).map((providerContact, index) => {
+              return {
+                key: dictionaryConverter.ProviderContact,
+                operator: "<>",
+                sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
+                value: providerContact,
+              };
+            }),
+          })}`
+        : ""
+    }${dictionaryConverter.TestRequest &&
       selection.find(({ id }) => id === "10")?.entries ||
       selection.find(({ id }) => id === "10")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.TestRequest &&
       selection.find(({ id }) => id === "10")?.entries &&
       !selection.find(({ id }) => id === "10")?.exclude
         ? selection
@@ -3133,12 +3243,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.TestRequest &&
       selection.find(({ id }) => id === "10")?.entries ||
       selection.find(({ id }) => id === "10")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.TestRequest &&
       !selection.find(({ id }) => id === "10")?.entries &&
       selection.find(({ id }) => id === "10")?.exclude
         ? selection
@@ -3162,7 +3272,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.TestRequest &&
       selection.find(({ id }) => id === "10")?.entries &&
       selection.find(({ id }) => id === "10")?.exclude
         ? `${selection
@@ -3205,71 +3315,12 @@ ${
             )
             .join("")}`
         : ""
-    }${
-      selection.find(({ id }) => id === "30")?.entries &&
-      !selection.find(({ id }) => id === "30")?.exclude
-        ? sqlQueryBuilder.COMPARE({
-            query: (
-              selection.find(({ id }) => id === "30")?.entries?.split(",") ?? []
-            ).map((patientContact, index) => {
-              return {
-                key: dictionaryConverter.ProviderContact,
-                operator: "=",
-                sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
-                value: patientContact,
-              };
-            }),
-          })
-        : ""
-    }${
-      !selection.find(({ id }) => id === "30")?.entries &&
-      selection.find(({ id }) => id === "30")?.exclude
-        ? sqlQueryBuilder.COMPARE({
-            query: (
-              selection.find(({ id }) => id === "30")?.exclude?.split(",") ?? []
-            ).map((patientContact, index) => {
-              return {
-                key: dictionaryConverter.ProviderContact,
-                operator: "<>",
-                sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
-                value: patientContact,
-              };
-            }),
-          })
-        : ""
-    }${
-      selection.find(({ id }) => id === "30")?.entries &&
-      selection.find(({ id }) => id === "30")?.exclude
-        ? `${sqlQueryBuilder.COMPARE({
-            query: (
-              selection.find(({ id }) => id === "30")?.entries?.split(",") ?? []
-            ).map((providerContact, index) => {
-              return {
-                key: dictionaryConverter.ProviderContact,
-                operator: "=",
-                sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
-                value: providerContact,
-              };
-            }),
-          })}${sqlQueryBuilder.COMPARE({
-            query: (
-              selection.find(({ id }) => id === "30")?.exclude?.split(",") ?? []
-            ).map((providerContact, index) => {
-              return {
-                key: dictionaryConverter.ProviderContact,
-                operator: "<>",
-                sqlKeyWord: `${index === 0 ? "AND" : "OR"}`,
-                value: providerContact,
-              };
-            }),
-          })}`
-        : ""
-    }${
+    }${dictionaryConverter.Gender &&
       selection.find(({ id }) => id === "3")?.entries ||
       selection.find(({ id }) => id === "3")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.Gender &&
       selection.find(({ id }) => id === "3")?.entries &&
       !selection.find(({ id }) => id === "3")?.exclude
         ? selection
@@ -3291,12 +3342,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.Gender &&
       selection.find(({ id }) => id === "3")?.entries ||
       selection.find(({ id }) => id === "3")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.Gender &&
       !selection.find(({ id }) => id === "3")?.entries &&
       selection.find(({ id }) => id === "3")?.exclude
         ? selection
@@ -3320,7 +3371,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.Gender &&
       selection.find(({ id }) => id === "3")?.entries &&
       selection.find(({ id }) => id === "3")?.exclude
         ? `${selection
@@ -3361,18 +3412,12 @@ ${
             )
             .join("")}`
         : ""
-    }
-
-
-
-
-
-        ${
-          selection.find(({ id }) => id === "2")?.entries ||
-          selection.find(({ id }) => id === "2")?.exclude
-            ? "AND ("
-            : ""
-        }  ${
+    }${dictionaryConverter.DiagnosisCode && 
+      selection.find(({ id }) => id === "2")?.entries ||
+      selection.find(({ id }) => id === "2")?.exclude
+        ? "AND ("
+        : ""
+    }  ${dictionaryConverter.DiagnosisCode &&
       selection.find(({ id }) => id === "2")?.entries &&
       !selection.find(({ id }) => id === "2")?.exclude
         ? selection
@@ -3394,12 +3439,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.DiagnosisCode &&
       selection.find(({ id }) => id === "2")?.entries ||
       selection.find(({ id }) => id === "2")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.DiagnosisCode &&
       !selection.find(({ id }) => id === "2")?.entries &&
       selection.find(({ id }) => id === "2")?.exclude
         ? selection
@@ -3423,7 +3468,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.DiagnosisCode &&
       selection.find(({ id }) => id === "2")?.entries &&
       selection.find(({ id }) => id === "2")?.exclude
         ? `${selection
@@ -3466,19 +3511,12 @@ ${
             )
             .join("")}`
         : ""
-    }
-
-
-
-
-
-
-    ${
+    }${dictionaryConverter.Cost &&
       selection.find(({ id }) => id === "7")?.entries ||
       selection.find(({ id }) => id === "7")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.Cost &&
       selection.find(({ id }) => id === "7")?.entries &&
       !selection.find(({ id }) => id === "7")?.exclude
         ? selection
@@ -3500,12 +3538,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.Cost &&
       selection.find(({ id }) => id === "7")?.entries ||
       selection.find(({ id }) => id === "7")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.Cost &&
       !selection.find(({ id }) => id === "7")?.entries &&
       selection.find(({ id }) => id === "7")?.exclude
         ? selection
@@ -3527,7 +3565,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.Cost &&
       selection.find(({ id }) => id === "7")?.entries &&
       selection.find(({ id }) => id === "7")?.exclude
         ? `${selection
@@ -3566,12 +3604,12 @@ ${
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.FacilityType &&
       selection.find(({ id }) => id === "8")?.entries ||
       selection.find(({ id }) => id === "8")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.FacilityType &&
       selection.find(({ id }) => id === "8")?.entries &&
       !selection.find(({ id }) => id === "8")?.exclude
         ? selection
@@ -3593,12 +3631,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.FacilityType &&
       selection.find(({ id }) => id === "8")?.entries ||
       selection.find(({ id }) => id === "8")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.FacilityType &&
       !selection.find(({ id }) => id === "8")?.entries &&
       selection.find(({ id }) => id === "8")?.exclude
         ? selection
@@ -3622,7 +3660,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.FacilityType &&
       selection.find(({ id }) => id === "8")?.entries &&
       selection.find(({ id }) => id === "8")?.exclude
         ? `${selection
@@ -3665,12 +3703,12 @@ ${
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.FacilityName &&
       selection.find(({ id }) => id === "9")?.entries ||
       selection.find(({ id }) => id === "9")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.FacilityName &&
       selection.find(({ id }) => id === "9")?.entries &&
       !selection.find(({ id }) => id === "9")?.exclude
         ? selection
@@ -3692,12 +3730,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.FacilityName &&
       selection.find(({ id }) => id === "9")?.entries ||
       selection.find(({ id }) => id === "9")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.FacilityName &&
       !selection.find(({ id }) => id === "9")?.entries &&
       selection.find(({ id }) => id === "9")?.exclude
         ? selection
@@ -3721,7 +3759,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.FacilityName &&
       selection.find(({ id }) => id === "9")?.entries &&
       selection.find(({ id }) => id === "9")?.exclude
         ? `${selection
@@ -3764,12 +3802,12 @@ ${
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.TestResult &&
       selection.find(({ id }) => id === "11")?.entries ||
       selection.find(({ id }) => id === "11")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.TestResult &&
       selection.find(({ id }) => id === "11")?.entries &&
       !selection.find(({ id }) => id === "11")?.exclude
         ? selection
@@ -3791,12 +3829,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.TestResult &&
       selection.find(({ id }) => id === "11")?.entries ||
       selection.find(({ id }) => id === "11")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.TestResult &&
       !selection.find(({ id }) => id === "11")?.entries &&
       selection.find(({ id }) => id === "11")?.exclude
         ? selection
@@ -3820,7 +3858,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.TestResult &&
       selection.find(({ id }) => id === "11")?.entries &&
       selection.find(({ id }) => id === "11")?.exclude
         ? `${selection
@@ -3863,12 +3901,12 @@ ${
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.DosageOfDrug &&
       selection.find(({ id }) => id === "12")?.entries ||
       selection.find(({ id }) => id === "12")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.DosageOfDrug &&
       selection.find(({ id }) => id === "12")?.entries &&
       !selection.find(({ id }) => id === "12")?.exclude
         ? selection
@@ -3890,12 +3928,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.DosageOfDrug &&
       selection.find(({ id }) => id === "12")?.entries ||
       selection.find(({ id }) => id === "12")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.DosageOfDrug &&
       !selection.find(({ id }) => id === "12")?.entries &&
       selection.find(({ id }) => id === "12")?.exclude
         ? selection
@@ -3919,7 +3957,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.DosageOfDrug &&
       selection.find(({ id }) => id === "12")?.entries &&
       selection.find(({ id }) => id === "12")?.exclude
         ? `${selection
@@ -3962,12 +4000,12 @@ ${
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.DosageFrequency &&
       selection.find(({ id }) => id === "13")?.entries ||
       selection.find(({ id }) => id === "13")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.DosageFrequency &&
       selection.find(({ id }) => id === "13")?.entries &&
       !selection.find(({ id }) => id === "13")?.exclude
         ? selection
@@ -3989,12 +4027,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.DosageFrequency &&
       selection.find(({ id }) => id === "13")?.entries ||
       selection.find(({ id }) => id === "13")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.DosageFrequency &&
       !selection.find(({ id }) => id === "13")?.entries &&
       selection.find(({ id }) => id === "13")?.exclude
         ? selection
@@ -4018,7 +4056,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.DosageFrequency &&
       selection.find(({ id }) => id === "13")?.entries &&
       selection.find(({ id }) => id === "13")?.exclude
         ? `${selection
@@ -4061,12 +4099,12 @@ ${
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.Product &&
       selection.find(({ id }) => id === "15")?.entries ||
       selection.find(({ id }) => id === "15")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.Product &&
       selection.find(({ id }) => id === "15")?.entries &&
       !selection.find(({ id }) => id === "15")?.exclude
         ? selection
@@ -4088,12 +4126,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.Product &&
       selection.find(({ id }) => id === "15")?.entries ||
       selection.find(({ id }) => id === "15")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.Product &&
       !selection.find(({ id }) => id === "15")?.entries &&
       selection.find(({ id }) => id === "15")?.exclude
         ? selection
@@ -4117,7 +4155,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.Product &&
       selection.find(({ id }) => id === "15")?.entries &&
       selection.find(({ id }) => id === "15")?.exclude
         ? `${selection
@@ -4158,12 +4196,12 @@ ${
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.Inpatient &&
       selection.find(({ id }) => id === "16")?.entries ||
       selection.find(({ id }) => id === "16")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.Inpatient &&
       selection.find(({ id }) => id === "16")?.entries &&
       !selection.find(({ id }) => id === "16")?.exclude
         ? selection
@@ -4185,12 +4223,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.Inpatient &&
       selection.find(({ id }) => id === "16")?.entries ||
       selection.find(({ id }) => id === "16")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.Inpatient &&
       !selection.find(({ id }) => id === "16")?.entries &&
       selection.find(({ id }) => id === "16")?.exclude
         ? selection
@@ -4214,7 +4252,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.Inpatient &&
       selection.find(({ id }) => id === "16")?.entries &&
       selection.find(({ id }) => id === "16")?.exclude
         ? `${selection
@@ -4255,12 +4293,12 @@ ${
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.Outpatient &&
       selection.find(({ id }) => id === "17")?.entries ||
       selection.find(({ id }) => id === "17")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.Outpatient &&
       selection.find(({ id }) => id === "17")?.entries &&
       !selection.find(({ id }) => id === "17")?.exclude
         ? selection
@@ -4282,12 +4320,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.Outpatient &&
       selection.find(({ id }) => id === "17")?.entries ||
       selection.find(({ id }) => id === "17")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.Outpatient &&
       !selection.find(({ id }) => id === "17")?.entries &&
       selection.find(({ id }) => id === "17")?.exclude
         ? selection
@@ -4311,7 +4349,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.Outpatient &&
       selection.find(({ id }) => id === "17")?.entries &&
       selection.find(({ id }) => id === "17")?.exclude
         ? `${selection
@@ -4354,12 +4392,12 @@ ${
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.FacilityLocation &&
       selection.find(({ id }) => id === "18")?.entries ||
       selection.find(({ id }) => id === "18")?.exclude
         ? "AND ("
         : ""
-    }${
+    }  ${dictionaryConverter.FacilityLocation &&
       selection.find(({ id }) => id === "18")?.entries &&
       !selection.find(({ id }) => id === "18")?.exclude
         ? selection
@@ -4383,12 +4421,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.FacilityLocation &&
       selection.find(({ id }) => id === "18")?.entries ||
       selection.find(({ id }) => id === "18")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.FacilityLocation &&
       !selection.find(({ id }) => id === "18")?.entries &&
       selection.find(({ id }) => id === "18")?.exclude
         ? selection
@@ -4412,7 +4450,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.FacilityLocation &&
       selection.find(({ id }) => id === "18")?.entries &&
       selection.find(({ id }) => id === "18")?.exclude
         ? `${selection
@@ -4455,12 +4493,13 @@ ${
             )
             .join("")}`
         : ""
-    }${
-      selection.find(({ id }) => id === "19")?.entries ||
-      selection.find(({ id }) => id === "19")?.exclude
-        ? "AND ("
-        : ""
-    }  ${
+    }
+${dictionaryConverter.PatientID &&
+  selection.find(({ id }) => id === "19")?.entries ||
+  selection.find(({ id }) => id === "19")?.exclude
+    ? "AND ("
+    : ""
+}${dictionaryConverter.PatientID &&
       selection.find(({ id }) => id === "19")?.entries &&
       !selection.find(({ id }) => id === "19")?.exclude
         ? selection
@@ -4482,12 +4521,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.PatientID &&
       selection.find(({ id }) => id === "19")?.entries ||
       selection.find(({ id }) => id === "19")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.PatientID &&
       !selection.find(({ id }) => id === "19")?.entries &&
       selection.find(({ id }) => id === "19")?.exclude
         ? selection
@@ -4511,7 +4550,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.PatientID &&
       selection.find(({ id }) => id === "19")?.entries &&
       selection.find(({ id }) => id === "19")?.exclude
         ? `${selection
@@ -4552,12 +4591,12 @@ ${
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.SpecimenType &&
       selection.find(({ id }) => id === "20")?.entries ||
       selection.find(({ id }) => id === "20")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.SpecimenType &&
       selection.find(({ id }) => id === "20")?.entries &&
       !selection.find(({ id }) => id === "20")?.exclude
         ? selection
@@ -4579,12 +4618,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.SpecimenType &&
       selection.find(({ id }) => id === "20")?.entries ||
       selection.find(({ id }) => id === "20")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.SpecimenType &&
       !selection.find(({ id }) => id === "20")?.entries &&
       selection.find(({ id }) => id === "20")?.exclude
         ? selection
@@ -4608,7 +4647,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.SpecimenType &&
       selection.find(({ id }) => id === "20")?.entries &&
       selection.find(({ id }) => id === "20")?.exclude
         ? `${selection
@@ -4651,12 +4690,12 @@ ${
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.DateOfBirth &&
       selection.find(({ id }) => id === "24")?.entries ||
       selection.find(({ id }) => id === "24")?.exclude
         ? "AND ("
         : ""
-    }${
+    }  ${dictionaryConverter.DateOfBirth &&
       selection.find(({ id }) => id === "24")?.entries &&
       !selection.find(({ id }) => id === "24")?.exclude
         ? selection
@@ -4678,12 +4717,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.DateOfBirth &&
       selection.find(({ id }) => id === "24")?.entries ||
       selection.find(({ id }) => id === "24")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.DateOfBirth &&
       !selection.find(({ id }) => id === "24")?.entries &&
       selection.find(({ id }) => id === "24")?.exclude
         ? selection
@@ -4707,7 +4746,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.DateOfBirth &&
       selection.find(({ id }) => id === "24")?.entries &&
       selection.find(({ id }) => id === "24")?.exclude
         ? `${selection
@@ -4750,12 +4789,13 @@ ${
             )
             .join("")}`
         : ""
-    }${
-      selection.find(({ id }) => id === "25")?.entries ||
-      selection.find(({ id }) => id === "25")?.exclude
-        ? "AND ("
-        : ""
-    }  ${
+    }
+${dictionaryConverter.SateOfOrigin &&
+  selection.find(({ id }) => id === "25")?.entries ||
+  selection.find(({ id }) => id === "25")?.exclude
+    ? "AND ("
+    : ""
+}  ${dictionaryConverter.SateOfOrigin &&
       selection.find(({ id }) => id === "25")?.entries &&
       !selection.find(({ id }) => id === "25")?.exclude
         ? selection
@@ -4777,12 +4817,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.SateOfOrigin &&
       selection.find(({ id }) => id === "25")?.entries ||
       selection.find(({ id }) => id === "25")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.SateOfOrigin &&
       !selection.find(({ id }) => id === "25")?.entries &&
       selection.find(({ id }) => id === "25")?.exclude
         ? selection
@@ -4806,7 +4846,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.SateOfOrigin &&
       selection.find(({ id }) => id === "25")?.entries &&
       selection.find(({ id }) => id === "25")?.exclude
         ? `${selection
@@ -4849,12 +4889,12 @@ ${
             )
             .join("")}`
         : ""
-    }${
+    }${dictionaryConverter.ProviderID &&
       selection.find(({ id }) => id === "26")?.entries ||
       selection.find(({ id }) => id === "26")?.exclude
         ? "AND ("
         : ""
-    }  ${
+    }  ${dictionaryConverter.ProviderID &&
       selection.find(({ id }) => id === "26")?.entries &&
       !selection.find(({ id }) => id === "26")?.exclude
         ? selection
@@ -4876,12 +4916,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.ProviderID &&
       selection.find(({ id }) => id === "26")?.entries ||
       selection.find(({ id }) => id === "26")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.ProviderID &&
       !selection.find(({ id }) => id === "26")?.entries &&
       selection.find(({ id }) => id === "26")?.exclude
         ? selection
@@ -4905,7 +4945,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.ProviderID &&
       selection.find(({ id }) => id === "26")?.entries &&
       selection.find(({ id }) => id === "26")?.exclude
         ? `${selection
@@ -4948,12 +4988,111 @@ ${
             )
             .join("")}`
         : ""
+    }${dictionaryConverter.ProviderID &&
+      selection.find(({ id }) => id === "26")?.entries ||
+      selection.find(({ id }) => id === "26")?.exclude
+        ? "AND ("
+        : ""
+    }  ${
+      selection.find(({ id }) => id === "26")?.entries &&
+      !selection.find(({ id }) => id === "26")?.exclude
+        ? selection
+            .find(({ id }) => id === "26")
+            ?.entries?.split(",")
+            .map(
+              (val, index) =>
+                `${
+                  index === 0
+                    ? `${dictionaryConverter.ProviderID} iLIKE '%${val}%'${
+                        selection
+                          .find(({ id }) => id === "26")
+                          ?.entries?.split(",").length === 1
+                          ? ""
+                          : ""
+                      }`
+                    : ` OR ${dictionaryConverter.ProviderID} iLIKE '%${val}%'`
+                }`
+            )
+            .join("")
+        : ""
+    } ${dictionaryConverter.ProviderID &&
+      selection.find(({ id }) => id === "26")?.entries ||
+      selection.find(({ id }) => id === "26")?.exclude
+        ? ")"
+        : ""
     }${
-  selection.find(({ id }) => id === "28")?.entries ||
-  selection.find(({ id }) => id === "28")?.exclude
-    ? "AND ("
-    : ""
-}  ${
+      !selection.find(({ id }) => id === "26")?.entries &&
+      selection.find(({ id }) => id === "26")?.exclude
+        ? selection
+            .find(({ id }) => id === "26")
+            ?.exclude?.split(",")
+            .map(
+              (val, index) =>
+                `${
+                  index === 0
+                    ? ` AND (${
+                        dictionaryConverter.ProviderID
+                      } NOT iLIKE '%${val}%'${
+                        selection
+                          .find(({ id }) => id === "26")
+                          ?.entries?.split(",").length === 1
+                          ? ")"
+                          : ""
+                      }`
+                    : ` OR ${dictionaryConverter.ProviderID} NOT iLIKE '%${val}%') `
+                }`
+            )
+            .join("")
+        : ""
+    }${dictionaryConverter.ProviderID &&
+      selection.find(({ id }) => id === "26")?.entries &&
+      selection.find(({ id }) => id === "26")?.exclude
+        ? `${selection
+            .find(({ id }) => id === "26")
+            ?.entries?.split(",")
+            .map(
+              (val, index) =>
+                `${
+                  index === 0
+                    ? ` AND (${
+                        dictionaryConverter.ProviderID
+                      } iLIKE '%${val}%'${
+                        selection
+                          .find(({ id }) => id === "26")
+                          ?.entries?.split(",").length === 1
+                          ? ")"
+                          : ""
+                      }`
+                    : ` OR ${dictionaryConverter.ProviderID} iLIKE '%${val}%') `
+                }`
+            )
+            .join("")} ${selection
+            .find(({ id }) => id === "26")
+            ?.exclude?.split(",")
+            .map(
+              (val, index) =>
+                `${
+                  index === 0
+                    ? ` AND (${
+                        dictionaryConverter.ProviderID
+                      } NOT iLIKE '%${val}%'${
+                        selection
+                          .find(({ id }) => id === "26")
+                          ?.exclude?.split(",").length === 1
+                          ? ")"
+                          : ""
+                      }`
+                    : ` OR ${dictionaryConverter.ProviderID} NOT iLIKE '%${val}%')`
+                }`
+            )
+            .join("")}`
+        : ""
+    }${dictionaryConverter.Specialty &&
+      selection.find(({ id }) => id === "28")?.entries ||
+      selection.find(({ id }) => id === "28")?.exclude
+        ? "AND ("
+        : ""
+    }  ${dictionaryConverter.Specialty &&
       selection.find(({ id }) => id === "28")?.entries &&
       !selection.find(({ id }) => id === "28")?.exclude
         ? selection
@@ -4975,12 +5114,12 @@ ${
             )
             .join("")
         : ""
-    } ${
+    } ${dictionaryConverter.Specialty &&
       selection.find(({ id }) => id === "28")?.entries ||
       selection.find(({ id }) => id === "28")?.exclude
         ? ")"
         : ""
-    }${
+    }${dictionaryConverter.Specialty &&
       !selection.find(({ id }) => id === "28")?.entries &&
       selection.find(({ id }) => id === "28")?.exclude
         ? selection
@@ -5004,7 +5143,7 @@ ${
             )
             .join("")
         : ""
-    }${
+    }${dictionaryConverter.Specialty &&
       selection.find(({ id }) => id === "28")?.entries &&
       selection.find(({ id }) => id === "28")?.exclude
         ? `${selection
