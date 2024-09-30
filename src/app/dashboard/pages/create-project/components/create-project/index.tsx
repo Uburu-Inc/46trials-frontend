@@ -81,7 +81,7 @@ export function CreateProject() {
               selection: selectedColumns,
               table: table_name,
               action: "count",
-              dictionaryConverter: data_dictionary,
+              dictionaryConverter: data_dictionary ?? "",
               entries: {
                 sampleSize: payload.sampleSize,
                 startDate: payload.startDate,

@@ -80,7 +80,7 @@ export function createQuery({
           })`
         : ""
     }${
-      selection.find(({ id }) => id === "5")?.entries &&
+      selection.find(({ id }) => id === "5")?.entries && dictionaryConverter.ProcedureDescription &&
       !selection.find(({ id }) => id === "5")?.exclude
         ? selection
             .find(({ id }) => id === "5")
@@ -100,7 +100,7 @@ export function createQuery({
         : ""
     }${
       !selection.find(({ id }) => id === "5")?.entries &&
-      selection.find(({ id }) => id === "5")?.exclude
+      selection.find(({ id }) => id === "5")?.exclude && dictionaryConverter.ProcedureDescription
         ? selection
             .find(({ id }) => id === "5")
             ?.exclude?.split(",")
@@ -123,7 +123,7 @@ export function createQuery({
             .join("")
         : ""
     }${
-      selection.find(({ id }) => id === "5")?.entries &&
+      selection.find(({ id }) => id === "5")?.entries && dictionaryConverter.ProcedureDescription &&
       selection.find(({ id }) => id === "5")?.exclude
         ? `${selection
             .find(({ id }) => id === "5")
