@@ -13,6 +13,7 @@ export type MainQueryData = {
   dataset: string;
   count: number;
   description: string | undefined;
+  institution: string;
 };
 
 export type QueryResponse = Array<{

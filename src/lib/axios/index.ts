@@ -45,14 +45,16 @@ export function useNetworkRequest({
 
       const response = error.response;
 
+      if ((token && response.status === 401) || response.status === 422) {
+        toast.error("Unauthorized or Session expired");
+        logout();
+      }
+
       if (!hideErrorAlert) {
         if (response.status >= 500) {
           toast.error("An unknown server error occurred");
         } else if (response.status === 404) {
           toast.error("Resource not found");
-        } else if (response.status === 401 && token) {
-          toast.error("Unauthorized");
-          logout();
         } else {
           if (!token && response.status === 401) {
             toast.error(response.data.error.detail);

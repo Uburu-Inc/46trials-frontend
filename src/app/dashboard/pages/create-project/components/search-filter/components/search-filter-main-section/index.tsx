@@ -11,7 +11,7 @@ import {
 import { SuccessIcon } from "@/app/components/reusable-components/icons/success-icon";
 import Drawer from "@/app/components/reusable-components/drawer";
 import Modal from "@/app/components/reusable-components/modal";
-import { useRegisterPayment } from "@/app/dashboard/hooks/payment/register-payment";
+import { useFinalizeTrials } from "@/app/dashboard/hooks/payment/finalize-trial-creation";
 import { useFetchExchangeRate } from "@/app/dashboard/hooks/payment/fetch-exchange-rate";
 import { AppContext } from "@/app/context";
 import { useSqlQueryRequest } from "@/app/dashboard/hooks/projects/sql/run-query";
@@ -19,13 +19,8 @@ import { useSqlQueryRequest } from "@/app/dashboard/hooks/projects/sql/run-query
 export function SearchFilterMainSection() {
   const { push } = useRouter();
   const { params } = useContext(AppContext);
-  
-  const {
-    loading,
-    success: querySuccess,
-    data,
-    sendQuery,
-  } = useSqlQueryRequest();
+
+  const { loading, data, sendQuery } = useSqlQueryRequest();
 
   const {
     count,
@@ -37,10 +32,12 @@ export function SearchFilterMainSection() {
   } = useContext(sqlQueryContext);
 
   const {
-    registerPayment,
-    loading: registeringPayment,
-    success: isPaymentRegistered,
-  } = useRegisterPayment();
+    loading: finalizing,
+    trials,
+    trialSuccess,
+    finalizeTrialCreation,
+    createTrial,
+  } = useFinalizeTrials();
 
   const { loading: fetchingRate, success, rate } = useFetchExchangeRate();
 
@@ -53,32 +50,40 @@ export function SearchFilterMainSection() {
     }
   }, [fetchingRate, success, rate, count]);
 
-  console.log(data.map((csv) => csv.data.dataset));
-
   const onRegisterPayment = useCallback(function () {
-    void sendQuery(queryParams);
+    void sendQuery(queryParams).then(() =>
+      createTrial({
+        name: projectProps.projectName,
+        sample_size: projectProps.sampleSize,
+        fulfilled: false,
+        client: params.uid,
+      })
+    );
   }, []);
 
   useEffect(() => {
-    if (!loading && querySuccess && data) {
-      console.log(data)
-      void registerPayment({
-        name: projectProps.projectName,
-        sample_size: projectProps.sampleSize,
-        budget: costPrice,
-        start_date: projectProps.startDate,
-        end_date: projectProps.endDate,
-        fulfilled: true,
-        uploaded_files: data.map((item) => {
-          return {
-            code: item.data.code,
-            dataset: item.data.dataset
-          }
-        }),
-        client: params.uid,
+    if (!loading && trials?.id && trialSuccess) {
+      void finalizeTrialCreation({
+        payload: {
+          name: projectProps.projectName,
+          sample_size: projectProps.sampleSize,
+          budget: costPrice,
+          start_date: projectProps.startDate,
+          end_date: projectProps.endDate,
+          fulfilled: true,
+          client: params.uid,
+          upload_files: data.map((item) => {
+            return {
+              file: item.data.dataset,
+              trial: trials.id,
+              institution: item.data.institution,
+            };
+          }),
+        },
+        trialId: trials?.id,
       });
     }
-  }, [loading, querySuccess, data]);
+  }, [loading, trialSuccess, trials?.id]);
 
   function showDrawer() {
     if (drawerRef.current) {
@@ -86,13 +91,13 @@ export function SearchFilterMainSection() {
     }
   }
 
-  useEffect(() => {
-    if (!registeringPayment && isPaymentRegistered) {
-      if (modalRef.current) {
-        modalRef.current.click();
-      }
-    }
-  }, [registeringPayment, isPaymentRegistered]);
+  // useEffect(() => {
+  //   if (!registeringPayment && isPaymentRegistered) {
+  //     if (modalRef.current) {
+  //       modalRef.current.click();
+  //     }
+  //   }
+  // }, [registeringPayment, isPaymentRegistered]);
 
   return (
     <>
@@ -102,7 +107,7 @@ export function SearchFilterMainSection() {
             "w-[30%] bg-white shadow-xl rounded-[0.5rem] h-full overflow-auto"
           }
         >
-          {phase2Data.map(({ data: { description, code } }, index) => (
+          {phase2Data.map(({ data: { description, code }}, index) => (
             <div
               key={index}
               className={
@@ -177,7 +182,7 @@ export function SearchFilterMainSection() {
         description="Kindly view the cost details of your request and proceed to payment."
         proceedText="Confirm Payment"
         ref={drawerRef}
-        loading={loading || registeringPayment}
+        loading={loading || finalizing}
         onProceed={onRegisterPayment}
       >
         <Card>
